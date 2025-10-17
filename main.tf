@@ -4,7 +4,7 @@ module "this" {
 
   name        = "repo-as-a-code"
   description = "This repository manages itself as code. Also it will manage other repositories in the future."
-  visibility = "public"
+  visibility  = "public"
 
   archive_on_destroy = false
 
@@ -43,7 +43,7 @@ module "quick_ops" {
 
   name        = "quick_ops"
   description = "Scripting magic. Like Ansible ad-hoc but with iterm2"
-  visibility = "public"
+  visibility  = "public"
 
   archive_on_destroy = true
 }
@@ -74,7 +74,7 @@ module "magzim21" {
 
   name        = "magzim21"
   description = "My bio and links"
-  visibility = "public"
+  visibility  = "public"
 
   archive_on_destroy = true
 }
@@ -88,12 +88,12 @@ module "elk_services" {
   source = "codelawcorp/repository/github"
   # version = "~> 2.0.0"  # It is always recommended to pin the version
 
-  name        = "elk_services"
-  description = "Scripting magic. Like Ansible ad-hoc but with iterm2"
-  archived = true
-  vulnerability_alerts = false # must be false for archived repos
+  name                               = "elk_services"
+  description                        = "Scripting magic. Like Ansible ad-hoc but with iterm2"
+  archived                           = true
+  vulnerability_alerts               = false # must be false for archived repos
   enable_dependabot_security_updates = false
-  visibility = "public"
+  visibility                         = "public"
 
   archive_on_destroy = true
 }
