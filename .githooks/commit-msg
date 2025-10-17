@@ -1,0 +1,15 @@
+#!/bin/sh
+set -e
+# On exit, print a message if the hook failed (non-zero exit) and preserve the exit code
+trap 'ret=$?; if [ $ret -ne 0 ]; then echo "pre-commit hook failed (exit code $ret)"; fi; exit $ret' EXIT
+
+
+echo "Running commit-msg hooks"
+
+# npm install -g @commitlint/config-conventional @commitlint/cli
+export NODE_PATH=/opt/homebrew/lib/node_modules/ # make sure that this matches to your global node_modules path
+CONFIG_PATH="$(git rev-parse --show-toplevel)/.githooks/.commitlintrc.yml"
+npm list -g @commitlint/config-conventional || npm install -g @commitlint/config-conventional commitlint
+npx commitlint --config "$CONFIG_PATH" --edit "$1"
+
+
