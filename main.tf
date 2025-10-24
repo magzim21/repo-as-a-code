@@ -1,87 +1,87 @@
 locals {
   repos = [
     {
-      name = "repo-as-a-code"
+      name        = "repo-as-a-code"
       description = "This repository manages itself as code. Also it will manage other repositories in the future."
-      visibility = "public"
-      archived = false
+      visibility  = "public"
+      archived    = false
       is_template = false
     },
     {
-      name = "elk_services"
+      name        = "elk_services"
       description = "Scripting magic. Like Ansible ad-hoc but with iterm2"
-      visibility = "public"
-      archived = false
+      visibility  = "public"
+      archived    = false
       is_template = false
     },
     {
-      name = "magzim21"
+      name        = "magzim21"
       description = "My bio and links"
-      visibility = "public"
-      archived = false
+      visibility  = "public"
+      archived    = false
       is_template = false
     },
     {
-      name = "obsidian-notes"
+      name        = "obsidian-notes"
       description = "Knowldege notes. Aka second brain."
-      visibility = "private"
-      archived = false
+      visibility  = "private"
+      archived    = false
       is_template = false
     },
     {
-      name = "quick_ops"
+      name        = "quick_ops"
       description = "Scripting magic. Like Ansible ad-hoc but with iterm2"
-      visibility = "public"
-      archived = false
+      visibility  = "public"
+      archived    = false
       is_template = false
     },
     {
-      name = "quick-ops"
+      name        = "quick-ops"
       description = ""
-      visibility = "public"
-      archived = false
+      visibility  = "public"
+      archived    = false
       is_template = false
     },
     {
-      name = "job_parser"
+      name        = "job_parser"
       description = "Docker, AWS EB, BeautifulSoup, Selenium, Telegram-bot, psycopg2, logging. Also: chrome, Xpra (virtual display)."
-      visibility = "public"
-      archived = true
+      visibility  = "public"
+      archived    = true
       is_template = false
     },
     {
-      name = "Kanban-Board"
+      name        = "Kanban-Board"
       description = "Java Script Advanced ITEA final exam"
-      visibility = "public"
-      archived = false
+      visibility  = "public"
+      archived    = false
       is_template = false
     },
     {
-      name = "terragrunt-sync"
+      name        = "terragrunt-sync"
       description = ""
-      visibility = "private"
-      archived = false
+      visibility  = "private"
+      archived    = false
       is_template = false
     },
     {
-      name = "ship-fast-ts"
+      name        = "ship-fast-ts"
       description = "The NextJs boilerplate to ship. FAST. ⚡️"
-      visibility = "private"
-      archived = false
+      visibility  = "private"
+      archived    = false
       is_template = false
     },
     {
-      name = "english-new"
+      name        = "english-new"
       description = ""
-      visibility = "private"
-      archived = false
+      visibility  = "private"
+      archived    = false
       is_template = false
     },
     {
-      name = "template"
+      name        = "template"
       description = "This is a repo template 👨🏼‍🔬"
-      visibility = "public"
-      archived = false
+      visibility  = "public"
+      archived    = false
       is_template = true
       branches = [
         {
@@ -95,61 +95,61 @@ locals {
         }
       ]
       pages = { // GitHub provider issue: pages branch must exist at applytime / bootstrap problem
-          source = {
-            branch = "gh-pages"
-            path   = "/"
-          }
+        source = {
+          branch = "gh-pages"
+          path   = "/"
         }
+      }
 
     },
     {
-      name = "crypto-seed-phrase-generator"
+      name        = "crypto-seed-phrase-generator"
       description = ""
-      visibility = "public"
-      archived = false
+      visibility  = "public"
+      archived    = false
       is_template = false
     },
     {
-      name = "dotfiles"
+      name        = "dotfiles"
       description = ""
-      visibility = "private"
-      archived = false
+      visibility  = "private"
+      archived    = false
       is_template = false
     },
     {
-      name = "safedial"
+      name        = "safedial"
       description = "A password checker CLI tool ☘️"
-      visibility = "public"
-      archived = true
+      visibility  = "public"
+      archived    = true
       is_template = false
     },
     {
-      name = "elevate-sec"
+      name        = "elevate-sec"
       description = ""
-      visibility = "public"
-      archived = true
+      visibility  = "public"
+      archived    = true
       is_template = false
     },
     {
-      name = "magz8s"
+      name        = "magz8s"
       description = "EKS installation with best practices"
-      visibility = "public"
-      archived = true
+      visibility  = "public"
+      archived    = true
       is_template = false
     },
     {
-      name = "kubespray-lite"
+      name        = "kubespray-lite"
       description = "aws ec2, terraform, ansible, kubernetes"
-      visibility = "public"
-      archived = true
+      visibility  = "public"
+      archived    = true
       is_template = false
     },
     {
-      name = "magzim21.github.io"
-      description = "Personal website"
-      visibility = "public"
-      archived = false
-      is_template = false
+      name                               = "magzim21.github.io"
+      description                        = "Personal website"
+      visibility                         = "public"
+      archived                           = false
+      is_template                        = false
       enable_dependabot_security_updates = false
       branches = [
         {
@@ -157,87 +157,87 @@ locals {
         }
       ]
       pages = { // GitHub provider issue: pages branch must exist at applytime / bootstrap problem
-          source = {
-            branch = "gh-pages"
-            path   = "/"
-          }
+        source = {
+          branch = "gh-pages"
+          path   = "/"
         }
+      }
     },
     {
-      name = "aws_terraform"
+      name        = "aws_terraform"
       description = "ASG(EC2) + ELB"
-      visibility = "public"
-      archived = true
+      visibility  = "public"
+      archived    = true
       is_template = false
     },
     {
-      name = "Ansible-gather-information"
+      name        = "Ansible-gather-information"
       description = "This Ansible role use useful for those freshmans who just came to project and not familiar with infrastructure etc."
-      visibility = "public"
-      archived = false
+      visibility  = "public"
+      archived    = false
       is_template = false
     },
     {
-      name = "ansible_change_hostnames"
+      name        = "ansible_change_hostnames"
       description = "ANSIBLE batch rename hostnames. It works with systemd, but can easily be adopted for init systems."
-      visibility = "public"
-      archived = false
+      visibility  = "public"
+      archived    = false
       is_template = false
     },
     {
-      name = "zabbix_agents_ansible"
+      name        = "zabbix_agents_ansible"
       description = "This is a simple playbook for mass installing zabbix agents. "
-      visibility = "public"
-      archived = false
+      visibility  = "public"
+      archived    = false
       is_template = false
     },
     {
-      name = "docker-zabbix-mysql"
+      name        = "docker-zabbix-mysql"
       description = ""
-      visibility = "public"
-      archived = true
+      visibility  = "public"
+      archived    = true
       is_template = false
     },
     {
-      name = "OOP-csv-editor"
+      name        = "OOP-csv-editor"
       description = "Console CSV editor with OOP"
-      visibility = "public"
-      archived = true
+      visibility  = "public"
+      archived    = true
       is_template = false
     },
     {
-      name = "Django-Flowers-Shop"
+      name        = "Django-Flowers-Shop"
       description = "ITEA course work. I have got RED diploma on it."
-      visibility = "public"
-      archived = true
+      visibility  = "public"
+      archived    = true
       is_template = false
     },
     {
-      name = "PHP-MySQL-JS_Payroll_System"
+      name        = "PHP-MySQL-JS_Payroll_System"
       description = "epam test task"
-      visibility = "public"
-      archived = true
+      visibility  = "public"
+      archived    = true
       is_template = false
     },
     {
-      name = "Rolling-dice-game"
+      name        = "Rolling-dice-game"
       description = "Simple console gambling game"
-      visibility = "public"
-      archived = true
+      visibility  = "public"
+      archived    = true
       is_template = false
     },
     {
-      name = "Parking-app"
+      name        = "Parking-app"
       description = "OOP practice with python"
-      visibility = "public"
-      archived = true
+      visibility  = "public"
+      archived    = true
       is_template = false
     },
     {
-      name = "Registration-form"
+      name        = "Registration-form"
       description = "training task"
-      visibility = "public"
-      archived = true
+      visibility  = "public"
+      archived    = true
       is_template = false
     },
   ]
@@ -254,12 +254,12 @@ module "repos" {
   visibility  = try(each.value.visibility, null)
 
 
-  archived           = try(each.value.archived, null)
-  is_template        = try(each.value.is_template, null)
+  archived    = try(each.value.archived, null)
+  is_template = try(each.value.is_template, null)
 
   homepage_url = try(each.value.homepage_url, null)
   # topics       = try(each.value.topics, [])
-  topics       = []
+  topics = []
 
   has_projects    = try(each.value.has_projects, null)
   has_wiki        = try(each.value.has_wiki, null)
@@ -285,8 +285,8 @@ module "repos" {
   template = try(each.value.template, null)
 
 
-  default_branch = try(each.value.default_branch, null)
-  branches = try(each.value.branches, null)
+  default_branch    = try(each.value.default_branch, null)
+  branches          = try(each.value.branches, null)
   custom_properties = []
 
 
