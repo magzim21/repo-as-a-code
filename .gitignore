@@ -134,8 +134,7 @@ obj/
 .terraform*
 !.terraform-docs.yml
 .terraformrc
-*.tfstate
-*.tfstate.backup
+*.tfstate*
 *.tfplan
 *.tfout
 *.secrets
