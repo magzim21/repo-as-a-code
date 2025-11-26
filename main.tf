@@ -6,7 +6,7 @@ locals {
       visibility  = "public"
       repository_files = {
         "README.md" = {
-          content = local.repo_readmes["codefast-day-01-next-api-gallery"]
+          content             = local.repo_readmes["codefast-day-01-next-api-gallery"]
           overwrite_on_create = true
         }
       }
@@ -17,7 +17,7 @@ locals {
       visibility  = "public"
       repository_files = {
         "README.md" = {
-          content = local.repo_readmes["codefast-day-02-next-landing-page"]
+          content             = local.repo_readmes["codefast-day-02-next-landing-page"]
           overwrite_on_create = true
         }
       }
@@ -28,7 +28,7 @@ locals {
       visibility  = "public"
       repository_files = {
         "README.md" = {
-          content = local.repo_readmes["codefast-day-03-next-mdx-blog"]
+          content             = local.repo_readmes["codefast-day-03-next-mdx-blog"]
           overwrite_on_create = true
         }
       }
@@ -39,7 +39,7 @@ locals {
       visibility  = "public"
       repository_files = {
         "README.md" = {
-          content = local.repo_readmes["codefast-day-04-next-pagination-lab"]
+          content             = local.repo_readmes["codefast-day-04-next-pagination-lab"]
           overwrite_on_create = true
         }
       }
@@ -50,7 +50,7 @@ locals {
       visibility  = "public"
       repository_files = {
         "README.md" = {
-          content = local.repo_readmes["codefast-day-05-next-seo-playbook"]
+          content             = local.repo_readmes["codefast-day-05-next-seo-playbook"]
           overwrite_on_create = true
         }
       }
@@ -61,7 +61,7 @@ locals {
       visibility  = "public"
       repository_files = {
         "README.md" = {
-          content = local.repo_readmes["codefast-day-06-seo-ab-testing"]
+          content             = local.repo_readmes["codefast-day-06-seo-ab-testing"]
           overwrite_on_create = true
         }
       }
@@ -72,7 +72,7 @@ locals {
       visibility  = "public"
       repository_files = {
         "README.md" = {
-          content = local.repo_readmes["codefast-day-07-figma-token-sync"]
+          content             = local.repo_readmes["codefast-day-07-figma-token-sync"]
           overwrite_on_create = true
         }
       }
@@ -83,7 +83,7 @@ locals {
       visibility  = "public"
       repository_files = {
         "README.md" = {
-          content = local.repo_readmes["codefast-day-08-design-token-ci"]
+          content             = local.repo_readmes["codefast-day-08-design-token-ci"]
           overwrite_on_create = true
         }
       }
@@ -94,7 +94,7 @@ locals {
       visibility  = "public"
       repository_files = {
         "README.md" = {
-          content = local.repo_readmes["codefast-day-09-datadog-rum-instrumentation"]
+          content             = local.repo_readmes["codefast-day-09-datadog-rum-instrumentation"]
           overwrite_on_create = true
         }
       }
@@ -105,18 +105,18 @@ locals {
       visibility  = "public"
       repository_files = {
         "README.md" = {
-          content = local.repo_readmes["codefast-day-10-rum-alerting"]
+          content             = local.repo_readmes["codefast-day-10-rum-alerting"]
           overwrite_on_create = true
         }
       }
     },
     {
       name        = "codefast-day-11-notion-sync"
-      description = "Day 11/30: Build a Notion content sync CLI that mirrors docs into a Markdown repo." 
+      description = "Day 11/30: Build a Notion content sync CLI that mirrors docs into a Markdown repo."
       visibility  = "public"
       repository_files = {
         "README.md" = {
-          content = local.repo_readmes["codefast-day-11-notion-sync"]
+          content             = local.repo_readmes["codefast-day-11-notion-sync"]
           overwrite_on_create = true
         }
       }
@@ -127,7 +127,7 @@ locals {
       visibility  = "public"
       repository_files = {
         "README.md" = {
-          content = local.repo_readmes["codefast-day-12-lesson-scheduler"]
+          content             = local.repo_readmes["codefast-day-12-lesson-scheduler"]
           overwrite_on_create = true
         }
       }
@@ -138,7 +138,7 @@ locals {
       visibility  = "public"
       repository_files = {
         "README.md" = {
-          content = local.repo_readmes["codefast-day-13-multi-api-atlas"]
+          content             = local.repo_readmes["codefast-day-13-multi-api-atlas"]
           overwrite_on_create = true
         }
       }
@@ -149,7 +149,7 @@ locals {
       visibility  = "public"
       repository_files = {
         "README.md" = {
-          content = local.repo_readmes["codefast-day-14-aceternity-theme-lab"]
+          content             = local.repo_readmes["codefast-day-14-aceternity-theme-lab"]
           overwrite_on_create = true
         }
       }
@@ -160,7 +160,7 @@ locals {
       visibility  = "public"
       repository_files = {
         "README.md" = {
-          content = local.repo_readmes["codefast-day-15-offline-sync-queue"]
+          content             = local.repo_readmes["codefast-day-15-offline-sync-queue"]
           overwrite_on_create = true
         }
       }
@@ -171,7 +171,7 @@ locals {
       visibility  = "public"
       repository_files = {
         "README.md" = {
-          content = local.repo_readmes["codefast-day-16-component-token-diff"]
+          content             = local.repo_readmes["codefast-day-16-component-token-diff"]
           overwrite_on_create = true
         }
       }
@@ -182,18 +182,18 @@ locals {
       visibility  = "public"
       repository_files = {
         "README.md" = {
-          content = local.repo_readmes["codefast-day-17-rum-seo-correlation"]
+          content             = local.repo_readmes["codefast-day-17-rum-seo-correlation"]
           overwrite_on_create = true
         }
       }
     },
     {
       name        = "codefast-day-18-certificate-generator"
-      description = "Day 18/30: Generate personalized course completion certificates using PDFKit and edge functions." 
+      description = "Day 18/30: Generate personalized course completion certificates using PDFKit and edge functions."
       visibility  = "public"
       repository_files = {
         "README.md" = {
-          content = local.repo_readmes["codefast-day-18-certificate-generator"]
+          content             = local.repo_readmes["codefast-day-18-certificate-generator"]
           overwrite_on_create = true
         }
       }
@@ -204,7 +204,7 @@ locals {
       visibility  = "public"
       repository_files = {
         "README.md" = {
-          content = local.repo_readmes["codefast-day-19-shad-cdn-publisher"]
+          content             = local.repo_readmes["codefast-day-19-shad-cdn-publisher"]
           overwrite_on_create = true
         }
       }
@@ -215,7 +215,7 @@ locals {
       visibility  = "public"
       repository_files = {
         "README.md" = {
-          content = local.repo_readmes["codefast-day-20-shad-cdn-auditor"]
+          content             = local.repo_readmes["codefast-day-20-shad-cdn-auditor"]
           overwrite_on_create = true
         }
       }
@@ -226,7 +226,7 @@ locals {
       visibility  = "public"
       repository_files = {
         "README.md" = {
-          content = local.repo_readmes["codefast-day-21-quality-guardrails"]
+          content             = local.repo_readmes["codefast-day-21-quality-guardrails"]
           overwrite_on_create = true
         }
       }
@@ -237,18 +237,18 @@ locals {
       visibility  = "public"
       repository_files = {
         "README.md" = {
-          content = local.repo_readmes["codefast-day-22-kanban"]
+          content             = local.repo_readmes["codefast-day-22-kanban"]
           overwrite_on_create = true
         }
       }
     },
     {
       name        = "codefast-day-23-search"
-      description = "Day 23/30: Ship a knowledge base search experience using Algolia and instant faceting." 
+      description = "Day 23/30: Ship a knowledge base search experience using Algolia and instant faceting."
       visibility  = "public"
       repository_files = {
         "README.md" = {
-          content = local.repo_readmes["codefast-day-23-search"]
+          content             = local.repo_readmes["codefast-day-23-search"]
           overwrite_on_create = true
         }
       }
@@ -259,7 +259,7 @@ locals {
       visibility  = "public"
       repository_files = {
         "README.md" = {
-          content = local.repo_readmes["codefast-day-24-cohort-metrics"]
+          content             = local.repo_readmes["codefast-day-24-cohort-metrics"]
           overwrite_on_create = true
         }
       }
@@ -270,7 +270,7 @@ locals {
       visibility  = "public"
       repository_files = {
         "README.md" = {
-          content = local.repo_readmes["codefast-day-25-reminder-pwa"]
+          content             = local.repo_readmes["codefast-day-25-reminder-pwa"]
           overwrite_on_create = true
         }
       }
@@ -281,7 +281,7 @@ locals {
       visibility  = "public"
       repository_files = {
         "README.md" = {
-          content = local.repo_readmes["codefast-day-26-seo-rum-dashboard"]
+          content             = local.repo_readmes["codefast-day-26-seo-rum-dashboard"]
           overwrite_on_create = true
         }
       }
@@ -292,7 +292,7 @@ locals {
       visibility  = "public"
       repository_files = {
         "README.md" = {
-          content = local.repo_readmes["codefast-day-27-figma-token-cli"]
+          content             = local.repo_readmes["codefast-day-27-figma-token-cli"]
           overwrite_on_create = true
         }
       }
@@ -303,7 +303,7 @@ locals {
       visibility  = "public"
       repository_files = {
         "README.md" = {
-          content = local.repo_readmes["codefast-day-28-feature-flags"]
+          content             = local.repo_readmes["codefast-day-28-feature-flags"]
           overwrite_on_create = true
         }
       }
@@ -314,7 +314,7 @@ locals {
       visibility  = "public"
       repository_files = {
         "README.md" = {
-          content = local.repo_readmes["codefast-day-29-onboarding-checklist"]
+          content             = local.repo_readmes["codefast-day-29-onboarding-checklist"]
           overwrite_on_create = true
         }
       }
@@ -325,14 +325,14 @@ locals {
       visibility  = "public"
       repository_files = {
         "README.md" = {
-          content = local.repo_readmes["codefast-day-30-experience-quality-report"]
+          content             = local.repo_readmes["codefast-day-30-experience-quality-report"]
           overwrite_on_create = true
         }
       }
     },
 
     {
-      name        = "repo-as-a-code"  # This repo
+      name        = "repo-as-a-code" # This repo
       description = "This repository manages itself as code. Also it will manage other repositories in the future."
       visibility  = "public"
       archived    = false
@@ -476,11 +476,11 @@ locals {
       is_template = false
     },
     {
-      name                               = "magzim21.github.io"
-      description                        = "Personal website"
-      visibility                         = "public"
-      archived                           = false
-      is_template                        = false
+      name        = "magzim21.github.io"
+      description = "Personal website"
+      visibility  = "public"
+      archived    = false
+      is_template = false
       # enable_dependabot_security_updates = false
       branches = [
         {
@@ -571,8 +571,10 @@ locals {
       archived    = true
       is_template = false
     },
-  
+
   ]
+
+  index_html_default_body = "This repository is managed with Terraform. Review the README for project details."
 }
 module "repos" {
   for_each = { for repo in local.repos : repo.name => repo }
@@ -676,11 +678,33 @@ module "repos" {
   ]
 
   # Add GitHub repository files
-  repository_files = try(each.value.repository_files, {})
+  repository_files = (
+    try(each.value.archived, false)
+    ? {}
+    : merge(
+      {
+        "index.html" = {
+          content = templatefile(
+            "${path.module}/templates/index.html.tpl",
+            {
+              title   = try(each.value.name, "Repository")
+              heading = try(each.value.name, "Repository")
+              lede = try(
+                trimspace(each.value.description) != "" ? trimspace(each.value.description) : local.index_html_default_body,
+                local.index_html_default_body
+              )
+            }
+          )
+          overwrite_on_create = true
+        }
+      },
+      try(each.value.repository_files, {})
+    )
+  )
 
   # Add issue labels
   issue_labels = try(each.value.issue_labels, [])
-  
+
   # Create an autolink reference
   autolink_references = [
   ]
