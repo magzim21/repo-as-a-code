@@ -4,17 +4,26 @@ locals {
       name        = "codefast-day-01-next-api-gallery"
       description = "Day 1/30: Ship a Next.js gallery that fetches a public API and renders statically generated cards."
       visibility  = "public"
+      topics      = ["codefast"]
       repository_files = {
         "README.md" = {
           content             = local.repo_readmes["codefast-day-01-next-api-gallery"]
           overwrite_on_create = true
         }
       }
+      pages = {
+        source = {
+          branch = "prod"
+          path   = "/"
+        }
+        build_type = "workflow"
+      }
     },
     {
       name        = "codefast-day-02-next-landing-page"
       description = "Day 2/30: Build a marketing landing page in Next.js with responsive Tailwind components and metadata."
       visibility  = "public"
+      topics      = ["codefast"]
       repository_files = {
         "README.md" = {
           content             = local.repo_readmes["codefast-day-02-next-landing-page"]
@@ -26,6 +35,7 @@ locals {
       name        = "codefast-day-03-next-mdx-blog"
       description = "Day 3/30: Create an MDX-powered blog in Next.js with dynamic routing and syntax highlighting."
       visibility  = "public"
+      topics      = ["codefast"]
       repository_files = {
         "README.md" = {
           content             = local.repo_readmes["codefast-day-03-next-mdx-blog"]
@@ -37,6 +47,7 @@ locals {
       name        = "codefast-day-04-next-pagination-lab"
       description = "Day 4/30: Prototype cursor-based pagination with resilient fallbacks, skeleton states, and API error boundaries."
       visibility  = "public"
+      topics      = ["codefast"]
       repository_files = {
         "README.md" = {
           content             = local.repo_readmes["codefast-day-04-next-pagination-lab"]
@@ -48,6 +59,7 @@ locals {
       name        = "codefast-day-05-next-seo-playbook"
       description = "Day 5/30: Automate lighthouse-backed SEO audits in Next.js with sitemap generation and hreflang coverage."
       visibility  = "public"
+      topics      = ["codefast"]
       repository_files = {
         "README.md" = {
           content             = local.repo_readmes["codefast-day-05-next-seo-playbook"]
@@ -59,6 +71,7 @@ locals {
       name        = "codefast-day-06-seo-ab-testing"
       description = "Day 6/30: Run server-side SEO experiments with dynamic metadata and automated canonical validation."
       visibility  = "public"
+      topics      = ["codefast"]
       repository_files = {
         "README.md" = {
           content             = local.repo_readmes["codefast-day-06-seo-ab-testing"]
@@ -70,6 +83,7 @@ locals {
       name        = "codefast-day-07-figma-token-sync"
       description = "Day 7/30: Keep tokens synced from Figma into JSON, Style Dictionary, and Tailwind layers on each push."
       visibility  = "public"
+      topics      = ["codefast"]
       repository_files = {
         "README.md" = {
           content             = local.repo_readmes["codefast-day-07-figma-token-sync"]
@@ -81,6 +95,7 @@ locals {
       name        = "codefast-day-08-design-token-ci"
       description = "Day 8/30: Build a pipeline that validates tokens synced from Figma against production CSS and flags drift."
       visibility  = "public"
+      topics      = ["codefast"]
       repository_files = {
         "README.md" = {
           content             = local.repo_readmes["codefast-day-08-design-token-ci"]
@@ -92,6 +107,7 @@ locals {
       name        = "codefast-day-09-datadog-rum-instrumentation"
       description = "Day 9/30: Instrument Datadog RUM across Next.js routes with user journey tagging and session replay."
       visibility  = "public"
+      topics      = ["codefast"]
       repository_files = {
         "README.md" = {
           content             = local.repo_readmes["codefast-day-09-datadog-rum-instrumentation"]
@@ -103,6 +119,7 @@ locals {
       name        = "codefast-day-10-rum-alerting"
       description = "Day 10/30: Analyze Datadog RUM signals for Core Web Vitals regressions and notify on Slack."
       visibility  = "public"
+      topics      = ["codefast"]
       repository_files = {
         "README.md" = {
           content             = local.repo_readmes["codefast-day-10-rum-alerting"]
@@ -114,6 +131,7 @@ locals {
       name        = "codefast-day-11-notion-sync"
       description = "Day 11/30: Build a Notion content sync CLI that mirrors docs into a Markdown repo."
       visibility  = "public"
+      topics      = ["codefast"]
       repository_files = {
         "README.md" = {
           content             = local.repo_readmes["codefast-day-11-notion-sync"]
@@ -125,6 +143,7 @@ locals {
       name        = "codefast-day-12-lesson-scheduler"
       description = "Day 12/30: Create a lesson scheduler that syncs Codefa.st modules with Google Calendar." # 
       visibility  = "public"
+      topics      = ["codefast"]
       repository_files = {
         "README.md" = {
           content             = local.repo_readmes["codefast-day-12-lesson-scheduler"]
@@ -136,6 +155,7 @@ locals {
       name        = "codefast-day-13-multi-api-atlas"
       description = "Day 13/30: Build a multi-API command center with geospatial map overlays, latency heatmaps, and localization toggles."
       visibility  = "public"
+      topics      = ["codefast"]
       repository_files = {
         "README.md" = {
           content             = local.repo_readmes["codefast-day-13-multi-api-atlas"]
@@ -147,6 +167,7 @@ locals {
       name        = "codefast-day-14-aceternity-theme-lab"
       description = "Day 14/30: Scaffold a theme editor that mirrors ui.aceternity.com palettes with live token previews."
       visibility  = "public"
+      topics      = ["codefast"]
       repository_files = {
         "README.md" = {
           content             = local.repo_readmes["codefast-day-14-aceternity-theme-lab"]
@@ -158,6 +179,7 @@ locals {
       name        = "codefast-day-15-offline-sync-queue"
       description = "Day 15/30: Persist fetched data and file uploads in IndexedDB, reconcile on reconnect, and dispatch queued emails."
       visibility  = "public"
+      topics      = ["codefast"]
       repository_files = {
         "README.md" = {
           content             = local.repo_readmes["codefast-day-15-offline-sync-queue"]
@@ -169,6 +191,7 @@ locals {
       name        = "codefast-day-16-component-token-diff"
       description = "Day 16/30: Diff design tokens across branches and surface breaking changes in Shadcn component stories."
       visibility  = "public"
+      topics      = ["codefast"]
       repository_files = {
         "README.md" = {
           content             = local.repo_readmes["codefast-day-16-component-token-diff"]
@@ -180,6 +203,7 @@ locals {
       name        = "codefast-day-17-rum-seo-correlation"
       description = "Day 17/30: Correlate Datadog RUM metrics with SEO rankings to surface pages with degraded UX."
       visibility  = "public"
+      topics      = ["codefast"]
       repository_files = {
         "README.md" = {
           content             = local.repo_readmes["codefast-day-17-rum-seo-correlation"]
@@ -191,6 +215,7 @@ locals {
       name        = "codefast-day-18-certificate-generator"
       description = "Day 18/30: Generate personalized course completion certificates using PDFKit and edge functions."
       visibility  = "public"
+      topics      = ["codefast"]
       repository_files = {
         "README.md" = {
           content             = local.repo_readmes["codefast-day-18-certificate-generator"]
@@ -202,6 +227,7 @@ locals {
       name        = "codefast-day-19-shad-cdn-publisher"
       description = "Day 19/30: Publish a shad cdn component bundle with versioned exports and integrity metadata."
       visibility  = "public"
+      topics      = ["codefast"]
       repository_files = {
         "README.md" = {
           content             = local.repo_readmes["codefast-day-19-shad-cdn-publisher"]
@@ -213,6 +239,7 @@ locals {
       name        = "codefast-day-20-shad-cdn-auditor"
       description = "Day 20/30: Audit shad cdn usage to recommend accessible variants and tree-shakable imports."
       visibility  = "public"
+      topics      = ["codefast"]
       repository_files = {
         "README.md" = {
           content             = local.repo_readmes["codefast-day-20-shad-cdn-auditor"]
@@ -224,6 +251,7 @@ locals {
       name        = "codefast-day-21-quality-guardrails"
       description = "Day 21/30: Enforce API error boundaries with synthetic probes, unit-tested handlers, and file-based fixtures."
       visibility  = "public"
+      topics      = ["codefast"]
       repository_files = {
         "README.md" = {
           content             = local.repo_readmes["codefast-day-21-quality-guardrails"]
@@ -235,6 +263,7 @@ locals {
       name        = "codefast-day-22-kanban"
       description = "Day 22/30: Deliver a drag-and-drop Kanban planner with server actions and optimistic updates."
       visibility  = "public"
+      topics      = ["codefast"]
       repository_files = {
         "README.md" = {
           content             = local.repo_readmes["codefast-day-22-kanban"]
@@ -246,6 +275,7 @@ locals {
       name        = "codefast-day-23-search"
       description = "Day 23/30: Ship a knowledge base search experience using Algolia and instant faceting."
       visibility  = "public"
+      topics      = ["codefast"]
       repository_files = {
         "README.md" = {
           content             = local.repo_readmes["codefast-day-23-search"]
@@ -257,6 +287,7 @@ locals {
       name        = "codefast-day-24-cohort-metrics"
       description = "Day 24/30: Compute SaaS cohort and retention metrics with SQL models and charts."
       visibility  = "public"
+      topics      = ["codefast"]
       repository_files = {
         "README.md" = {
           content             = local.repo_readmes["codefast-day-24-cohort-metrics"]
@@ -268,6 +299,7 @@ locals {
       name        = "codefast-day-25-reminder-pwa"
       description = "Day 25/30: Launch a mobile-first PWA for daily practice reminders with push notifications."
       visibility  = "public"
+      topics      = ["codefast"]
       repository_files = {
         "README.md" = {
           content             = local.repo_readmes["codefast-day-25-reminder-pwa"]
@@ -279,6 +311,7 @@ locals {
       name        = "codefast-day-26-seo-rum-dashboard"
       description = "Day 26/30: Ship a combined SEO and RUM insights dashboard with anomaly detection and executive summaries."
       visibility  = "public"
+      topics      = ["codefast"]
       repository_files = {
         "README.md" = {
           content             = local.repo_readmes["codefast-day-26-seo-rum-dashboard"]
@@ -290,6 +323,7 @@ locals {
       name        = "codefast-day-27-figma-token-cli"
       description = "Day 27/30: Provide a CLI to sync Figma tokens across repos with change logs and GitHub check outputs."
       visibility  = "public"
+      topics      = ["codefast"]
       repository_files = {
         "README.md" = {
           content             = local.repo_readmes["codefast-day-27-figma-token-cli"]
@@ -301,6 +335,7 @@ locals {
       name        = "codefast-day-28-feature-flags"
       description = "Day 28/30: Build a feature flag service integrating LaunchDarkly and configuration UI."
       visibility  = "public"
+      topics      = ["codefast"]
       repository_files = {
         "README.md" = {
           content             = local.repo_readmes["codefast-day-28-feature-flags"]
@@ -312,6 +347,7 @@ locals {
       name        = "codefast-day-29-onboarding-checklist"
       description = "Day 29/30: Create an animated onboarding checklist with Framer Motion and progress sync."
       visibility  = "public"
+      topics      = ["codefast"]
       repository_files = {
         "README.md" = {
           content             = local.repo_readmes["codefast-day-29-onboarding-checklist"]
@@ -323,6 +359,7 @@ locals {
       name        = "codefast-day-30-experience-quality-report"
       description = "Day 30/30: Automate weekly experience quality reports blending Datadog RUM, SEO, and design token drift."
       visibility  = "public"
+      topics      = ["codefast"]
       repository_files = {
         "README.md" = {
           content             = local.repo_readmes["codefast-day-30-experience-quality-report"]
@@ -378,6 +415,7 @@ locals {
       description = "Docker, AWS EB, BeautifulSoup, Selenium, Telegram-bot, psycopg2, logging. Also: chrome, Xpra (virtual display)."
       visibility  = "public"
       archived    = true
+      # default_branch = "main"
       is_template = false
     },
     {
@@ -419,9 +457,6 @@ locals {
           name = "gh-pages"
         },
         {
-          name = "wtf"
-        },
-        {
           name = "prod"
         }
       ]
@@ -448,31 +483,35 @@ locals {
       is_template = false
     },
     {
-      name        = "safedial"
-      description = "A password checker CLI tool ☘️"
-      visibility  = "public"
-      archived    = true
-      is_template = false
+      name           = "safedial"
+      description    = "A password checker CLI tool ☘️"
+      visibility     = "public"
+      archived       = true
+      default_branch = "main"
+      is_template    = false
     },
     {
-      name        = "elevate-sec"
-      description = ""
-      visibility  = "public"
-      archived    = true
-      is_template = false
+      name           = "elevate-sec"
+      description    = ""
+      visibility     = "public"
+      archived       = true
+      default_branch = "main"
+      is_template    = false
     },
     {
-      name        = "magz8s"
-      description = "EKS installation with best practices"
-      visibility  = "public"
-      archived    = true
-      is_template = false
+      name           = "magz8s"
+      description    = "EKS installation with best practices"
+      visibility     = "public"
+      archived       = true
+      default_branch = "main"
+      is_template    = false
     },
     {
       name        = "kubespray-lite"
       description = "aws ec2, terraform, ansible, kubernetes"
       visibility  = "public"
       archived    = true
+      # default_branch = "main"
       is_template = false
     },
     {
@@ -495,11 +534,12 @@ locals {
       }
     },
     {
-      name        = "aws_terraform"
-      description = "ASG(EC2) + ELB"
-      visibility  = "public"
-      archived    = true
-      is_template = false
+      name           = "aws_terraform"
+      description    = "ASG(EC2) + ELB"
+      visibility     = "public"
+      archived       = true
+      default_branch = "main"
+      is_template    = false
     },
     {
       name        = "Ansible-gather-information"
@@ -527,6 +567,7 @@ locals {
       description = ""
       visibility  = "public"
       archived    = true
+      # default_branch = "main"
       is_template = false
     },
     {
@@ -534,6 +575,7 @@ locals {
       description = "Console CSV editor with OOP"
       visibility  = "public"
       archived    = true
+      # default_branch = "main"
       is_template = false
     },
     {
@@ -541,6 +583,7 @@ locals {
       description = "ITEA course work. I have got RED diploma on it."
       visibility  = "public"
       archived    = true
+      # default_branch = "main"
       is_template = false
     },
     {
@@ -548,6 +591,7 @@ locals {
       description = "epam test task"
       visibility  = "public"
       archived    = true
+      # default_branch = "main"
       is_template = false
     },
     {
@@ -555,6 +599,7 @@ locals {
       description = "Simple console gambling game"
       visibility  = "public"
       archived    = true
+      # default_branch = "main"
       is_template = false
     },
     {
@@ -562,6 +607,7 @@ locals {
       description = "OOP practice with python"
       visibility  = "public"
       archived    = true
+      # default_branch = "main"
       is_template = false
     },
     {
@@ -569,6 +615,7 @@ locals {
       description = "training task"
       visibility  = "public"
       archived    = true
+      # default_branch = "main"
       is_template = false
     },
 
@@ -580,7 +627,8 @@ module "repos" {
   for_each = { for repo in local.repos : repo.name => repo }
 
   # Swap sources. These docs are autogenerated.
-  source = "codelawcorp/repository/github"
+  source  = "codelawcorp/repository/github"
+  version = "4.0.7"
   # version = "~> 2.0.0" # It is always recommended to pin version
 
   name        = try(each.value.name, null)
@@ -593,7 +641,7 @@ module "repos" {
 
   homepage_url = try(each.value.homepage_url, null)
   # topics       = try(each.value.topics, [])
-  topics = []
+  topics = try(each.value.topics, [])
 
   has_projects    = try(each.value.has_projects, null)
   has_wiki        = try(each.value.has_wiki, null)
@@ -647,7 +695,8 @@ module "repos" {
   ]
 
   # This also automatically enables vulnerability_alerts
-  enable_dependabot_security_updates = try(each.value.enable_dependabot_security_updates, null)
+  vulnerability_alerts               = true
+  enable_dependabot_security_updates = try(each.value.enable_dependabot_security_updates, true, null)
 
 
   # Configure webhooks for the repository
