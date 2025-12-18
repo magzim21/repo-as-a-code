@@ -15,10 +15,6 @@ import {
   id = "obsidian-notes"
 }
 import {
-  to = module.repos["quick_ops"].github_repository.this
-  id = "quick_ops"
-}
-import {
   to = module.repos["quick-ops"].github_repository.this
   id = "quick-ops"
 }

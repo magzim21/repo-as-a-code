@@ -1,6 +1,25 @@
 locals {
   repos = [
     {
+      name        = "save-the-world"
+      description = "Save the world by backing up git repositories"
+      visibility  = "public"
+      topics      = ["backup", "git"]
+      archived    = false
+      template = {
+        owner                = "codelawcorp"
+        repository           = "template"
+        include_all_branches = false
+      }
+      pages = {
+        build_type = "workflow"
+      }
+      has_issues      = true
+      has_projects    = true
+      has_wiki        = false
+      has_discussions = true
+    },
+    {
       name        = "codefast-day-01-next-api-gallery"
       description = "Day 1/30: Ship a Next.js gallery that fetches a public API and renders statically generated cards."
       visibility  = "public"
@@ -776,13 +795,6 @@ locals {
       name        = "obsidian-notes"
       description = "Knowldege notes. Aka second brain."
       visibility  = "private"
-      archived    = false
-      is_template = false
-    },
-    {
-      name        = "quick_ops"
-      description = "Scripting magic. Like Ansible ad-hoc but with iterm2"
-      visibility  = "public"
       archived    = false
       is_template = false
     },
