@@ -1,6 +1,44 @@
 locals {
   repos = [
     {
+      name        = "frontendmentor"
+      description = "Practice HTML, CSS, and JavaScript by building real-world projects."
+      visibility  = "private"
+      topics      = ["html", "css", "javascript", ]
+      archived    = false
+      template = {
+        owner                = "codelawcorp"
+        repository           = "template"
+        include_all_branches = false
+      }
+      # pages = {
+      #   build_type = "workflow"
+      # }
+      has_issues      = false
+      has_projects    = false
+      has_wiki        = false
+      has_discussions = false
+    },
+    {
+      name        = "canada-immigration-news"
+      description = "Monitor Canada PR fast tracks"
+      visibility  = "private"
+      topics      = ["canada", ]
+      archived    = false
+      template = {
+        owner                = "codelawcorp"
+        repository           = "template"
+        include_all_branches = false
+      }
+      # pages = {
+      #   build_type = "workflow"
+      # }
+      has_issues      = false
+      has_projects    = false
+      has_wiki        = false
+      has_discussions = false
+    },
+    {
       name        = "save-the-world"
       description = "Save the world by backing up git repositories"
       visibility  = "public"
