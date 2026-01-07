@@ -13,8 +13,8 @@ on:
       - prod
       - stg
       - dev
-  schedule: # A regular sync to prevent drifts.
-    - cron: "0 8 * * 1" # every day at 8am UTC Monday # https://crontab.guru/#0_8_*_*_*
+#  schedule: # A regular sync to prevent drifts.
+#    - cron: "0 8 * * 1" # every day at 8am UTC Monday # https://crontab.guru/#0_8_*_*_*
   workflow_dispatch: {}
 # env:
 #   AWS_REGION: $${{ vars.AWS_REGION }} # Set via GitHub Secrets and variables on a org level

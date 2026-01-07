@@ -1,6 +1,38 @@
 locals {
   repos = [
     {
+      name        = "ims-lp"
+      description = "IMS Landing Page"
+      visibility  = "public"
+      topics      = ["html", "css", "javascript", ]
+      archived    = false
+      template = {
+        owner                = "codelawcorp"
+        repository           = "template"
+        include_all_branches = false
+      }
+      pages = {
+        build_type = "workflow"
+      }
+      repository_files = {
+        ".github/workflows/main.yaml" = {
+          content             = templatefile("templates/main.yaml.tpl", {})
+          commit_message      = "fix(semantic-release): determine the next version"
+          overwrite_on_create = true
+        }
+        "README.md" = {
+          content             = local.repo_readmes["ims-lp"]
+          overwrite_on_create = true
+        }
+      }
+      has_issues      = false
+      has_projects    = false
+      has_wiki        = false
+      has_discussions = false
+
+      archive_on_destroy = false
+    },
+    {
       name        = "frontendmentor"
       description = "Practice HTML, CSS, and JavaScript by building real-world projects."
       visibility  = "private"
@@ -18,6 +50,8 @@ locals {
       has_projects    = false
       has_wiki        = false
       has_discussions = false
+
+      archive_on_destroy = false
     },
     {
       name        = "canada-immigration-news"
@@ -37,6 +71,8 @@ locals {
       has_projects    = false
       has_wiki        = false
       has_discussions = false
+
+      archive_on_destroy = false
     },
     {
       name        = "save-the-world"
@@ -81,6 +117,7 @@ locals {
           overwrite_on_create = true
         }
       }
+      archive_on_destroy = false
     },
     {
       name        = "codefast-day-02-next-landing-page"
@@ -106,6 +143,7 @@ locals {
           overwrite_on_create = true
         }
       }
+      archive_on_destroy = false
     },
     {
       name        = "codefast-day-03-next-mdx-blog"
@@ -131,6 +169,7 @@ locals {
           overwrite_on_create = true
         }
       }
+      archive_on_destroy = false
     },
     {
       name        = "codefast-day-04-next-pagination-lab"
@@ -156,6 +195,7 @@ locals {
           overwrite_on_create = true
         }
       }
+      archive_on_destroy = false
     },
     {
       name        = "codefast-day-05-next-seo-playbook"
@@ -181,6 +221,7 @@ locals {
           overwrite_on_create = true
         }
       }
+      archive_on_destroy = false
     },
     {
       name        = "codefast-day-06-seo-ab-testing"
@@ -206,6 +247,7 @@ locals {
           overwrite_on_create = true
         }
       }
+      archive_on_destroy = false
     },
     {
       name        = "codefast-day-07-figma-token-sync"
@@ -231,6 +273,7 @@ locals {
           overwrite_on_create = true
         }
       }
+      archive_on_destroy = false
     },
     {
       name        = "codefast-day-08-design-token-ci"
@@ -256,6 +299,7 @@ locals {
           overwrite_on_create = true
         }
       }
+      archive_on_destroy = false
     },
     {
       name        = "codefast-day-09-datadog-rum-instrumentation"
@@ -281,6 +325,7 @@ locals {
           overwrite_on_create = true
         }
       }
+      archive_on_destroy = false
     },
     {
       name        = "codefast-day-10-rum-alerting"
@@ -306,6 +351,7 @@ locals {
           overwrite_on_create = true
         }
       }
+      archive_on_destroy = false
     },
     {
       name        = "codefast-day-11-notion-sync"
@@ -331,6 +377,7 @@ locals {
           overwrite_on_create = true
         }
       }
+      archive_on_destroy = false
     },
     {
       name        = "codefast-day-12-lesson-scheduler"
@@ -356,6 +403,7 @@ locals {
           overwrite_on_create = true
         }
       }
+      archive_on_destroy = false
     },
     {
       name        = "codefast-day-13-multi-api-atlas"
@@ -381,6 +429,7 @@ locals {
           overwrite_on_create = true
         }
       }
+      archive_on_destroy = false
     },
     {
       name        = "codefast-day-14-aceternity-theme-lab"
@@ -406,6 +455,7 @@ locals {
           overwrite_on_create = true
         }
       }
+      archive_on_destroy = false
     },
     {
       name        = "codefast-day-15-offline-sync-queue"
@@ -431,6 +481,7 @@ locals {
           overwrite_on_create = true
         }
       }
+      archive_on_destroy = false
     },
     {
       name        = "codefast-day-16-component-token-diff"
@@ -456,6 +507,7 @@ locals {
           overwrite_on_create = true
         }
       }
+      archive_on_destroy = false
     },
     {
       name        = "codefast-day-17-rum-seo-correlation"
@@ -481,6 +533,7 @@ locals {
           overwrite_on_create = true
         }
       }
+      archive_on_destroy = false
     },
     {
       name        = "codefast-day-18-certificate-generator"
@@ -506,6 +559,7 @@ locals {
           overwrite_on_create = true
         }
       }
+      archive_on_destroy = false
     },
     {
       name        = "codefast-day-19-shad-cdn-publisher"
@@ -531,6 +585,7 @@ locals {
           overwrite_on_create = true
         }
       }
+      archive_on_destroy = false
     },
     {
       name        = "codefast-day-20-shad-cdn-auditor"
@@ -556,6 +611,7 @@ locals {
           overwrite_on_create = true
         }
       }
+      archive_on_destroy = false
     },
     {
       name        = "codefast-day-21-quality-guardrails"
@@ -581,6 +637,7 @@ locals {
           overwrite_on_create = true
         }
       }
+      archive_on_destroy = false
     },
     {
       name        = "codefast-day-22-kanban"
@@ -606,6 +663,7 @@ locals {
           overwrite_on_create = true
         }
       }
+      archive_on_destroy = false
     },
     {
       name        = "codefast-day-23-search"
@@ -631,6 +689,7 @@ locals {
           overwrite_on_create = true
         }
       }
+      archive_on_destroy = false
     },
     {
       name        = "codefast-day-24-cohort-metrics"
@@ -656,6 +715,7 @@ locals {
           overwrite_on_create = true
         }
       }
+      archive_on_destroy = false
     },
     {
       name        = "codefast-day-25-reminder-pwa"
@@ -681,6 +741,7 @@ locals {
           overwrite_on_create = true
         }
       }
+      archive_on_destroy = false
     },
     {
       name        = "codefast-day-26-seo-rum-dashboard"
@@ -706,6 +767,7 @@ locals {
           overwrite_on_create = true
         }
       }
+      archive_on_destroy = false
     },
     {
       name        = "codefast-day-27-figma-token-cli"
@@ -731,6 +793,7 @@ locals {
           overwrite_on_create = true
         }
       }
+      archive_on_destroy = false
     },
     {
       name        = "codefast-day-28-feature-flags"
@@ -756,6 +819,7 @@ locals {
           overwrite_on_create = true
         }
       }
+      archive_on_destroy = false
     },
     {
       name        = "codefast-day-29-onboarding-checklist"
@@ -781,6 +845,7 @@ locals {
           overwrite_on_create = true
         }
       }
+      archive_on_destroy = false
     },
     {
       name        = "codefast-day-30-experience-quality-report"
@@ -806,6 +871,7 @@ locals {
           overwrite_on_create = true
         }
       }
+      archive_on_destroy = false
     },
 
     {
@@ -819,7 +885,7 @@ locals {
       name        = "elk_services"
       description = "Scripting magic. Like Ansible ad-hoc but with iterm2"
       visibility  = "public"
-      archived    = false
+      archived    = true
       is_template = false
     },
     {
@@ -838,7 +904,7 @@ locals {
     },
     {
       name        = "quick-ops"
-      description = ""
+      description = "Sripting magic. Like Ansible ad-hoc but with iterm2"
       visibility  = "public"
       archived    = false
       is_template = false
@@ -1063,14 +1129,14 @@ module "repos" {
 
   # Swap sources. These docs are autogenerated.
   source  = "codelawcorp/repository/github"
-  version = "4.2.3"
+  version = "4.2.4"
   # version = "~> 2.0.0" # It is always recommended to pin version
 
   name        = try(each.value.name, null)
   description = try(each.value.description, null)
   visibility  = try(each.value.visibility, null)
 
-  homepage_url = try(each.value.homepage_url, each.value.pages.cname, aws_route53_record.this_a[each.key].name, null)
+  homepage_url = try(each.value.homepage_url, each.value.pages.cname, each.value.pages != null ? "${each.value.name}.${data.aws_route53_zone.this.name}" : null, null)
   fork         = try(each.value.fork, null)
   source_owner = try(each.value.source_owner, null)
   source_repo  = try(each.value.source_repo, null)
@@ -1117,7 +1183,7 @@ module "repos" {
   #   # GitHub Pages configuration (optional)
   pages = try(each.value.pages, null) != null ? {
     build_type = try(each.value.pages.build_type, "workflow")
-    cname      = try(each.value.pages.cname, aws_route53_record.this_a[each.key].name, null)
+    cname      = try(each.value.pages.cname, "${each.value.name}.${data.aws_route53_zone.this.name}", null)
     # source = try(each.value.pages.source, null)
     source = try(each.value.pages.source, null) != null ? {
       branch = try(each.value.pages.source.branch, "gh-pages")
@@ -1229,12 +1295,23 @@ data "aws_route53_zone" "this" {
   name = "maxim.run."
 }
 
-resource "aws_route53_record" "this_a" {
+
+resource "aws_route53_record" "this_cname" {
   for_each = {
-    for repo in local.repos : repo.name => repo if try(repo.pages, null) != null
+    for repo in local.repos : repo.name => repo if try(repo.pages, null) != null && try(repo.pages.cname, null) != data.aws_route53_zone.this.name
   }
   zone_id = data.aws_route53_zone.this.zone_id
   name    = try(each.value.pages.cname, null) != null ? each.value.pages.cname : "${each.key}.${data.aws_route53_zone.this.name}"
+  type    = "CNAME"
+  ttl     = "300"
+  records = [
+    "magzim21.github.io"
+  ]
+}
+
+resource "aws_route53_record" "this_a" {
+  zone_id = data.aws_route53_zone.this.zone_id
+  name    = data.aws_route53_zone.this.name
   type    = "A"
   ttl     = "300"
   records = [
@@ -1246,11 +1323,8 @@ resource "aws_route53_record" "this_a" {
 }
 
 resource "aws_route53_record" "this_aaaa" {
-  for_each = {
-    for repo in local.repos : repo.name => repo if try(repo.pages, null) != null
-  }
+  name    = data.aws_route53_zone.this.name
   zone_id = data.aws_route53_zone.this.zone_id
-  name    = try(each.value.pages.cname, null) != null ? each.value.pages.cname : "${each.key}.${data.aws_route53_zone.this.name}"
   type    = "AAAA"
   ttl     = "300"
   records = [
@@ -1262,7 +1336,7 @@ resource "aws_route53_record" "this_aaaa" {
 }
 
 
-# https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/verifying-your-custom-domain-for-github-pages
+# https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/verifying-your-custom-domain-for-github-pages#verifying-a-domain-for-your-user-site
 resource "aws_route53_record" "txt_verification" {
 
   zone_id = data.aws_route53_zone.this.zone_id
