@@ -1191,22 +1191,11 @@ module "repos" {
     } : null
   } : null
 
-  environments = [
-  ]
+  environments = try(each.value.environments, null)
 
-  actions_variables = [
-    # {
-    #   name  = "TEST_VAR"
-    #   value = "true"
-    # }
-  ]
+  actions_variables = try(each.value.actions_variables, null)
 
-  actions_secrets = [
-    # {
-    #   name  = "DEPLOY_TOKEN"
-    #   value = "secret-token-value"
-    # }
-  ]
+  actions_secrets = try(each.value.actions_secrets, null)
 
   # This also automatically enables vulnerability_alerts
   # vulnerability_alerts               = true
@@ -1214,31 +1203,15 @@ module "repos" {
 
 
   # Configure webhooks for the repository
-  webhooks = [
-    # {
-    #   url          = "https://jenkins.example.com/github-webhook/"
-    #   content_type = "json"
-    #   events       = ["push", "pull_request"]
-    # }
-  ]
+  webhooks = try(each.value.webhooks, null)
 
 
 
 
 
-  users = [
-    # {
-    #   username   = "magzim21"
-    #   permission = "admin"
-    # }
-  ]
+  users = try(each.value.users, null)
 
-  teams = [
-    # {
-    #   team_id    = "your-org/admin-team"
-    #   permission = "admin"
-    # }
-  ]
+  teams = try(each.value.teams, null)
 
   # Add GitHub repository files
   repository_files = (
@@ -1287,6 +1260,8 @@ module "repos" {
 
   # Projects are not supported by this module.
   # 410 Projects (classic) has been deprecated in favor of the new Projects experience. []
+
+  archive_on_destroy = try(each.value.archive_on_destroy, null)
 }
 
 
