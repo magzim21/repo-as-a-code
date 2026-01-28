@@ -1,3 +1,16 @@
+terraform {
+  backend "s3" {
+    # Varables not allowed in backend block
+    bucket = "terraform-state-249446252531-repo-as-a-code" # module.terraform_state_bucket.s3_bucket_id
+
+    key          = "terraform.tfstate"
+    region       = "ca-central-1"
+    encrypt      = true
+    use_lockfile = true
+  }
+}
+
+# https://docs.github.com/en/actions/how-tos/secure-your-work/security-harden-deployments/oidc-in-aws
 data "aws_caller_identity" "current" {}
 
 

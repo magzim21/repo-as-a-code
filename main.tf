@@ -54,6 +54,27 @@ locals {
       archive_on_destroy = false
     },
     {
+      name        = "finance-simulation"
+      description = "Finance simulation"
+      visibility  = "private"
+      topics      = ["finance", "simulation"]
+      archived    = false
+      template = {
+        owner                = "codelawcorp"
+        repository           = "template"
+        include_all_branches = false
+      }
+      # pages = {
+      #   build_type = "workflow"
+      # }
+      has_issues      = false
+      has_projects    = false
+      has_wiki        = false
+      has_discussions = false
+
+      archive_on_destroy = false
+    },
+    {
       name        = "canada-immigration-news"
       description = "Monitor Canada PR fast tracks"
       visibility  = "private"
@@ -962,7 +983,7 @@ locals {
           name = "prod"
         }
       ]
-      pages = { // GitHub provider issue: pages branch must exist at applytime / bootstrap problem
+      pages = { // GitHub provider issue: gh-pages branch must exist at applytime / bootstrap problem
       }
 
     },

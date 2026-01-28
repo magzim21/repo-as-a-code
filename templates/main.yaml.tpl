@@ -128,7 +128,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     environment:
-      name: github-pages
+      name: prod
       url: $${{steps.deployment.outputs.page_url}}
     steps:
       - name: Deploy artifact
