@@ -68,6 +68,8 @@ jobs:
   tf-plan: 
     name: Terraform plan
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write # This is required for requesting the JWT
     needs: 
       - next-version
     steps:
@@ -96,7 +98,9 @@ jobs:
   tf-apply: # This is safe to apply because critical resources `prevent_destroy = true` or `archive_on_destroy = true`
     name: Terraform apply
     runs-on: ubuntu-latest
-    if: github.ref_name == 'prod'
+    permissions:
+      id-token: write # This is required for requesting the JWT
+    # if: github.ref_name == 'prod'
     # if: needs.git-tag-release.outputs.should-run-build == 'True'
     needs: 
       - tf-plan
