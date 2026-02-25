@@ -70,6 +70,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       id-token: write # This is required for requesting the JWT
+      contents: read
     needs: 
       - next-version
     steps:
@@ -106,6 +107,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       id-token: write # This is required for requesting the JWT
+      contents: read
     # if: github.ref_name == 'prod'
     # if: needs.git-tag-release.outputs.should-run-build == 'True'
     needs: 
