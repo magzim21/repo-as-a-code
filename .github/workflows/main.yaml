@@ -86,10 +86,14 @@ jobs:
         run: terraform init -input=false
       - name: Check if terraform configuration is valid
         run: terraform validate
-      - name: Run Terraform apply
-        run: |
-          terraform apply -auto-approve 
-          echo "#### Successfully applied organization" >> $GITHUB_STEP_SUMMARY
+      - name: Run Terraform plan
+        run: terraform plan -out=tfplan -parallelism=3
+      - name: Upload Terraform plan
+        uses: actions/upload-artifact@v4
+        with:
+          name: tfplan
+          path: tfplan
+          retention-days: 1
 
 
 
@@ -123,12 +127,14 @@ jobs:
           terraform_version: ${{ vars.TERRAFORM_VERSION }}
       - name: Run Terraform init
         run: terraform init -input=false
-      - name: Check if terraform configuration is valid
-        run: terraform validate
+      - name: Download Terraform plan
+        uses: actions/download-artifact@v4
+        with:
+          name: tfplan
       - name: Run Terraform apply
         run: |
-          terraform apply -auto-approve 
-          echo "#### Successfully applied organization" >> $GITHUB_STEP_SUMMARY
+          terraform apply tfplan -parallelism=3 -auto-approve
+          echo "#### Successfully applied terraform configuration" >> $GITHUB_STEP_SUMMARY
 
 
   git-tag-release:
