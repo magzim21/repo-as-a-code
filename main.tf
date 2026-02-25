@@ -64,6 +64,24 @@ locals {
         repository           = "template"
         include_all_branches = false
       }
+      actions_variables = [
+        {
+          name  = "TERRAFORM_VERSION"
+          value = "1.14.5"
+        },
+        {
+          name  = "AWS_ACCOUNT_ID"
+          value = data.aws_caller_identity.current.account_id
+        },
+        {
+          name  = "AWS_REGION"
+          value = "us-east-1"
+        },
+        {
+          name  = "IAM_GHA_OIDC_ROLE_NAME"
+          value = "github-actions-role"
+        },
+      ]
       # pages = {
       #   build_type = "workflow"
       # }
@@ -926,7 +944,19 @@ locals {
         {
           name  = "TERRAFORM_VERSION"
           value = "1.14.5"
-        }
+        },
+        {
+          name  = "AWS_ACCOUNT_ID"
+          value = data.aws_caller_identity.current.account_id
+        },
+        {
+          name  = "AWS_REGION"
+          value = "us-east-1"
+        },
+        {
+          name  = "IAM_GHA_OIDC_ROLE_NAME"
+          value = "github-actions-role"
+        },
       ]
     },
     {
