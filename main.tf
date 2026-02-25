@@ -940,6 +940,18 @@ locals {
       visibility  = "public"
       archived    = false
       is_template = false
+
+      environments = [
+        {
+          name = "prod"
+          secrets = [
+            # {
+            #   name  = "pat_token"
+            #   value = "Creaate it manually in the GitHub Actions UI"
+            # },
+          ]
+        },
+      ]
       actions_variables = [
         {
           name  = "TERRAFORM_VERSION"
@@ -957,6 +969,8 @@ locals {
           name  = "IAM_GHA_OIDC_ROLE_NAME"
           value = "github-actions-role"
         },
+      ]
+      actions_secrets = [
       ]
     },
     {
