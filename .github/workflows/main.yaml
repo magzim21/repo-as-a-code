@@ -89,7 +89,7 @@ jobs:
       - name: Run Terraform plan
         env:
           GITHUB_TOKEN: ${{ secrets.pat_token }} # override the default GITHUB_TOKEN
-        run: terraform plan -out=tfplan -parallelism=3
+        run: terraform plan -out=tfplan -parallelism=20
       - name: Upload Terraform plan
         uses: actions/upload-artifact@v4
         with:
@@ -137,7 +137,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.pat_token }} # override the default GITHUB_TOKEN
         run: |
-          terraform apply tfplan -parallelism=3 -auto-approve
+          terraform apply -parallelism=20 -auto-approve tfplan
           echo "#### Successfully applied terraform configuration" >> $GITHUB_STEP_SUMMARY
 
 
