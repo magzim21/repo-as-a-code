@@ -54,6 +54,27 @@ locals {
       archive_on_destroy = false
     },
     {
+      name        = "aws-infra-personal"
+      description = "AWS infrastructure for personal use"
+      visibility  = "private"
+      topics      = ["aws", "infrastructure", "personal"]
+      archived    = false
+      template = {
+        owner                = "codelawcorp"
+        repository           = "template"
+        include_all_branches = false
+      }
+      # pages = {
+      #   build_type = "workflow"
+      # }
+      has_issues      = false
+      has_projects    = false
+      has_wiki        = false
+      has_discussions = false
+
+      archive_on_destroy = false
+    },
+    {
       name        = "finance-simulation"
       description = "Finance simulation"
       visibility  = "private"
@@ -114,786 +135,786 @@ locals {
       has_wiki        = false
       has_discussions = true
     },
-    {
-      name        = "codefast-day-01-next-api-gallery"
-      description = "Day 1/30: Ship a Next.js gallery that fetches a public API and renders statically generated cards."
-      visibility  = "public"
-      topics      = ["codefast"]
-      template = {
-        owner                = "codelawcorp"
-        repository           = "template"
-        include_all_branches = false
-      }
-      pages = {
-        build_type = "workflow"
-      }
-      repository_files = {
-        ".github/workflows/main.yaml" = {
-          content             = templatefile("templates/main.yaml.tpl", {})
-          commit_message      = "fix(semantic-release): determine the next version"
-          overwrite_on_create = true
-        }
-        "README.md" = {
-          content             = local.repo_readmes["codefast-day-01-next-api-gallery"]
-          overwrite_on_create = true
-        }
-      }
-      archive_on_destroy = false
-    },
-    {
-      name        = "codefast-day-02-next-landing-page"
-      description = "Day 2/30: Build a marketing landing page in Next.js with responsive Tailwind components and metadata."
-      visibility  = "public"
-      topics      = ["codefast"]
-      template = {
-        owner                = "codelawcorp"
-        repository           = "template"
-        include_all_branches = false
-      }
-      pages = {
-        build_type = "workflow"
-      }
-      repository_files = {
-        ".github/workflows/main.yaml" = {
-          content             = templatefile("templates/main.yaml.tpl", {})
-          commit_message      = "fix(semantic-release): determine the next version"
-          overwrite_on_create = true
-        }
-        "README.md" = {
-          content             = local.repo_readmes["codefast-day-02-next-landing-page"]
-          overwrite_on_create = true
-        }
-      }
-      archive_on_destroy = false
-    },
-    {
-      name        = "codefast-day-03-next-mdx-blog"
-      description = "Day 3/30: Create an MDX-powered blog in Next.js with dynamic routing and syntax highlighting."
-      visibility  = "public"
-      topics      = ["codefast"]
-      template = {
-        owner                = "codelawcorp"
-        repository           = "template"
-        include_all_branches = false
-      }
-      pages = {
-        build_type = "workflow"
-      }
-      repository_files = {
-        ".github/workflows/main.yaml" = {
-          content             = templatefile("templates/main.yaml.tpl", {})
-          commit_message      = "fix(semantic-release): determine the next version"
-          overwrite_on_create = true
-        }
-        "README.md" = {
-          content             = local.repo_readmes["codefast-day-03-next-mdx-blog"]
-          overwrite_on_create = true
-        }
-      }
-      archive_on_destroy = false
-    },
-    {
-      name        = "codefast-day-04-next-pagination-lab"
-      description = "Day 4/30: Prototype cursor-based pagination with resilient fallbacks, skeleton states, and API error boundaries."
-      visibility  = "public"
-      topics      = ["codefast"]
-      template = {
-        owner                = "codelawcorp"
-        repository           = "template"
-        include_all_branches = false
-      }
-      pages = {
-        build_type = "workflow"
-      }
-      repository_files = {
-        ".github/workflows/main.yaml" = {
-          content             = templatefile("templates/main.yaml.tpl", {})
-          commit_message      = "fix(semantic-release): determine the next version"
-          overwrite_on_create = true
-        }
-        "README.md" = {
-          content             = local.repo_readmes["codefast-day-04-next-pagination-lab"]
-          overwrite_on_create = true
-        }
-      }
-      archive_on_destroy = false
-    },
-    {
-      name        = "codefast-day-05-next-seo-playbook"
-      description = "Day 5/30: Automate lighthouse-backed SEO audits in Next.js with sitemap generation and hreflang coverage."
-      visibility  = "public"
-      topics      = ["codefast"]
-      template = {
-        owner                = "codelawcorp"
-        repository           = "template"
-        include_all_branches = false
-      }
-      pages = {
-        build_type = "workflow"
-      }
-      repository_files = {
-        ".github/workflows/main.yaml" = {
-          content             = templatefile("templates/main.yaml.tpl", {})
-          commit_message      = "fix(semantic-release): determine the next version"
-          overwrite_on_create = true
-        }
-        "README.md" = {
-          content             = local.repo_readmes["codefast-day-05-next-seo-playbook"]
-          overwrite_on_create = true
-        }
-      }
-      archive_on_destroy = false
-    },
-    {
-      name        = "codefast-day-06-seo-ab-testing"
-      description = "Day 6/30: Run server-side SEO experiments with dynamic metadata and automated canonical validation."
-      visibility  = "public"
-      topics      = ["codefast"]
-      template = {
-        owner                = "codelawcorp"
-        repository           = "template"
-        include_all_branches = false
-      }
-      pages = {
-        build_type = "workflow"
-      }
-      repository_files = {
-        ".github/workflows/main.yaml" = {
-          content             = templatefile("templates/main.yaml.tpl", {})
-          commit_message      = "fix(semantic-release): determine the next version"
-          overwrite_on_create = true
-        }
-        "README.md" = {
-          content             = local.repo_readmes["codefast-day-06-seo-ab-testing"]
-          overwrite_on_create = true
-        }
-      }
-      archive_on_destroy = false
-    },
-    {
-      name        = "codefast-day-07-figma-token-sync"
-      description = "Day 7/30: Keep tokens synced from Figma into JSON, Style Dictionary, and Tailwind layers on each push."
-      visibility  = "public"
-      topics      = ["codefast"]
-      template = {
-        owner                = "codelawcorp"
-        repository           = "template"
-        include_all_branches = false
-      }
-      pages = {
-        build_type = "workflow"
-      }
-      repository_files = {
-        ".github/workflows/main.yaml" = {
-          content             = templatefile("templates/main.yaml.tpl", {})
-          commit_message      = "fix(semantic-release): determine the next version"
-          overwrite_on_create = true
-        }
-        "README.md" = {
-          content             = local.repo_readmes["codefast-day-07-figma-token-sync"]
-          overwrite_on_create = true
-        }
-      }
-      archive_on_destroy = false
-    },
-    {
-      name        = "codefast-day-08-design-token-ci"
-      description = "Day 8/30: Build a pipeline that validates tokens synced from Figma against production CSS and flags drift."
-      visibility  = "public"
-      topics      = ["codefast"]
-      template = {
-        owner                = "codelawcorp"
-        repository           = "template"
-        include_all_branches = false
-      }
-      pages = {
-        build_type = "workflow"
-      }
-      repository_files = {
-        ".github/workflows/main.yaml" = {
-          content             = templatefile("templates/main.yaml.tpl", {})
-          commit_message      = "fix(semantic-release): determine the next version"
-          overwrite_on_create = true
-        }
-        "README.md" = {
-          content             = local.repo_readmes["codefast-day-08-design-token-ci"]
-          overwrite_on_create = true
-        }
-      }
-      archive_on_destroy = false
-    },
-    {
-      name        = "codefast-day-09-datadog-rum-instrumentation"
-      description = "Day 9/30: Instrument Datadog RUM across Next.js routes with user journey tagging and session replay."
-      visibility  = "public"
-      topics      = ["codefast"]
-      template = {
-        owner                = "codelawcorp"
-        repository           = "template"
-        include_all_branches = false
-      }
-      pages = {
-        build_type = "workflow"
-      }
-      repository_files = {
-        ".github/workflows/main.yaml" = {
-          content             = templatefile("templates/main.yaml.tpl", {})
-          commit_message      = "fix(semantic-release): determine the next version"
-          overwrite_on_create = true
-        }
-        "README.md" = {
-          content             = local.repo_readmes["codefast-day-09-datadog-rum-instrumentation"]
-          overwrite_on_create = true
-        }
-      }
-      archive_on_destroy = false
-    },
-    {
-      name        = "codefast-day-10-rum-alerting"
-      description = "Day 10/30: Analyze Datadog RUM signals for Core Web Vitals regressions and notify on Slack."
-      visibility  = "public"
-      topics      = ["codefast"]
-      template = {
-        owner                = "codelawcorp"
-        repository           = "template"
-        include_all_branches = false
-      }
-      pages = {
-        build_type = "workflow"
-      }
-      repository_files = {
-        ".github/workflows/main.yaml" = {
-          content             = templatefile("templates/main.yaml.tpl", {})
-          commit_message      = "fix(semantic-release): determine the next version"
-          overwrite_on_create = true
-        }
-        "README.md" = {
-          content             = local.repo_readmes["codefast-day-10-rum-alerting"]
-          overwrite_on_create = true
-        }
-      }
-      archive_on_destroy = false
-    },
-    {
-      name        = "codefast-day-11-notion-sync"
-      description = "Day 11/30: Build a Notion content sync CLI that mirrors docs into a Markdown repo."
-      visibility  = "public"
-      topics      = ["codefast"]
-      template = {
-        owner                = "codelawcorp"
-        repository           = "template"
-        include_all_branches = false
-      }
-      pages = {
-        build_type = "workflow"
-      }
-      repository_files = {
-        ".github/workflows/main.yaml" = {
-          content             = templatefile("templates/main.yaml.tpl", {})
-          commit_message      = "fix(semantic-release): determine the next version"
-          overwrite_on_create = true
-        }
-        "README.md" = {
-          content             = local.repo_readmes["codefast-day-11-notion-sync"]
-          overwrite_on_create = true
-        }
-      }
-      archive_on_destroy = false
-    },
-    {
-      name        = "codefast-day-12-lesson-scheduler"
-      description = "Day 12/30: Create a lesson scheduler that syncs Codefa.st modules with Google Calendar." # 
-      visibility  = "public"
-      topics      = ["codefast"]
-      template = {
-        owner                = "codelawcorp"
-        repository           = "template"
-        include_all_branches = false
-      }
-      pages = {
-        build_type = "workflow"
-      }
-      repository_files = {
-        ".github/workflows/main.yaml" = {
-          content             = templatefile("templates/main.yaml.tpl", {})
-          commit_message      = "fix(semantic-release): determine the next version"
-          overwrite_on_create = true
-        }
-        "README.md" = {
-          content             = local.repo_readmes["codefast-day-12-lesson-scheduler"]
-          overwrite_on_create = true
-        }
-      }
-      archive_on_destroy = false
-    },
-    {
-      name        = "codefast-day-13-multi-api-atlas"
-      description = "Day 13/30: Build a multi-API command center with geospatial map overlays, latency heatmaps, and localization toggles."
-      visibility  = "public"
-      topics      = ["codefast"]
-      template = {
-        owner                = "codelawcorp"
-        repository           = "template"
-        include_all_branches = false
-      }
-      pages = {
-        build_type = "workflow"
-      }
-      repository_files = {
-        ".github/workflows/main.yaml" = {
-          content             = templatefile("templates/main.yaml.tpl", {})
-          commit_message      = "fix(semantic-release): determine the next version"
-          overwrite_on_create = true
-        }
-        "README.md" = {
-          content             = local.repo_readmes["codefast-day-13-multi-api-atlas"]
-          overwrite_on_create = true
-        }
-      }
-      archive_on_destroy = false
-    },
-    {
-      name        = "codefast-day-14-aceternity-theme-lab"
-      description = "Day 14/30: Scaffold a theme editor that mirrors ui.aceternity.com palettes with live token previews."
-      visibility  = "public"
-      topics      = ["codefast"]
-      template = {
-        owner                = "codelawcorp"
-        repository           = "template"
-        include_all_branches = false
-      }
-      pages = {
-        build_type = "workflow"
-      }
-      repository_files = {
-        ".github/workflows/main.yaml" = {
-          content             = templatefile("templates/main.yaml.tpl", {})
-          commit_message      = "fix(semantic-release): determine the next version"
-          overwrite_on_create = true
-        }
-        "README.md" = {
-          content             = local.repo_readmes["codefast-day-14-aceternity-theme-lab"]
-          overwrite_on_create = true
-        }
-      }
-      archive_on_destroy = false
-    },
-    {
-      name        = "codefast-day-15-offline-sync-queue"
-      description = "Day 15/30: Persist fetched data and file uploads in IndexedDB, reconcile on reconnect, and dispatch queued emails."
-      visibility  = "public"
-      topics      = ["codefast"]
-      template = {
-        owner                = "codelawcorp"
-        repository           = "template"
-        include_all_branches = false
-      }
-      pages = {
-        build_type = "workflow"
-      }
-      repository_files = {
-        ".github/workflows/main.yaml" = {
-          content             = templatefile("templates/main.yaml.tpl", {})
-          commit_message      = "fix(semantic-release): determine the next version"
-          overwrite_on_create = true
-        }
-        "README.md" = {
-          content             = local.repo_readmes["codefast-day-15-offline-sync-queue"]
-          overwrite_on_create = true
-        }
-      }
-      archive_on_destroy = false
-    },
-    {
-      name        = "codefast-day-16-component-token-diff"
-      description = "Day 16/30: Diff design tokens across branches and surface breaking changes in Shadcn component stories."
-      visibility  = "public"
-      topics      = ["codefast"]
-      template = {
-        owner                = "codelawcorp"
-        repository           = "template"
-        include_all_branches = false
-      }
-      pages = {
-        build_type = "workflow"
-      }
-      repository_files = {
-        ".github/workflows/main.yaml" = {
-          content             = templatefile("templates/main.yaml.tpl", {})
-          commit_message      = "fix(semantic-release): determine the next version"
-          overwrite_on_create = true
-        }
-        "README.md" = {
-          content             = local.repo_readmes["codefast-day-16-component-token-diff"]
-          overwrite_on_create = true
-        }
-      }
-      archive_on_destroy = false
-    },
-    {
-      name        = "codefast-day-17-rum-seo-correlation"
-      description = "Day 17/30: Correlate Datadog RUM metrics with SEO rankings to surface pages with degraded UX."
-      visibility  = "public"
-      topics      = ["codefast"]
-      template = {
-        owner                = "codelawcorp"
-        repository           = "template"
-        include_all_branches = false
-      }
-      pages = {
-        build_type = "workflow"
-      }
-      repository_files = {
-        ".github/workflows/main.yaml" = {
-          content             = templatefile("templates/main.yaml.tpl", {})
-          commit_message      = "fix(semantic-release): determine the next version"
-          overwrite_on_create = true
-        }
-        "README.md" = {
-          content             = local.repo_readmes["codefast-day-17-rum-seo-correlation"]
-          overwrite_on_create = true
-        }
-      }
-      archive_on_destroy = false
-    },
-    {
-      name        = "codefast-day-18-certificate-generator"
-      description = "Day 18/30: Generate personalized course completion certificates using PDFKit and edge functions."
-      visibility  = "public"
-      topics      = ["codefast"]
-      template = {
-        owner                = "codelawcorp"
-        repository           = "template"
-        include_all_branches = false
-      }
-      pages = {
-        build_type = "workflow"
-      }
-      repository_files = {
-        ".github/workflows/main.yaml" = {
-          content             = templatefile("templates/main.yaml.tpl", {})
-          commit_message      = "fix(semantic-release): determine the next version"
-          overwrite_on_create = true
-        }
-        "README.md" = {
-          content             = local.repo_readmes["codefast-day-18-certificate-generator"]
-          overwrite_on_create = true
-        }
-      }
-      archive_on_destroy = false
-    },
-    {
-      name        = "codefast-day-19-shad-cdn-publisher"
-      description = "Day 19/30: Publish a shad cdn component bundle with versioned exports and integrity metadata."
-      visibility  = "public"
-      topics      = ["codefast"]
-      template = {
-        owner                = "codelawcorp"
-        repository           = "template"
-        include_all_branches = false
-      }
-      pages = {
-        build_type = "workflow"
-      }
-      repository_files = {
-        ".github/workflows/main.yaml" = {
-          content             = templatefile("templates/main.yaml.tpl", {})
-          commit_message      = "fix(semantic-release): determine the next version"
-          overwrite_on_create = true
-        }
-        "README.md" = {
-          content             = local.repo_readmes["codefast-day-19-shad-cdn-publisher"]
-          overwrite_on_create = true
-        }
-      }
-      archive_on_destroy = false
-    },
-    {
-      name        = "codefast-day-20-shad-cdn-auditor"
-      description = "Day 20/30: Audit shad cdn usage to recommend accessible variants and tree-shakable imports."
-      visibility  = "public"
-      topics      = ["codefast"]
-      template = {
-        owner                = "codelawcorp"
-        repository           = "template"
-        include_all_branches = false
-      }
-      pages = {
-        build_type = "workflow"
-      }
-      repository_files = {
-        ".github/workflows/main.yaml" = {
-          content             = templatefile("templates/main.yaml.tpl", {})
-          commit_message      = "fix(semantic-release): determine the next version"
-          overwrite_on_create = true
-        }
-        "README.md" = {
-          content             = local.repo_readmes["codefast-day-20-shad-cdn-auditor"]
-          overwrite_on_create = true
-        }
-      }
-      archive_on_destroy = false
-    },
-    {
-      name        = "codefast-day-21-quality-guardrails"
-      description = "Day 21/30: Enforce API error boundaries with synthetic probes, unit-tested handlers, and file-based fixtures."
-      visibility  = "public"
-      topics      = ["codefast"]
-      template = {
-        owner                = "codelawcorp"
-        repository           = "template"
-        include_all_branches = false
-      }
-      pages = {
-        build_type = "workflow"
-      }
-      repository_files = {
-        ".github/workflows/main.yaml" = {
-          content             = templatefile("templates/main.yaml.tpl", {})
-          commit_message      = "fix(semantic-release): determine the next version"
-          overwrite_on_create = true
-        }
-        "README.md" = {
-          content             = local.repo_readmes["codefast-day-21-quality-guardrails"]
-          overwrite_on_create = true
-        }
-      }
-      archive_on_destroy = false
-    },
-    {
-      name        = "codefast-day-22-kanban"
-      description = "Day 22/30: Deliver a drag-and-drop Kanban planner with server actions and optimistic updates."
-      visibility  = "public"
-      topics      = ["codefast"]
-      template = {
-        owner                = "codelawcorp"
-        repository           = "template"
-        include_all_branches = false
-      }
-      pages = {
-        build_type = "workflow"
-      }
-      repository_files = {
-        ".github/workflows/main.yaml" = {
-          content             = templatefile("templates/main.yaml.tpl", {})
-          commit_message      = "fix(semantic-release): determine the next version"
-          overwrite_on_create = true
-        }
-        "README.md" = {
-          content             = local.repo_readmes["codefast-day-22-kanban"]
-          overwrite_on_create = true
-        }
-      }
-      archive_on_destroy = false
-    },
-    {
-      name        = "codefast-day-23-search"
-      description = "Day 23/30: Ship a knowledge base search experience using Algolia and instant faceting."
-      visibility  = "public"
-      topics      = ["codefast"]
-      template = {
-        owner                = "codelawcorp"
-        repository           = "template"
-        include_all_branches = false
-      }
-      pages = {
-        build_type = "workflow"
-      }
-      repository_files = {
-        ".github/workflows/main.yaml" = {
-          content             = templatefile("templates/main.yaml.tpl", {})
-          commit_message      = "fix(semantic-release): determine the next version"
-          overwrite_on_create = true
-        }
-        "README.md" = {
-          content             = local.repo_readmes["codefast-day-23-search"]
-          overwrite_on_create = true
-        }
-      }
-      archive_on_destroy = false
-    },
-    {
-      name        = "codefast-day-24-cohort-metrics"
-      description = "Day 24/30: Compute SaaS cohort and retention metrics with SQL models and charts."
-      visibility  = "public"
-      topics      = ["codefast"]
-      template = {
-        owner                = "codelawcorp"
-        repository           = "template"
-        include_all_branches = false
-      }
-      pages = {
-        build_type = "workflow"
-      }
-      repository_files = {
-        ".github/workflows/main.yaml" = {
-          content             = templatefile("templates/main.yaml.tpl", {})
-          commit_message      = "fix(semantic-release): determine the next version"
-          overwrite_on_create = true
-        }
-        "README.md" = {
-          content             = local.repo_readmes["codefast-day-24-cohort-metrics"]
-          overwrite_on_create = true
-        }
-      }
-      archive_on_destroy = false
-    },
-    {
-      name        = "codefast-day-25-reminder-pwa"
-      description = "Day 25/30: Launch a mobile-first PWA for daily practice reminders with push notifications."
-      visibility  = "public"
-      topics      = ["codefast"]
-      template = {
-        owner                = "codelawcorp"
-        repository           = "template"
-        include_all_branches = false
-      }
-      pages = {
-        build_type = "workflow"
-      }
-      repository_files = {
-        ".github/workflows/main.yaml" = {
-          content             = templatefile("templates/main.yaml.tpl", {})
-          commit_message      = "fix(semantic-release): determine the next version"
-          overwrite_on_create = true
-        }
-        "README.md" = {
-          content             = local.repo_readmes["codefast-day-25-reminder-pwa"]
-          overwrite_on_create = true
-        }
-      }
-      archive_on_destroy = false
-    },
-    {
-      name        = "codefast-day-26-seo-rum-dashboard"
-      description = "Day 26/30: Ship a combined SEO and RUM insights dashboard with anomaly detection and executive summaries."
-      visibility  = "public"
-      topics      = ["codefast"]
-      template = {
-        owner                = "codelawcorp"
-        repository           = "template"
-        include_all_branches = false
-      }
-      pages = {
-        build_type = "workflow"
-      }
-      repository_files = {
-        ".github/workflows/main.yaml" = {
-          content             = templatefile("templates/main.yaml.tpl", {})
-          commit_message      = "fix(semantic-release): determine the next version"
-          overwrite_on_create = true
-        }
-        "README.md" = {
-          content             = local.repo_readmes["codefast-day-26-seo-rum-dashboard"]
-          overwrite_on_create = true
-        }
-      }
-      archive_on_destroy = false
-    },
-    {
-      name        = "codefast-day-27-figma-token-cli"
-      description = "Day 27/30: Provide a CLI to sync Figma tokens across repos with change logs and GitHub check outputs."
-      visibility  = "public"
-      topics      = ["codefast"]
-      template = {
-        owner                = "codelawcorp"
-        repository           = "template"
-        include_all_branches = false
-      }
-      pages = {
-        build_type = "workflow"
-      }
-      repository_files = {
-        ".github/workflows/main.yaml" = {
-          content             = templatefile("templates/main.yaml.tpl", {})
-          commit_message      = "fix(semantic-release): determine the next version"
-          overwrite_on_create = true
-        }
-        "README.md" = {
-          content             = local.repo_readmes["codefast-day-27-figma-token-cli"]
-          overwrite_on_create = true
-        }
-      }
-      archive_on_destroy = false
-    },
-    {
-      name        = "codefast-day-28-feature-flags"
-      description = "Day 28/30: Build a feature flag service integrating LaunchDarkly and configuration UI."
-      visibility  = "public"
-      topics      = ["codefast"]
-      template = {
-        owner                = "codelawcorp"
-        repository           = "template"
-        include_all_branches = false
-      }
-      pages = {
-        build_type = "workflow"
-      }
-      repository_files = {
-        ".github/workflows/main.yaml" = {
-          content             = templatefile("templates/main.yaml.tpl", {})
-          commit_message      = "fix(semantic-release): determine the next version"
-          overwrite_on_create = true
-        }
-        "README.md" = {
-          content             = local.repo_readmes["codefast-day-28-feature-flags"]
-          overwrite_on_create = true
-        }
-      }
-      archive_on_destroy = false
-    },
-    {
-      name        = "codefast-day-29-onboarding-checklist"
-      description = "Day 29/30: Create an animated onboarding checklist with Framer Motion and progress sync."
-      visibility  = "public"
-      topics      = ["codefast"]
-      template = {
-        owner                = "codelawcorp"
-        repository           = "template"
-        include_all_branches = false
-      }
-      pages = {
-        build_type = "workflow"
-      }
-      repository_files = {
-        ".github/workflows/main.yaml" = {
-          content             = templatefile("templates/main.yaml.tpl", {})
-          commit_message      = "fix(semantic-release): determine the next version"
-          overwrite_on_create = true
-        }
-        "README.md" = {
-          content             = local.repo_readmes["codefast-day-29-onboarding-checklist"]
-          overwrite_on_create = true
-        }
-      }
-      archive_on_destroy = false
-    },
-    {
-      name        = "codefast-day-30-experience-quality-report"
-      description = "Day 30/30: Automate weekly experience quality reports blending Datadog RUM, SEO, and design token drift."
-      visibility  = "public"
-      topics      = ["codefast"]
-      template = {
-        owner                = "codelawcorp"
-        repository           = "template"
-        include_all_branches = false
-      }
-      pages = {
-        build_type = "workflow"
-      }
-      repository_files = {
-        ".github/workflows/main.yaml" = {
-          content             = templatefile("templates/main.yaml.tpl", {})
-          commit_message      = "fix(semantic-release): determine the next version"
-          overwrite_on_create = true
-        }
-        "README.md" = {
-          content             = local.repo_readmes["codefast-day-30-experience-quality-report"]
-          overwrite_on_create = true
-        }
-      }
-      archive_on_destroy = false
-    },
+    # {
+    #   name        = "codefast-day-01-next-api-gallery"
+    #   description = "Day 1/30: Ship a Next.js gallery that fetches a public API and renders statically generated cards."
+    #   visibility  = "public"
+    #   topics      = ["codefast"]
+    #   template = {
+    #     owner                = "codelawcorp"
+    #     repository           = "template"
+    #     include_all_branches = false
+    #   }
+    #   pages = {
+    #     build_type = "workflow"
+    #   }
+    #   repository_files = {
+    #     ".github/workflows/main.yaml" = {
+    #       content             = templatefile("templates/main.yaml.tpl", {})
+    #       commit_message      = "fix(semantic-release): determine the next version"
+    #       overwrite_on_create = true
+    #     }
+    #     "README.md" = {
+    #       content             = local.repo_readmes["codefast-day-01-next-api-gallery"]
+    #       overwrite_on_create = true
+    #     }
+    #   }
+    #   archive_on_destroy = false
+    # },
+    # {
+    #   name        = "codefast-day-02-next-landing-page"
+    #   description = "Day 2/30: Build a marketing landing page in Next.js with responsive Tailwind components and metadata."
+    #   visibility  = "public"
+    #   topics      = ["codefast"]
+    #   template = {
+    #     owner                = "codelawcorp"
+    #     repository           = "template"
+    #     include_all_branches = false
+    #   }
+    #   pages = {
+    #     build_type = "workflow"
+    #   }
+    #   repository_files = {
+    #     ".github/workflows/main.yaml" = {
+    #       content             = templatefile("templates/main.yaml.tpl", {})
+    #       commit_message      = "fix(semantic-release): determine the next version"
+    #       overwrite_on_create = true
+    #     }
+    #     "README.md" = {
+    #       content             = local.repo_readmes["codefast-day-02-next-landing-page"]
+    #       overwrite_on_create = true
+    #     }
+    #   }
+    #   archive_on_destroy = false
+    # },
+    # {
+    #   name        = "codefast-day-03-next-mdx-blog"
+    #   description = "Day 3/30: Create an MDX-powered blog in Next.js with dynamic routing and syntax highlighting."
+    #   visibility  = "public"
+    #   topics      = ["codefast"]
+    #   template = {
+    #     owner                = "codelawcorp"
+    #     repository           = "template"
+    #     include_all_branches = false
+    #   }
+    #   pages = {
+    #     build_type = "workflow"
+    #   }
+    #   repository_files = {
+    #     ".github/workflows/main.yaml" = {
+    #       content             = templatefile("templates/main.yaml.tpl", {})
+    #       commit_message      = "fix(semantic-release): determine the next version"
+    #       overwrite_on_create = true
+    #     }
+    #     "README.md" = {
+    #       content             = local.repo_readmes["codefast-day-03-next-mdx-blog"]
+    #       overwrite_on_create = true
+    #     }
+    #   }
+    #   archive_on_destroy = false
+    # },
+    # {
+    #   name        = "codefast-day-04-next-pagination-lab"
+    #   description = "Day 4/30: Prototype cursor-based pagination with resilient fallbacks, skeleton states, and API error boundaries."
+    #   visibility  = "public"
+    #   topics      = ["codefast"]
+    #   template = {
+    #     owner                = "codelawcorp"
+    #     repository           = "template"
+    #     include_all_branches = false
+    #   }
+    #   pages = {
+    #     build_type = "workflow"
+    #   }
+    #   repository_files = {
+    #     ".github/workflows/main.yaml" = {
+    #       content             = templatefile("templates/main.yaml.tpl", {})
+    #       commit_message      = "fix(semantic-release): determine the next version"
+    #       overwrite_on_create = true
+    #     }
+    #     "README.md" = {
+    #       content             = local.repo_readmes["codefast-day-04-next-pagination-lab"]
+    #       overwrite_on_create = true
+    #     }
+    #   }
+    #   archive_on_destroy = false
+    # },
+    # {
+    #   name        = "codefast-day-05-next-seo-playbook"
+    #   description = "Day 5/30: Automate lighthouse-backed SEO audits in Next.js with sitemap generation and hreflang coverage."
+    #   visibility  = "public"
+    #   topics      = ["codefast"]
+    #   template = {
+    #     owner                = "codelawcorp"
+    #     repository           = "template"
+    #     include_all_branches = false
+    #   }
+    #   pages = {
+    #     build_type = "workflow"
+    #   }
+    #   repository_files = {
+    #     ".github/workflows/main.yaml" = {
+    #       content             = templatefile("templates/main.yaml.tpl", {})
+    #       commit_message      = "fix(semantic-release): determine the next version"
+    #       overwrite_on_create = true
+    #     }
+    #     "README.md" = {
+    #       content             = local.repo_readmes["codefast-day-05-next-seo-playbook"]
+    #       overwrite_on_create = true
+    #     }
+    #   }
+    #   archive_on_destroy = false
+    # },
+    # {
+    #   name        = "codefast-day-06-seo-ab-testing"
+    #   description = "Day 6/30: Run server-side SEO experiments with dynamic metadata and automated canonical validation."
+    #   visibility  = "public"
+    #   topics      = ["codefast"]
+    #   template = {
+    #     owner                = "codelawcorp"
+    #     repository           = "template"
+    #     include_all_branches = false
+    #   }
+    #   pages = {
+    #     build_type = "workflow"
+    #   }
+    #   repository_files = {
+    #     ".github/workflows/main.yaml" = {
+    #       content             = templatefile("templates/main.yaml.tpl", {})
+    #       commit_message      = "fix(semantic-release): determine the next version"
+    #       overwrite_on_create = true
+    #     }
+    #     "README.md" = {
+    #       content             = local.repo_readmes["codefast-day-06-seo-ab-testing"]
+    #       overwrite_on_create = true
+    #     }
+    #   }
+    #   archive_on_destroy = false
+    # },
+    # {
+    #   name        = "codefast-day-07-figma-token-sync"
+    #   description = "Day 7/30: Keep tokens synced from Figma into JSON, Style Dictionary, and Tailwind layers on each push."
+    #   visibility  = "public"
+    #   topics      = ["codefast"]
+    #   template = {
+    #     owner                = "codelawcorp"
+    #     repository           = "template"
+    #     include_all_branches = false
+    #   }
+    #   pages = {
+    #     build_type = "workflow"
+    #   }
+    #   repository_files = {
+    #     ".github/workflows/main.yaml" = {
+    #       content             = templatefile("templates/main.yaml.tpl", {})
+    #       commit_message      = "fix(semantic-release): determine the next version"
+    #       overwrite_on_create = true
+    #     }
+    #     "README.md" = {
+    #       content             = local.repo_readmes["codefast-day-07-figma-token-sync"]
+    #       overwrite_on_create = true
+    #     }
+    #   }
+    #   archive_on_destroy = false
+    # },
+    # {
+    #   name        = "codefast-day-08-design-token-ci"
+    #   description = "Day 8/30: Build a pipeline that validates tokens synced from Figma against production CSS and flags drift."
+    #   visibility  = "public"
+    #   topics      = ["codefast"]
+    #   template = {
+    #     owner                = "codelawcorp"
+    #     repository           = "template"
+    #     include_all_branches = false
+    #   }
+    #   pages = {
+    #     build_type = "workflow"
+    #   }
+    #   repository_files = {
+    #     ".github/workflows/main.yaml" = {
+    #       content             = templatefile("templates/main.yaml.tpl", {})
+    #       commit_message      = "fix(semantic-release): determine the next version"
+    #       overwrite_on_create = true
+    #     }
+    #     "README.md" = {
+    #       content             = local.repo_readmes["codefast-day-08-design-token-ci"]
+    #       overwrite_on_create = true
+    #     }
+    #   }
+    #   archive_on_destroy = false
+    # },
+    # {
+    #   name        = "codefast-day-09-datadog-rum-instrumentation"
+    #   description = "Day 9/30: Instrument Datadog RUM across Next.js routes with user journey tagging and session replay."
+    #   visibility  = "public"
+    #   topics      = ["codefast"]
+    #   template = {
+    #     owner                = "codelawcorp"
+    #     repository           = "template"
+    #     include_all_branches = false
+    #   }
+    #   pages = {
+    #     build_type = "workflow"
+    #   }
+    #   repository_files = {
+    #     ".github/workflows/main.yaml" = {
+    #       content             = templatefile("templates/main.yaml.tpl", {})
+    #       commit_message      = "fix(semantic-release): determine the next version"
+    #       overwrite_on_create = true
+    #     }
+    #     "README.md" = {
+    #       content             = local.repo_readmes["codefast-day-09-datadog-rum-instrumentation"]
+    #       overwrite_on_create = true
+    #     }
+    #   }
+    #   archive_on_destroy = false
+    # },
+    # {
+    #   name        = "codefast-day-10-rum-alerting"
+    #   description = "Day 10/30: Analyze Datadog RUM signals for Core Web Vitals regressions and notify on Slack."
+    #   visibility  = "public"
+    #   topics      = ["codefast"]
+    #   template = {
+    #     owner                = "codelawcorp"
+    #     repository           = "template"
+    #     include_all_branches = false
+    #   }
+    #   pages = {
+    #     build_type = "workflow"
+    #   }
+    #   repository_files = {
+    #     ".github/workflows/main.yaml" = {
+    #       content             = templatefile("templates/main.yaml.tpl", {})
+    #       commit_message      = "fix(semantic-release): determine the next version"
+    #       overwrite_on_create = true
+    #     }
+    #     "README.md" = {
+    #       content             = local.repo_readmes["codefast-day-10-rum-alerting"]
+    #       overwrite_on_create = true
+    #     }
+    #   }
+    #   archive_on_destroy = false
+    # },
+    # {
+    #   name        = "codefast-day-11-notion-sync"
+    #   description = "Day 11/30: Build a Notion content sync CLI that mirrors docs into a Markdown repo."
+    #   visibility  = "public"
+    #   topics      = ["codefast"]
+    #   template = {
+    #     owner                = "codelawcorp"
+    #     repository           = "template"
+    #     include_all_branches = false
+    #   }
+    #   pages = {
+    #     build_type = "workflow"
+    #   }
+    #   repository_files = {
+    #     ".github/workflows/main.yaml" = {
+    #       content             = templatefile("templates/main.yaml.tpl", {})
+    #       commit_message      = "fix(semantic-release): determine the next version"
+    #       overwrite_on_create = true
+    #     }
+    #     "README.md" = {
+    #       content             = local.repo_readmes["codefast-day-11-notion-sync"]
+    #       overwrite_on_create = true
+    #     }
+    #   }
+    #   archive_on_destroy = false
+    # },
+    # {
+    #   name        = "codefast-day-12-lesson-scheduler"
+    #   description = "Day 12/30: Create a lesson scheduler that syncs Codefa.st modules with Google Calendar." # 
+    #   visibility  = "public"
+    #   topics      = ["codefast"]
+    #   template = {
+    #     owner                = "codelawcorp"
+    #     repository           = "template"
+    #     include_all_branches = false
+    #   }
+    #   pages = {
+    #     build_type = "workflow"
+    #   }
+    #   repository_files = {
+    #     ".github/workflows/main.yaml" = {
+    #       content             = templatefile("templates/main.yaml.tpl", {})
+    #       commit_message      = "fix(semantic-release): determine the next version"
+    #       overwrite_on_create = true
+    #     }
+    #     "README.md" = {
+    #       content             = local.repo_readmes["codefast-day-12-lesson-scheduler"]
+    #       overwrite_on_create = true
+    #     }
+    #   }
+    #   archive_on_destroy = false
+    # },
+    # {
+    #   name        = "codefast-day-13-multi-api-atlas"
+    #   description = "Day 13/30: Build a multi-API command center with geospatial map overlays, latency heatmaps, and localization toggles."
+    #   visibility  = "public"
+    #   topics      = ["codefast"]
+    #   template = {
+    #     owner                = "codelawcorp"
+    #     repository           = "template"
+    #     include_all_branches = false
+    #   }
+    #   pages = {
+    #     build_type = "workflow"
+    #   }
+    #   repository_files = {
+    #     ".github/workflows/main.yaml" = {
+    #       content             = templatefile("templates/main.yaml.tpl", {})
+    #       commit_message      = "fix(semantic-release): determine the next version"
+    #       overwrite_on_create = true
+    #     }
+    #     "README.md" = {
+    #       content             = local.repo_readmes["codefast-day-13-multi-api-atlas"]
+    #       overwrite_on_create = true
+    #     }
+    #   }
+    #   archive_on_destroy = false
+    # },
+    # {
+    #   name        = "codefast-day-14-aceternity-theme-lab"
+    #   description = "Day 14/30: Scaffold a theme editor that mirrors ui.aceternity.com palettes with live token previews."
+    #   visibility  = "public"
+    #   topics      = ["codefast"]
+    #   template = {
+    #     owner                = "codelawcorp"
+    #     repository           = "template"
+    #     include_all_branches = false
+    #   }
+    #   pages = {
+    #     build_type = "workflow"
+    #   }
+    #   repository_files = {
+    #     ".github/workflows/main.yaml" = {
+    #       content             = templatefile("templates/main.yaml.tpl", {})
+    #       commit_message      = "fix(semantic-release): determine the next version"
+    #       overwrite_on_create = true
+    #     }
+    #     "README.md" = {
+    #       content             = local.repo_readmes["codefast-day-14-aceternity-theme-lab"]
+    #       overwrite_on_create = true
+    #     }
+    #   }
+    #   archive_on_destroy = false
+    # },
+    # {
+    #   name        = "codefast-day-15-offline-sync-queue"
+    #   description = "Day 15/30: Persist fetched data and file uploads in IndexedDB, reconcile on reconnect, and dispatch queued emails."
+    #   visibility  = "public"
+    #   topics      = ["codefast"]
+    #   template = {
+    #     owner                = "codelawcorp"
+    #     repository           = "template"
+    #     include_all_branches = false
+    #   }
+    #   pages = {
+    #     build_type = "workflow"
+    #   }
+    #   repository_files = {
+    #     ".github/workflows/main.yaml" = {
+    #       content             = templatefile("templates/main.yaml.tpl", {})
+    #       commit_message      = "fix(semantic-release): determine the next version"
+    #       overwrite_on_create = true
+    #     }
+    #     "README.md" = {
+    #       content             = local.repo_readmes["codefast-day-15-offline-sync-queue"]
+    #       overwrite_on_create = true
+    #     }
+    #   }
+    #   archive_on_destroy = false
+    # },
+    # {
+    #   name        = "codefast-day-16-component-token-diff"
+    #   description = "Day 16/30: Diff design tokens across branches and surface breaking changes in Shadcn component stories."
+    #   visibility  = "public"
+    #   topics      = ["codefast"]
+    #   template = {
+    #     owner                = "codelawcorp"
+    #     repository           = "template"
+    #     include_all_branches = false
+    #   }
+    #   pages = {
+    #     build_type = "workflow"
+    #   }
+    #   repository_files = {
+    #     ".github/workflows/main.yaml" = {
+    #       content             = templatefile("templates/main.yaml.tpl", {})
+    #       commit_message      = "fix(semantic-release): determine the next version"
+    #       overwrite_on_create = true
+    #     }
+    #     "README.md" = {
+    #       content             = local.repo_readmes["codefast-day-16-component-token-diff"]
+    #       overwrite_on_create = true
+    #     }
+    #   }
+    #   archive_on_destroy = false
+    # },
+    # {
+    #   name        = "codefast-day-17-rum-seo-correlation"
+    #   description = "Day 17/30: Correlate Datadog RUM metrics with SEO rankings to surface pages with degraded UX."
+    #   visibility  = "public"
+    #   topics      = ["codefast"]
+    #   template = {
+    #     owner                = "codelawcorp"
+    #     repository           = "template"
+    #     include_all_branches = false
+    #   }
+    #   pages = {
+    #     build_type = "workflow"
+    #   }
+    #   repository_files = {
+    #     ".github/workflows/main.yaml" = {
+    #       content             = templatefile("templates/main.yaml.tpl", {})
+    #       commit_message      = "fix(semantic-release): determine the next version"
+    #       overwrite_on_create = true
+    #     }
+    #     "README.md" = {
+    #       content             = local.repo_readmes["codefast-day-17-rum-seo-correlation"]
+    #       overwrite_on_create = true
+    #     }
+    #   }
+    #   archive_on_destroy = false
+    # },
+    # {
+    #   name        = "codefast-day-18-certificate-generator"
+    #   description = "Day 18/30: Generate personalized course completion certificates using PDFKit and edge functions."
+    #   visibility  = "public"
+    #   topics      = ["codefast"]
+    #   template = {
+    #     owner                = "codelawcorp"
+    #     repository           = "template"
+    #     include_all_branches = false
+    #   }
+    #   pages = {
+    #     build_type = "workflow"
+    #   }
+    #   repository_files = {
+    #     ".github/workflows/main.yaml" = {
+    #       content             = templatefile("templates/main.yaml.tpl", {})
+    #       commit_message      = "fix(semantic-release): determine the next version"
+    #       overwrite_on_create = true
+    #     }
+    #     "README.md" = {
+    #       content             = local.repo_readmes["codefast-day-18-certificate-generator"]
+    #       overwrite_on_create = true
+    #     }
+    #   }
+    #   archive_on_destroy = false
+    # },
+    # {
+    #   name        = "codefast-day-19-shad-cdn-publisher"
+    #   description = "Day 19/30: Publish a shad cdn component bundle with versioned exports and integrity metadata."
+    #   visibility  = "public"
+    #   topics      = ["codefast"]
+    #   template = {
+    #     owner                = "codelawcorp"
+    #     repository           = "template"
+    #     include_all_branches = false
+    #   }
+    #   pages = {
+    #     build_type = "workflow"
+    #   }
+    #   repository_files = {
+    #     ".github/workflows/main.yaml" = {
+    #       content             = templatefile("templates/main.yaml.tpl", {})
+    #       commit_message      = "fix(semantic-release): determine the next version"
+    #       overwrite_on_create = true
+    #     }
+    #     "README.md" = {
+    #       content             = local.repo_readmes["codefast-day-19-shad-cdn-publisher"]
+    #       overwrite_on_create = true
+    #     }
+    #   }
+    #   archive_on_destroy = false
+    # },
+    # {
+    #   name        = "codefast-day-20-shad-cdn-auditor"
+    #   description = "Day 20/30: Audit shad cdn usage to recommend accessible variants and tree-shakable imports."
+    #   visibility  = "public"
+    #   topics      = ["codefast"]
+    #   template = {
+    #     owner                = "codelawcorp"
+    #     repository           = "template"
+    #     include_all_branches = false
+    #   }
+    #   pages = {
+    #     build_type = "workflow"
+    #   }
+    #   repository_files = {
+    #     ".github/workflows/main.yaml" = {
+    #       content             = templatefile("templates/main.yaml.tpl", {})
+    #       commit_message      = "fix(semantic-release): determine the next version"
+    #       overwrite_on_create = true
+    #     }
+    #     "README.md" = {
+    #       content             = local.repo_readmes["codefast-day-20-shad-cdn-auditor"]
+    #       overwrite_on_create = true
+    #     }
+    #   }
+    #   archive_on_destroy = false
+    # },
+    # {
+    #   name        = "codefast-day-21-quality-guardrails"
+    #   description = "Day 21/30: Enforce API error boundaries with synthetic probes, unit-tested handlers, and file-based fixtures."
+    #   visibility  = "public"
+    #   topics      = ["codefast"]
+    #   template = {
+    #     owner                = "codelawcorp"
+    #     repository           = "template"
+    #     include_all_branches = false
+    #   }
+    #   pages = {
+    #     build_type = "workflow"
+    #   }
+    #   repository_files = {
+    #     ".github/workflows/main.yaml" = {
+    #       content             = templatefile("templates/main.yaml.tpl", {})
+    #       commit_message      = "fix(semantic-release): determine the next version"
+    #       overwrite_on_create = true
+    #     }
+    #     "README.md" = {
+    #       content             = local.repo_readmes["codefast-day-21-quality-guardrails"]
+    #       overwrite_on_create = true
+    #     }
+    #   }
+    #   archive_on_destroy = false
+    # },
+    # {
+    #   name        = "codefast-day-22-kanban"
+    #   description = "Day 22/30: Deliver a drag-and-drop Kanban planner with server actions and optimistic updates."
+    #   visibility  = "public"
+    #   topics      = ["codefast"]
+    #   template = {
+    #     owner                = "codelawcorp"
+    #     repository           = "template"
+    #     include_all_branches = false
+    #   }
+    #   pages = {
+    #     build_type = "workflow"
+    #   }
+    #   repository_files = {
+    #     ".github/workflows/main.yaml" = {
+    #       content             = templatefile("templates/main.yaml.tpl", {})
+    #       commit_message      = "fix(semantic-release): determine the next version"
+    #       overwrite_on_create = true
+    #     }
+    #     "README.md" = {
+    #       content             = local.repo_readmes["codefast-day-22-kanban"]
+    #       overwrite_on_create = true
+    #     }
+    #   }
+    #   archive_on_destroy = false
+    # },
+    # {
+    #   name        = "codefast-day-23-search"
+    #   description = "Day 23/30: Ship a knowledge base search experience using Algolia and instant faceting."
+    #   visibility  = "public"
+    #   topics      = ["codefast"]
+    #   template = {
+    #     owner                = "codelawcorp"
+    #     repository           = "template"
+    #     include_all_branches = false
+    #   }
+    #   pages = {
+    #     build_type = "workflow"
+    #   }
+    #   repository_files = {
+    #     ".github/workflows/main.yaml" = {
+    #       content             = templatefile("templates/main.yaml.tpl", {})
+    #       commit_message      = "fix(semantic-release): determine the next version"
+    #       overwrite_on_create = true
+    #     }
+    #     "README.md" = {
+    #       content             = local.repo_readmes["codefast-day-23-search"]
+    #       overwrite_on_create = true
+    #     }
+    #   }
+    #   archive_on_destroy = false
+    # },
+    # {
+    #   name        = "codefast-day-24-cohort-metrics"
+    #   description = "Day 24/30: Compute SaaS cohort and retention metrics with SQL models and charts."
+    #   visibility  = "public"
+    #   topics      = ["codefast"]
+    #   template = {
+    #     owner                = "codelawcorp"
+    #     repository           = "template"
+    #     include_all_branches = false
+    #   }
+    #   pages = {
+    #     build_type = "workflow"
+    #   }
+    #   repository_files = {
+    #     ".github/workflows/main.yaml" = {
+    #       content             = templatefile("templates/main.yaml.tpl", {})
+    #       commit_message      = "fix(semantic-release): determine the next version"
+    #       overwrite_on_create = true
+    #     }
+    #     "README.md" = {
+    #       content             = local.repo_readmes["codefast-day-24-cohort-metrics"]
+    #       overwrite_on_create = true
+    #     }
+    #   }
+    #   archive_on_destroy = false
+    # },
+    # {
+    #   name        = "codefast-day-25-reminder-pwa"
+    #   description = "Day 25/30: Launch a mobile-first PWA for daily practice reminders with push notifications."
+    #   visibility  = "public"
+    #   topics      = ["codefast"]
+    #   template = {
+    #     owner                = "codelawcorp"
+    #     repository           = "template"
+    #     include_all_branches = false
+    #   }
+    #   pages = {
+    #     build_type = "workflow"
+    #   }
+    #   repository_files = {
+    #     ".github/workflows/main.yaml" = {
+    #       content             = templatefile("templates/main.yaml.tpl", {})
+    #       commit_message      = "fix(semantic-release): determine the next version"
+    #       overwrite_on_create = true
+    #     }
+    #     "README.md" = {
+    #       content             = local.repo_readmes["codefast-day-25-reminder-pwa"]
+    #       overwrite_on_create = true
+    #     }
+    #   }
+    #   archive_on_destroy = false
+    # },
+    # {
+    #   name        = "codefast-day-26-seo-rum-dashboard"
+    #   description = "Day 26/30: Ship a combined SEO and RUM insights dashboard with anomaly detection and executive summaries."
+    #   visibility  = "public"
+    #   topics      = ["codefast"]
+    #   template = {
+    #     owner                = "codelawcorp"
+    #     repository           = "template"
+    #     include_all_branches = false
+    #   }
+    #   pages = {
+    #     build_type = "workflow"
+    #   }
+    #   repository_files = {
+    #     ".github/workflows/main.yaml" = {
+    #       content             = templatefile("templates/main.yaml.tpl", {})
+    #       commit_message      = "fix(semantic-release): determine the next version"
+    #       overwrite_on_create = true
+    #     }
+    #     "README.md" = {
+    #       content             = local.repo_readmes["codefast-day-26-seo-rum-dashboard"]
+    #       overwrite_on_create = true
+    #     }
+    #   }
+    #   archive_on_destroy = false
+    # },
+    # {
+    #   name        = "codefast-day-27-figma-token-cli"
+    #   description = "Day 27/30: Provide a CLI to sync Figma tokens across repos with change logs and GitHub check outputs."
+    #   visibility  = "public"
+    #   topics      = ["codefast"]
+    #   template = {
+    #     owner                = "codelawcorp"
+    #     repository           = "template"
+    #     include_all_branches = false
+    #   }
+    #   pages = {
+    #     build_type = "workflow"
+    #   }
+    #   repository_files = {
+    #     ".github/workflows/main.yaml" = {
+    #       content             = templatefile("templates/main.yaml.tpl", {})
+    #       commit_message      = "fix(semantic-release): determine the next version"
+    #       overwrite_on_create = true
+    #     }
+    #     "README.md" = {
+    #       content             = local.repo_readmes["codefast-day-27-figma-token-cli"]
+    #       overwrite_on_create = true
+    #     }
+    #   }
+    #   archive_on_destroy = false
+    # },
+    # {
+    #   name        = "codefast-day-28-feature-flags"
+    #   description = "Day 28/30: Build a feature flag service integrating LaunchDarkly and configuration UI."
+    #   visibility  = "public"
+    #   topics      = ["codefast"]
+    #   template = {
+    #     owner                = "codelawcorp"
+    #     repository           = "template"
+    #     include_all_branches = false
+    #   }
+    #   pages = {
+    #     build_type = "workflow"
+    #   }
+    #   repository_files = {
+    #     ".github/workflows/main.yaml" = {
+    #       content             = templatefile("templates/main.yaml.tpl", {})
+    #       commit_message      = "fix(semantic-release): determine the next version"
+    #       overwrite_on_create = true
+    #     }
+    #     "README.md" = {
+    #       content             = local.repo_readmes["codefast-day-28-feature-flags"]
+    #       overwrite_on_create = true
+    #     }
+    #   }
+    #   archive_on_destroy = false
+    # },
+    # {
+    #   name        = "codefast-day-29-onboarding-checklist"
+    #   description = "Day 29/30: Create an animated onboarding checklist with Framer Motion and progress sync."
+    #   visibility  = "public"
+    #   topics      = ["codefast"]
+    #   template = {
+    #     owner                = "codelawcorp"
+    #     repository           = "template"
+    #     include_all_branches = false
+    #   }
+    #   pages = {
+    #     build_type = "workflow"
+    #   }
+    #   repository_files = {
+    #     ".github/workflows/main.yaml" = {
+    #       content             = templatefile("templates/main.yaml.tpl", {})
+    #       commit_message      = "fix(semantic-release): determine the next version"
+    #       overwrite_on_create = true
+    #     }
+    #     "README.md" = {
+    #       content             = local.repo_readmes["codefast-day-29-onboarding-checklist"]
+    #       overwrite_on_create = true
+    #     }
+    #   }
+    #   archive_on_destroy = false
+    # },
+    # {
+    #   name        = "codefast-day-30-experience-quality-report"
+    #   description = "Day 30/30: Automate weekly experience quality reports blending Datadog RUM, SEO, and design token drift."
+    #   visibility  = "public"
+    #   topics      = ["codefast"]
+    #   template = {
+    #     owner                = "codelawcorp"
+    #     repository           = "template"
+    #     include_all_branches = false
+    #   }
+    #   pages = {
+    #     build_type = "workflow"
+    #   }
+    #   repository_files = {
+    #     ".github/workflows/main.yaml" = {
+    #       content             = templatefile("templates/main.yaml.tpl", {})
+    #       commit_message      = "fix(semantic-release): determine the next version"
+    #       overwrite_on_create = true
+    #     }
+    #     "README.md" = {
+    #       content             = local.repo_readmes["codefast-day-30-experience-quality-report"]
+    #       overwrite_on_create = true
+    #     }
+    #   }
+    #   archive_on_destroy = false
+    # },
 
     {
       name        = "repo-as-a-code" # This repo
@@ -901,6 +922,12 @@ locals {
       visibility  = "public"
       archived    = false
       is_template = false
+      actions_variables = [
+        {
+          name  = "TERRAFORM_VERSION"
+          value = "1.14.5"
+        }
+      ]
     },
     {
       name        = "elk_services"
@@ -1239,7 +1266,7 @@ module "repos" {
     try(each.value.archived, false)
     ? {}
     : merge(
-      {
+      try(each.value.pages, null) != null ? {
         "index.html" = {
           content = templatefile(
             "${path.module}/templates/index.html.tpl",
@@ -1254,7 +1281,7 @@ module "repos" {
           )
           overwrite_on_create = true
         }
-      },
+      } : {},
       try(each.value.repository_files, {})
     )
   )
