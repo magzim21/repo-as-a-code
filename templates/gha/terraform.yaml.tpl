@@ -1,0 +1,158 @@
+---
+  name: main
+  run-name: ${{ github.actor }} - ${{ github.event.head_commit.message }} 🏗️
+  on:
+    push:
+      branches:
+        - prod
+        # - stg
+        # - dev
+    schedule: # A regular sync to prevent drifts.
+      - cron: "0 8 * * 1" # every day at 8am UTC Monday # https://crontab.guru/#0_8_*_*_*
+    workflow_dispatch: {}
+  # env:
+    # APP_NAME: ${{ vars.APP_NAME }} # Set via GitHub Secrets and variables on a repo level
+    # AWS_REGION: ${{ vars.AWS_REGION }} # Set via GitHub Secrets and variables on a org level
+    # AWS_ACCOUNT_ID: ${{ vars.AWS_ACCOUNT_ID }}  # Set via GitHub Secrets and variables on a org level
+  #   ROLE_ARN: ${{ secrets.ROLE_ARN }}     # Set via GitHub Secrets on a repo level
+  jobs:
+    tests:
+      name: Run Tests
+      permissions:
+        contents: read
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v4
+          with:
+            fetch-depth: 0 # fetching all history to scan for secrets
+  
+        - uses: hashicorp/setup-terraform@v3
+          with:
+            terraform_version: ${{ vars.TERRAFORM_VERSION }}
+        - name: Check if terraform is well formatted
+          run: terraform fmt -recursive  -check
+  
+    next-version:
+      name: Determine the next version
+      runs-on: ubuntu-latest
+      needs:
+        - tests
+      permissions:
+        contents: write # to be able to publish a GitHub release
+      outputs:
+        should-run-build: ${{ steps.decision.outputs.should-run-build }}
+        semver_tag: ${{ steps.decision.outputs.semver_tag }}
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v4
+          with:
+            fetch-depth: 0
+        - name: Setup Node.js for semantic-release
+          uses: actions/setup-node@v4
+          with:
+            node-version: "lts/*"
+        - name: Decide whether to release
+          id: decision
+          run: |
+            # Check if there are any changes that are relevant for the release
+            SEMVER_TAG=$(npx semantic-release --dry-run | awk '/next release version is/ {print $NF}')
+            if [[ -n "${SEMVER_TAG}" ]]; then
+              echo "should-run-build=True" >> "$GITHUB_OUTPUT"
+              echo "semver_tag=$SEMVER_TAG" >> $GITHUB_OUTPUT
+              echo "#### Found features/fixes. The next version will be ${SEMVER_TAG}... :punch:" | tee -a $GITHUB_STEP_SUMMARY
+            else
+              echo "should-run-build=False" >> "$GITHUB_OUTPUT"
+              echo "#### No features, no fixes. Skipping Build job :police_car:" | tee -a $GITHUB_STEP_SUMMARY
+            fi
+  
+    tf-plan: 
+      name: Terraform plan
+      runs-on: ubuntu-latest
+      permissions:
+        id-token: write # This is required for requesting the JWT
+      needs: 
+        - next-version
+      steps:
+        - uses: actions/checkout@v4
+        - name: Configure AWS credentials via OIDC
+          uses: aws-actions/configure-aws-credentials@v4
+          with:
+            role-to-assume: arn:aws:iam::${{ vars.AWS_ACCOUNT_ID }}:role/${{ vars.IAM_GHA_OIDC_ROLE_NAME }}
+            aws-region: ${{ vars.AWS_REGION }}
+        - uses: hashicorp/setup-terraform@v3
+          with:
+            terraform_version: ${{ vars.TERRAFORM_VERSION }}
+        - name: Run Terraform init
+          run: terraform init -input=false
+        - name: Check if terraform configuration is valid
+          run: terraform validate
+        - name: Run Terraform apply
+          run: |
+            terraform apply -auto-approve 
+            echo "#### Successfully applied organization" >> $GITHUB_STEP_SUMMARY
+  
+  
+  
+  
+  
+    tf-apply: # This is safe to apply because critical resources `prevent_destroy = true` or `archive_on_destroy = true`
+      name: Terraform apply
+      runs-on: ubuntu-latest
+      permissions:
+        id-token: write # This is required for requesting the JWT
+      # if: github.ref_name == 'prod'
+      # if: needs.git-tag-release.outputs.should-run-build == 'True'
+      needs: 
+        - tf-plan
+      # concurrency: ${{ github.ref_name }}
+      environment: # Configure manual approval in native GitHub Actions UI before continuing. https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment
+        name: ${{ github.ref_name }}
+        # url: ${{ vars.ENV_URL }}
+      # defaults:
+      #   run:
+      #     working-directory: ./terraform
+      steps:
+        - uses: actions/checkout@v4
+        - name: Configure AWS credentials via OIDC
+          uses: aws-actions/configure-aws-credentials@v4
+          with:
+            role-to-assume: arn:aws:iam::${{ vars.AWS_ACCOUNT_ID }}:role/${{ vars.IAM_GHA_OIDC_ROLE_NAME }}
+            aws-region: ${{ vars.AWS_REGION }}
+        - uses: hashicorp/setup-terraform@v3
+          with:
+            terraform_version: ${{ vars.TERRAFORM_VERSION }}
+        - name: Run Terraform init
+          run: terraform init -input=false
+        - name: Check if terraform configuration is valid
+          run: terraform validate
+        - name: Run Terraform apply
+          run: |
+            terraform apply -auto-approve 
+            echo "#### Successfully applied organization" >> $GITHUB_STEP_SUMMARY
+  
+  
+    git-tag-release:
+      name: Create ${{ needs.next-version.outputs.semver_tag }} git tag
+      runs-on: ubuntu-latest
+      needs:
+        - next-version
+        - tf-apply
+      permissions:
+        contents: write # to be able to publish a GitHub release
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v4
+          with:
+            fetch-depth: 0
+            ref: ${{ github.ref }} # checkout the latest commit on the brabch (terraform-docs), not the current's event ommit
+        - name: Setup Node.js for semantic-release
+          uses: actions/setup-node@v4
+          with:
+            node-version: "lts/*"
+        - name: Create a semanitc git tag
+          run: |
+            set -x
+            npx semantic-release --debug
+            echo $?
+            echo "#### Created a git tag ${{ needs.next-version.outputs.semver_tag }} 🐙" | tee -a $GITHUB_STEP_SUMMARY
+  
