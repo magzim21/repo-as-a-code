@@ -93,6 +93,45 @@ locals {
       archive_on_destroy = false
     },
     {
+      name        = "aws-lakehouse-lab"
+      description = "AWS Lakehouse Lab"
+      visibility  = "private"
+      topics      = ["aws", "lakehouse", "lab"]
+      archived    = false
+      template = {
+        owner                = "codelawcorp"
+        repository           = "template"
+        include_all_branches = false
+      }
+      actions_variables = [
+        {
+          name  = "TERRAFORM_VERSION"
+          value = "1.14.5"
+        },
+        {
+          name  = "AWS_ACCOUNT_ID"
+          value = data.aws_caller_identity.current.account_id
+        },
+        {
+          name  = "AWS_REGION"
+          value = "ca-central-1"
+        },
+        {
+          name  = "IAM_GHA_OIDC_ROLE_NAME"
+          value = "github-actions-role"
+        },
+      ]
+      # pages = {
+      #   build_type = "workflow"
+      # }
+      has_issues      = false
+      has_projects    = false
+      has_wiki        = false
+      has_discussions = false
+
+      archive_on_destroy = false
+    },
+    {
       name        = "finance-simulation"
       description = "Finance simulation"
       visibility  = "private"
