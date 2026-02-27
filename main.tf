@@ -17,7 +17,6 @@ locals {
       repository_files = {
         ".github/workflows/main.yaml" = {
           content             = templatefile("templates/gha/pages.yaml.tpl", {})
-          commit_message      = "fix(semantic-release): determine the next version"
           overwrite_on_create = true
         }
         "README.md" = {
@@ -121,6 +120,12 @@ locals {
           value = "github-actions-role"
         },
       ]
+      repository_files = {
+        ".github/workflows/terraform.yaml" = {
+          content             = templatefile("templates/gha/terraform.yaml.tpl", {})
+          overwrite_on_create = true
+        }
+      }
       # pages = {
       #   build_type = "workflow"
       # }
@@ -208,7 +213,6 @@ locals {
     #   repository_files = {
     #     ".github/workflows/main.yaml" = {
     #       content             = templatefile("templates/gha/pages.yaml.tpl", {})
-    #       commit_message      = "fix(semantic-release): determine the next version"
     #       overwrite_on_create = true
     #     }
     #     "README.md" = {
@@ -234,7 +238,6 @@ locals {
     #   repository_files = {
     #     ".github/workflows/main.yaml" = {
     #       content             = templatefile("templates/gha/pages.yaml.tpl", {})
-    #       commit_message      = "fix(semantic-release): determine the next version"
     #       overwrite_on_create = true
     #     }
     #     "README.md" = {
@@ -260,7 +263,6 @@ locals {
     #   repository_files = {
     #     ".github/workflows/main.yaml" = {
     #       content             = templatefile("templates/gha/pages.yaml.tpl", {})
-    #       commit_message      = "fix(semantic-release): determine the next version"
     #       overwrite_on_create = true
     #     }
     #     "README.md" = {
@@ -286,7 +288,6 @@ locals {
     #   repository_files = {
     #     ".github/workflows/main.yaml" = {
     #       content             = templatefile("templates/gha/pages.yaml.tpl", {})
-    #       commit_message      = "fix(semantic-release): determine the next version"
     #       overwrite_on_create = true
     #     }
     #     "README.md" = {
@@ -312,7 +313,6 @@ locals {
     #   repository_files = {
     #     ".github/workflows/main.yaml" = {
     #       content             = templatefile("templates/gha/pages.yaml.tpl", {})
-    #       commit_message      = "fix(semantic-release): determine the next version"
     #       overwrite_on_create = true
     #     }
     #     "README.md" = {
@@ -338,7 +338,6 @@ locals {
     #   repository_files = {
     #     ".github/workflows/main.yaml" = {
     #       content             = templatefile("templates/gha/pages.yaml.tpl", {})
-    #       commit_message      = "fix(semantic-release): determine the next version"
     #       overwrite_on_create = true
     #     }
     #     "README.md" = {
@@ -364,7 +363,6 @@ locals {
     #   repository_files = {
     #     ".github/workflows/main.yaml" = {
     #       content             = templatefile("templates/gha/pages.yaml.tpl", {})
-    #       commit_message      = "fix(semantic-release): determine the next version"
     #       overwrite_on_create = true
     #     }
     #     "README.md" = {
@@ -390,7 +388,6 @@ locals {
     #   repository_files = {
     #     ".github/workflows/main.yaml" = {
     #       content             = templatefile("templates/gha/pages.yaml.tpl", {})
-    #       commit_message      = "fix(semantic-release): determine the next version"
     #       overwrite_on_create = true
     #     }
     #     "README.md" = {
@@ -416,7 +413,6 @@ locals {
     #   repository_files = {
     #     ".github/workflows/main.yaml" = {
     #       content             = templatefile("templates/gha/pages.yaml.tpl", {})
-    #       commit_message      = "fix(semantic-release): determine the next version"
     #       overwrite_on_create = true
     #     }
     #     "README.md" = {
@@ -442,7 +438,6 @@ locals {
     #   repository_files = {
     #     ".github/workflows/main.yaml" = {
     #       content             = templatefile("templates/gha/pages.yaml.tpl", {})
-    #       commit_message      = "fix(semantic-release): determine the next version"
     #       overwrite_on_create = true
     #     }
     #     "README.md" = {
@@ -468,7 +463,6 @@ locals {
     #   repository_files = {
     #     ".github/workflows/main.yaml" = {
     #       content             = templatefile("templates/gha/pages.yaml.tpl", {})
-    #       commit_message      = "fix(semantic-release): determine the next version"
     #       overwrite_on_create = true
     #     }
     #     "README.md" = {
@@ -494,7 +488,6 @@ locals {
     #   repository_files = {
     #     ".github/workflows/main.yaml" = {
     #       content             = templatefile("templates/gha/pages.yaml.tpl", {})
-    #       commit_message      = "fix(semantic-release): determine the next version"
     #       overwrite_on_create = true
     #     }
     #     "README.md" = {
@@ -520,7 +513,6 @@ locals {
     #   repository_files = {
     #     ".github/workflows/main.yaml" = {
     #       content             = templatefile("templates/gha/pages.yaml.tpl", {})
-    #       commit_message      = "fix(semantic-release): determine the next version"
     #       overwrite_on_create = true
     #     }
     #     "README.md" = {
@@ -546,7 +538,6 @@ locals {
     #   repository_files = {
     #     ".github/workflows/main.yaml" = {
     #       content             = templatefile("templates/gha/pages.yaml.tpl", {})
-    #       commit_message      = "fix(semantic-release): determine the next version"
     #       overwrite_on_create = true
     #     }
     #     "README.md" = {
@@ -572,7 +563,6 @@ locals {
     #   repository_files = {
     #     ".github/workflows/main.yaml" = {
     #       content             = templatefile("templates/gha/pages.yaml.tpl", {})
-    #       commit_message      = "fix(semantic-release): determine the next version"
     #       overwrite_on_create = true
     #     }
     #     "README.md" = {
@@ -598,7 +588,6 @@ locals {
     #   repository_files = {
     #     ".github/workflows/main.yaml" = {
     #       content             = templatefile("templates/gha/pages.yaml.tpl", {})
-    #       commit_message      = "fix(semantic-release): determine the next version"
     #       overwrite_on_create = true
     #     }
     #     "README.md" = {
@@ -624,7 +613,6 @@ locals {
     #   repository_files = {
     #     ".github/workflows/main.yaml" = {
     #       content             = templatefile("templates/gha/pages.yaml.tpl", {})
-    #       commit_message      = "fix(semantic-release): determine the next version"
     #       overwrite_on_create = true
     #     }
     #     "README.md" = {
@@ -650,7 +638,6 @@ locals {
     #   repository_files = {
     #     ".github/workflows/main.yaml" = {
     #       content             = templatefile("templates/gha/pages.yaml.tpl", {})
-    #       commit_message      = "fix(semantic-release): determine the next version"
     #       overwrite_on_create = true
     #     }
     #     "README.md" = {
@@ -676,7 +663,6 @@ locals {
     #   repository_files = {
     #     ".github/workflows/main.yaml" = {
     #       content             = templatefile("templates/gha/pages.yaml.tpl", {})
-    #       commit_message      = "fix(semantic-release): determine the next version"
     #       overwrite_on_create = true
     #     }
     #     "README.md" = {
@@ -702,7 +688,6 @@ locals {
     #   repository_files = {
     #     ".github/workflows/main.yaml" = {
     #       content             = templatefile("templates/gha/pages.yaml.tpl", {})
-    #       commit_message      = "fix(semantic-release): determine the next version"
     #       overwrite_on_create = true
     #     }
     #     "README.md" = {
@@ -728,7 +713,6 @@ locals {
     #   repository_files = {
     #     ".github/workflows/main.yaml" = {
     #       content             = templatefile("templates/gha/pages.yaml.tpl", {})
-    #       commit_message      = "fix(semantic-release): determine the next version"
     #       overwrite_on_create = true
     #     }
     #     "README.md" = {
@@ -754,7 +738,6 @@ locals {
     #   repository_files = {
     #     ".github/workflows/main.yaml" = {
     #       content             = templatefile("templates/gha/pages.yaml.tpl", {})
-    #       commit_message      = "fix(semantic-release): determine the next version"
     #       overwrite_on_create = true
     #     }
     #     "README.md" = {
@@ -780,7 +763,6 @@ locals {
     #   repository_files = {
     #     ".github/workflows/main.yaml" = {
     #       content             = templatefile("templates/gha/pages.yaml.tpl", {})
-    #       commit_message      = "fix(semantic-release): determine the next version"
     #       overwrite_on_create = true
     #     }
     #     "README.md" = {
@@ -806,7 +788,6 @@ locals {
     #   repository_files = {
     #     ".github/workflows/main.yaml" = {
     #       content             = templatefile("templates/gha/pages.yaml.tpl", {})
-    #       commit_message      = "fix(semantic-release): determine the next version"
     #       overwrite_on_create = true
     #     }
     #     "README.md" = {
@@ -832,7 +813,6 @@ locals {
     #   repository_files = {
     #     ".github/workflows/main.yaml" = {
     #       content             = templatefile("templates/gha/pages.yaml.tpl", {})
-    #       commit_message      = "fix(semantic-release): determine the next version"
     #       overwrite_on_create = true
     #     }
     #     "README.md" = {
@@ -858,7 +838,6 @@ locals {
     #   repository_files = {
     #     ".github/workflows/main.yaml" = {
     #       content             = templatefile("templates/gha/pages.yaml.tpl", {})
-    #       commit_message      = "fix(semantic-release): determine the next version"
     #       overwrite_on_create = true
     #     }
     #     "README.md" = {
@@ -884,7 +863,6 @@ locals {
     #   repository_files = {
     #     ".github/workflows/main.yaml" = {
     #       content             = templatefile("templates/gha/pages.yaml.tpl", {})
-    #       commit_message      = "fix(semantic-release): determine the next version"
     #       overwrite_on_create = true
     #     }
     #     "README.md" = {
@@ -910,7 +888,6 @@ locals {
     #   repository_files = {
     #     ".github/workflows/main.yaml" = {
     #       content             = templatefile("templates/gha/pages.yaml.tpl", {})
-    #       commit_message      = "fix(semantic-release): determine the next version"
     #       overwrite_on_create = true
     #     }
     #     "README.md" = {
@@ -936,7 +913,6 @@ locals {
     #   repository_files = {
     #     ".github/workflows/main.yaml" = {
     #       content             = templatefile("templates/gha/pages.yaml.tpl", {})
-    #       commit_message      = "fix(semantic-release): determine the next version"
     #       overwrite_on_create = true
     #     }
     #     "README.md" = {
@@ -962,7 +938,6 @@ locals {
     #   repository_files = {
     #     ".github/workflows/main.yaml" = {
     #       content             = templatefile("templates/gha/pages.yaml.tpl", {})
-    #       commit_message      = "fix(semantic-release): determine the next version"
     #       overwrite_on_create = true
     #     }
     #     "README.md" = {
