@@ -158,6 +158,27 @@ locals {
       archive_on_destroy = false
     },
     {
+      name        = "airtable-scripting"
+      description = "Airtable scripting for inventory management"
+      visibility  = "private"
+      topics      = ["airtable", "scripting", "inventory"]
+      archived    = false
+      template = {
+        owner                = "codelawcorp"
+        repository           = "template"
+        include_all_branches = false
+      }
+      # pages = {
+      #   build_type = "workflow"
+      # }
+      has_issues      = false
+      has_projects    = false
+      has_wiki        = false
+      has_discussions = false
+
+      archive_on_destroy = false
+    },
+    {
       name        = "canada-immigration-news"
       description = "Monitor Canada PR fast tracks"
       visibility  = "private"
