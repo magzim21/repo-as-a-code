@@ -1,6 +1,37 @@
 locals {
   repos = [
     {
+      name        = "cleaning-landing-page"
+      description = "Cleaning Landing Page"
+      visibility  = "public"
+      topics      = ["cleaning", "landing-page", "html", "css", "javascript", ]
+      archived    = false
+      template = {
+        owner                = "codelawcorp"
+        repository           = "template"
+        include_all_branches = false
+      }
+      pages = {
+        build_type = "workflow"
+      }
+      repository_files = {
+        ".github/workflows/main.yaml" = {
+          content             = templatefile("templates/gha/pages.yaml.tpl", {})
+          overwrite_on_create = true
+        }
+        "README.md" = {
+          content             = local.repo_readmes["cleaning-landing-page"]
+          overwrite_on_create = true
+        }
+      }
+      has_issues      = false
+      has_projects    = false
+      has_wiki        = false
+      has_discussions = false
+
+      archive_on_destroy = false
+    },
+    {
       name        = "ims-lp"
       description = "IMS Landing Page"
       visibility  = "public"

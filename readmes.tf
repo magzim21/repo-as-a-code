@@ -1,5 +1,10 @@
 locals {
   repo_readmes = {
+    "cleaning-landing-page" = <<-EOT
+# Cleaning Landing Page
+
+EOT
+
     "ims-lp" = <<-EOT
 # IMS Landing Page
 
