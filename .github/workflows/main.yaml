@@ -73,6 +73,9 @@ jobs:
       contents: read
     needs: 
       - next-version
+    env:
+      DD_API_KEY: ${{ secrets.DD_API_KEY }}
+      DD_APP_KEY: ${{ secrets.DD_APP_KEY }}
     steps:
       - uses: actions/checkout@v4
       - name: Configure AWS credentials via OIDC
@@ -112,6 +115,9 @@ jobs:
     # if: needs.git-tag-release.outputs.should-run-build == 'True'
     needs: 
       - tf-plan
+    env:
+      DD_API_KEY: ${{ secrets.DD_API_KEY }}
+      DD_APP_KEY: ${{ secrets.DD_APP_KEY }}
     # concurrency: ${{ github.ref_name }}
     environment: # Configure manual approval in native GitHub Actions UI before continuing. https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment
       name: ${{ github.ref_name }}
