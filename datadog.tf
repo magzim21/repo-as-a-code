@@ -3,7 +3,7 @@ resource "datadog_synthetics_test" "test_uptime" {
   type      = "api"
   subtype   = "http"
   status    = "live"
-  message   = "Notify @pagerduty" # TODO / create slack channel
+  message   = "Notify @slack-codelawcorp-alerts"
   locations = ["aws:ca-central-1"]
   tags      = ["env:prod"]
 
