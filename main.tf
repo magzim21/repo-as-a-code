@@ -12,7 +12,9 @@ locals {
         include_all_branches = false
       }
       pages = {
-        build_type = "workflow"
+        build_type               = "workflow"
+        cname                    = "island-drift-detailing.${data.aws_route53_zone.this.name}"
+        do_not_create_index_html = true
       }
       repository_files = {
         ".github/workflows/main.yaml" = {
@@ -1376,7 +1378,7 @@ module "repos" {
     try(each.value.archived, false)
     ? {}
     : merge(
-      try(each.value.pages, null) != null ? {
+      try(each.value.pages, null) != null && !try(each.value.pages.do_not_create_index_html, false) ? {
         "index.html" = {
           content = templatefile(
             "${path.module}/templates/index.html.tpl",
