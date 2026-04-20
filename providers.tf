@@ -12,7 +12,11 @@ terraform {
     }
 
     datadog = {
-      source = "DataDog/datadog"
+      source  = "DataDog/datadog"
+      version = ">= 4.5.0, < 5.0.0"
+    }
+    vercel = {
+      source = "vercel/vercel"
     }
 
   }
@@ -24,3 +28,11 @@ provider "datadog" {
   # set DD_APP_KEY
 }
 
+
+
+provider "vercel" {
+  # VERCEL_API_TOKEN 
+
+  # Optional default team for all resources
+  team = "codelaw"
+}
