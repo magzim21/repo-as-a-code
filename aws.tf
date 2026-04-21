@@ -55,3 +55,59 @@ resource "aws_route53_record" "txt_verification" {
     "69e2555f9da01b3b9b11d2005fb9a2"
   ]
 }
+
+
+
+### Resend ### START
+
+resource "aws_route53_record" "booking_resend_dkim" {
+  zone_id = data.aws_route53_zone.this.zone_id
+  name    = "resend._domainkey.booking.${data.aws_route53_zone.this.name}"
+  type    = "TXT"
+  ttl     = "300"
+  records = [
+    "p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDBlotpATsv7QRLNPoyzQK9EDZH6y2RAsXX+W0pdtLe72IrWoWWGvtr2Inodu2BvabpfmwpMhKWkxz79y8jzHv8Z13yk5IWArTScg2o8ILvfe05JkwkzCQxwpul9DVH2wIdCypWBZjn0P5jo2cN07AN283cxzp+pUYWJnGRmwlRuwIDAQAB"
+  ]
+}
+
+resource "aws_route53_record" "booking_resend_send_mx" {
+  zone_id = data.aws_route53_zone.this.zone_id
+  name    = "send.booking.${data.aws_route53_zone.this.name}"
+  type    = "MX"
+  ttl     = "300"
+  records = [
+    "10 feedback-smtp.us-east-1.amazonses.com"
+  ]
+}
+
+resource "aws_route53_record" "booking_resend_send_spf" {
+  zone_id = data.aws_route53_zone.this.zone_id
+  name    = "send.booking.${data.aws_route53_zone.this.name}"
+  type    = "TXT"
+  ttl     = "300"
+  records = [
+    "v=spf1 include:amazonses.com ~all"
+  ]
+}
+
+resource "aws_route53_record" "booking_resend_dmarc" {
+  zone_id = data.aws_route53_zone.this.zone_id
+  name    = "_dmarc.${data.aws_route53_zone.this.name}"
+  type    = "TXT"
+  ttl     = "300"
+  records = [
+    "v=DMARC1; p=none;"
+  ]
+}
+
+resource "aws_route53_record" "booking_resend_inbound_mx" {
+  zone_id = data.aws_route53_zone.this.zone_id
+  name    = "booking.${data.aws_route53_zone.this.name}"
+  type    = "MX"
+  ttl     = "300"
+  records = [
+    "10 inbound-smtp.us-east-1.amazonaws.com"
+  ]
+}
+
+### Resend ### END

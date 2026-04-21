@@ -14,3 +14,5 @@ resource "aws_route53_record" "this_txt" {
   ttl     = "300"
   records = [var.vercel.txt_verification]
 }
+
+

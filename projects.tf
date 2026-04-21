@@ -19,7 +19,8 @@ module "cleaning_landing_page" {
 
   vercel = {
     cname            = "island-drift-detailing.maxim.run"
-    txt_verification = "vc-domain-verify=island-drift-detailing.maxim.run,d0407c02048b2444f102" # Vercel does not expose this in provider yet. 
+    txt_verification = "vc-domain-verify=island-drift-detailing.maxim.run,cf47fe220e9730b1efd5" # Vercel does not expose this in provider yet. 
+    resend_api_key   = var.resend_api_key
   }
 }
 

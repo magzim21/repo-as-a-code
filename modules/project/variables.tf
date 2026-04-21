@@ -6,14 +6,24 @@ variable "zone_name" {
 
 variable "vercel" {
   type = object({
-    cname            = string
-    txt_verification = string
+    cname                  = string
+    txt_verification       = string
+    resend_api_key         = string
+    resend_dkim_public_key = optional(string)
+    resend_ses_region      = optional(string)
+    resend_spf_value       = optional(string)
+    resend_dmarc_value     = optional(string)
   })
   description = "Vercel settings."
   nullable    = false
   default = {
-    cname            = null
-    txt_verification = null
+    cname                  = null
+    txt_verification       = null
+    resend_api_key         = null
+    resend_dkim_public_key = null
+    resend_ses_region      = "us-east-1"
+    resend_spf_value       = "v=spf1 include:amazonses.com ~all"
+    resend_dmarc_value     = "v=DMARC1; p=none;"
   }
 }
 

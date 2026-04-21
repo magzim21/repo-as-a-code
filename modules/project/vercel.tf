@@ -11,8 +11,9 @@ resource "vercel_project" "this" {
   }
 
   git_repository = {
-    type = "github"
-    repo = "magzim21/${module.gh_repository.repository.name}" # Requires PRO plan if this repo belongs to git organization
+    type              = "github"
+    repo              = "magzim21/${module.gh_repository.repository.name}" # Requires PRO plan if this repo belongs to git organization
+    production_branch = var.default_branch
   }
 }
 
@@ -20,15 +21,28 @@ resource "vercel_project" "this" {
 resource "vercel_project_domain" "this" {
   project_id = vercel_project.this.id
   domain     = try(var.vercel.cname, local.domain_name)
-  #   git_branch = var.default_branch
+  # git_branch = var.default_branch # with this enabled, the project is not deployed to production.
 }
 
 resource "vercel_deployment" "this_prod" {
-  project_id = vercel_project.this.id
-  production = true
-  ref        = var.default_branch
+  project_id  = vercel_project.this.id
+  production  = true
+  ref         = var.default_branch
+  environment = {}
 }
 
+
+resource "vercel_project_environment_variables" "this" {
+  project_id = vercel_project.this.id
+  variables = [
+    {
+      key       = "RESEND_API_KEY"
+      value     = var.vercel.resend_api_key
+      target    = ["production"]
+      sensitive = true
+    }
+  ]
+}
 
 # Example Usage (Synthetics API test)
 # Create a new Datadog Synthetics API/HTTP test on https://www.example.org
