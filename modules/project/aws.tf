@@ -3,7 +3,8 @@ resource "aws_route53_record" "this_cname" {
   name    = vercel_project_domain.this.domain
   type    = "CNAME"
   ttl     = "300"
-  records = ["3b1e60b4a8ee8b43.vercel-dns-017.com."]
+  records = [var.vercel.cname_verification]
+
 }
 
 

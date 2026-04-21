@@ -1,3 +1,42 @@
+### SSM Parameters ### START
+resource "aws_ssm_parameter" "datadog_api_key" {
+  name  = "/repo-as-a-code/DD_API_KEY"
+  type  = "SecureString"
+  value = "placeholder-added-manually"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
+resource "aws_ssm_parameter" "datadog_app_key" {
+  name  = "/repo-as-a-code/DD_APP_KEY"
+  type  = "SecureString"
+  value = "placeholder-added-manually"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
+resource "aws_ssm_parameter" "vercel_api_token" {
+  name  = "/repo-as-a-code/VERCEL_API_TOKEN"
+  type  = "SecureString"
+  value = "placeholder-added-manually"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
+resource "aws_ssm_parameter" "resend_api_key" {
+  name  = "/repo-as-a-code/resend_api_key"
+  type  = "SecureString"
+  value = "placeholder-added-manually"
+  lifecycle {
+    ignore_changes = [value]
+  }
+}
+
+
+### SSM Parameters ### END
 
 data "aws_route53_zone" "this" {
   name = "maxim.run."

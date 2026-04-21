@@ -24,6 +24,8 @@ terraform {
 
 provider "datadog" {
   api_url = "https://us5.datadoghq.com/" # or DD_HOST
+  api_key = aws_ssm_parameter.datadog_api_key.value
+  app_key = aws_ssm_parameter.datadog_app_key.value
   # set DD_API_KEY
   # set DD_APP_KEY
 }
@@ -32,7 +34,7 @@ provider "datadog" {
 
 provider "vercel" {
   # VERCEL_API_TOKEN 
-
+  api_token = aws_ssm_parameter.vercel_api_token.value
   # Optional default team for all resources
   team = "codelaw"
 }

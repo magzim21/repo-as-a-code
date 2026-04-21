@@ -40,6 +40,12 @@ resource "vercel_project_environment_variables" "this" {
       value     = var.vercel.resend_api_key
       target    = ["production"]
       sensitive = true
+    },
+    {
+      key       = "RESEND_API_KEY"
+      value     = var.vercel.resend_api_key
+      target    = ["preview", "development"]
+      sensitive = false # can't be sensitive for development environment
     }
   ]
 }

@@ -18,9 +18,11 @@ module "cleaning_landing_page" {
   #   }
 
   vercel = {
-    cname            = "island-drift-detailing.maxim.run"
-    txt_verification = "vc-domain-verify=island-drift-detailing.maxim.run,cf47fe220e9730b1efd5" # Vercel does not expose this in provider yet. 
-    resend_api_key   = var.resend_api_key
+    cname              = "island-drift-detailing.maxim.run"
+    txt_verification   = "vc-domain-verify=island-drift-detailing.maxim.run,cf47fe220e9730b1efd5" # Vercel does not expose this in provider yet. 
+    cname_verification = "3b1e60b4a8ee8b43.vercel-dns-017.com."
+
+    resend_api_key = aws_ssm_parameter.resend_api_key.value
   }
 }
 

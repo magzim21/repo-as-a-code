@@ -73,9 +73,7 @@ jobs:
       contents: read
     needs: 
       - next-version
-    env:
-      DD_API_KEY: ${{ secrets.DD_API_KEY }}
-      DD_APP_KEY: ${{ secrets.DD_APP_KEY }}
+    # env:
     steps:
       - uses: actions/checkout@v4
       - name: Configure AWS credentials via OIDC
