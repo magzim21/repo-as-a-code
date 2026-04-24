@@ -48,18 +48,18 @@ resource "vercel_project_environment_variables" "this" {
       sensitive = false # can't be sensitive for development environment
     },
     {
-      key = "BOOKING_EMAIL_FROM"
-      value = "Island Drift Detailing <hello@booking.maxim.run>"
-      target = ["production","preview","development"]
+      key       = "BOOKING_EMAIL_FROM"
+      value     = "Island Drift Detailing <hello@booking.maxim.run>"
+      target    = ["production", "preview", "development"]
       sensitive = false
     },
     {
-      key = "BOOKING_EMAIL_TO"
-      value = "book@maxim.run"
-      target = ["production","preview","development"]
+      key       = "BOOKING_EMAIL_TO"
+      value     = "book@maxim.run"
+      target    = ["production", "preview", "development"]
       sensitive = false
     },
-    
+
   ]
 }
 

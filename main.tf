@@ -32,6 +32,19 @@ locals {
       archive_on_destroy = false
     },
     {
+      name            = "family-history"
+      description     = "Family history project"
+      visibility      = "private"
+      topics          = []
+      archived        = false
+      has_issues      = false
+      has_projects    = false
+      has_wiki        = false
+      has_discussions = false
+
+      archive_on_destroy = true
+    },
+    {
       name        = "frontendmentor"
       description = "Practice HTML, CSS, and JavaScript by building real-world projects."
       visibility  = "private"
