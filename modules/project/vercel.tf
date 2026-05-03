@@ -59,6 +59,12 @@ resource "vercel_project_environment_variables" "this" {
       target    = ["production", "preview", "development"]
       sensitive = false
     },
+    {
+      key       = "SLACK_WEBHOOK_URL"
+      value     = var.vercel.slack_webhook_url
+      target    = ["production", "preview", "development"]
+      sensitive = false
+    }
 
   ]
 }

@@ -22,7 +22,17 @@ module "cleaning_landing_page" {
     txt_verification   = "vc-domain-verify=island-drift-detailing.maxim.run,cf47fe220e9730b1efd5" # Vercel does not expose this in provider yet. 
     cname_verification = "3b1e60b4a8ee8b43.vercel-dns-017.com."
 
-    resend_api_key = aws_ssm_parameter.resend_api_key.value
+    resend_api_key    = aws_ssm_parameter.resend_api_key.value
+    slack_webhook_url = aws_ssm_parameter.cleaning_landing_page_slack_webhook_url.value
   }
 }
 
+resource "aws_ssm_parameter" "cleaning_landing_page_slack_webhook_url" {
+  name  = "/repo-as-a-code/cleaning-landing-page/slack_webhook_url"
+  type  = "SecureString"
+  value = "placeholder-added-manually"
+
+  lifecycle {
+    ignore_changes = [value]
+  }
+}

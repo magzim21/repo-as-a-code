@@ -10,6 +10,7 @@ variable "vercel" {
     cname_verification = string
     txt_verification   = string
     resend_api_key     = string
+    slack_webhook_url  = string
     # resend_dkim_public_key = optional(string)
     # resend_ses_region      = optional(string)
     # resend_spf_value       = optional(string)
@@ -22,6 +23,7 @@ variable "vercel" {
     cname_verification = null
     txt_verification   = null
     resend_api_key     = null
+    slack_webhook_url  = null
     # resend_dkim_public_key = null
     # resend_ses_region      = "us-east-1"
     # resend_spf_value       = "v=spf1 include:amazonses.com ~all"
