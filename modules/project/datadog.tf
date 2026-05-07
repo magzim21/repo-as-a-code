@@ -33,3 +33,12 @@ resource "datadog_synthetics_test" "this" {
     }
   }
 }
+
+
+
+resource "datadog_rum_application" "this" {
+  name                              = local.domain_name
+  type                              = "browser"
+  rum_event_processing_state        = "ALL"
+  product_analytics_retention_state = "MAX"
+}

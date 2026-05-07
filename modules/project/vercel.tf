@@ -64,6 +64,18 @@ resource "vercel_project_environment_variables" "this" {
       value     = var.vercel.slack_webhook_url
       target    = ["production", "preview", "development"]
       sensitive = false
+    },
+    {
+      key       = "RUM_APPLICATION_ID"
+      value     = datadog_rum_application.this.id
+      target    = ["production", "preview", "development"]
+      sensitive = false
+    },
+    {
+      key       = "RUM_APPLICATION_CLIENT_TOKEN"
+      value     = datadog_rum_application.this.client_token
+      target    = ["production", "preview", "development"]
+      sensitive = false
     }
 
   ]
