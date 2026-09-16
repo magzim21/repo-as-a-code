@@ -38,15 +38,14 @@ locals {
         include_all_branches = false
       }
       pages = {
-        build_type = "workflow"
+        build_type               = "workflow"
+        do_not_create_index_html = true # the app owns index.html — Terraform must not overwrite it
       }
       repository_files = {
+        # Keep only the GitHub Pages deploy workflow. index.html and README.md are
+        # intentionally NOT managed here — the personal-wealth-tracker repo owns them.
         ".github/workflows/main.yaml" = {
           content             = templatefile("templates/gha/pages.yaml.tpl", {})
-          overwrite_on_create = true
-        }
-        "README.md" = {
-          content             = local.repo_readmes["personal-wealth-tracker"]
           overwrite_on_create = true
         }
       }
