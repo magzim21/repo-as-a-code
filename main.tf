@@ -1,6 +1,19 @@
 locals {
   repos = [
     {
+      name        = "human-mcp"
+      description = "Human MCP server"
+      visibility  = "private"
+      topics      = ["mcp"]
+      archived    = false
+      has_issues      = false
+      has_projects    = false
+      has_wiki        = false
+      has_discussions = false
+
+      archive_on_destroy = false
+    },
+    {
       name        = "personal-wealth-tracker"
       description = "Personal Wealth Tracker"
       visibility  = "public"
