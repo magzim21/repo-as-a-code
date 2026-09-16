@@ -1,6 +1,19 @@
 locals {
   repos = [
     {
+      name            = "ims"
+      description     = "Inventory Management System"
+      visibility      = "private"
+      topics          = ["inventory", "management-system"]
+      archived        = false
+      has_issues      = false
+      has_projects    = false
+      has_wiki        = false
+      has_discussions = false
+
+      archive_on_destroy = false
+    },
+    {
       name            = "human-mcp"
       description     = "Human MCP server"
       visibility      = "private"
