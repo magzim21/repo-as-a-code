@@ -1,11 +1,11 @@
 locals {
   repos = [
     {
-      name        = "human-mcp"
-      description = "Human MCP server"
-      visibility  = "private"
-      topics      = ["mcp"]
-      archived    = false
+      name            = "human-mcp"
+      description     = "Human MCP server"
+      visibility      = "private"
+      topics          = ["mcp"]
+      archived        = false
       has_issues      = false
       has_projects    = false
       has_wiki        = false
