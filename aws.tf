@@ -150,3 +150,17 @@ resource "aws_route53_record" "booking_resend_inbound_mx" {
 }
 
 ### Resend ### END
+
+
+### Vercel ### START
+
+# resource "aws_route53_record" "vercel_domain_verification" {
+#   zone_id = data.aws_route53_zone.this.zone_id
+#   name    = "_vercel.${data.aws_route53_zone.this.name}"
+#   type    = "TXT"
+#   ttl     = "300"
+#   records = ["vc-domain-verify=island-drift-detailing.maxim.run,cf47fe220e9730b1efd5"] # Vercel does not expose this in provider yet. // this value  came from Island Drift detailng vercel project verification UI.
+#            # "vc-domain-verify=island-mist-detailing.maxim.run,7f4b75575c7f657a6a05"
+# }
+
+### Vercel ### END

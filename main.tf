@@ -1,6 +1,37 @@
 locals {
   repos = [
     {
+      name        = "personal-wealth-tracker"
+      description = "Personal Wealth Tracker"
+      visibility  = "public"
+      topics      = ["personal", "wealth", "tracker", "self-hosted"]
+      archived    = false
+      template = {
+        owner                = "codelawcorp"
+        repository           = "template"
+        include_all_branches = false
+      }
+      pages = {
+        build_type = "workflow"
+      }
+      repository_files = {
+        ".github/workflows/main.yaml" = {
+          content             = templatefile("templates/gha/pages.yaml.tpl", {})
+          overwrite_on_create = true
+        }
+        "README.md" = {
+          content             = local.repo_readmes["personal-wealth-tracker"]
+          overwrite_on_create = true
+        }
+      }
+      has_issues      = false
+      has_projects    = false
+      has_wiki        = false
+      has_discussions = false
+
+      archive_on_destroy = true
+    },
+    {
       name        = "ims-lp"
       description = "IMS Landing Page"
       visibility  = "public"

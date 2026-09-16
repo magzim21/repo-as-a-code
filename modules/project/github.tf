@@ -21,6 +21,7 @@ module "gh_repository" {
   # topics       = try(var.topics, [])
   topics = try(var.topics, [])
 
+  has_issues      = try(var.has_issues, null)
   has_projects    = try(var.has_projects, null)
   has_wiki        = try(var.has_wiki, null)
   has_discussions = try(var.has_discussions, null)

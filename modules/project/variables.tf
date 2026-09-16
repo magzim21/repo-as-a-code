@@ -8,7 +8,6 @@ variable "vercel" {
   type = object({
     cname              = string
     cname_verification = string
-    txt_verification   = string
     resend_api_key     = string
     slack_webhook_url  = string
     # resend_dkim_public_key = optional(string)
@@ -21,7 +20,6 @@ variable "vercel" {
   default = {
     cname              = null
     cname_verification = null
-    txt_verification   = null
     resend_api_key     = null
     slack_webhook_url  = null
     # resend_dkim_public_key = null
@@ -109,6 +107,14 @@ variable "topics" {
   type        = list(string)
   description = "GitHub topic labels for the repository."
   default     = []
+}
+
+variable "has_issues" {
+  type        = bool
+  description = "Enable GitHub Issues on the repository."
+  nullable    = true
+  default     = null
+
 }
 
 variable "has_projects" {
