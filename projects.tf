@@ -17,6 +17,7 @@ resource "aws_route53_record" "this_txt_vercel_verification" {
 }
 
 
+# TODO / rename to island drift detailing or just detailing
 module "cleaning_landing_page" {
   source = "./modules/project"
   name   = "cleaning-landing-page"

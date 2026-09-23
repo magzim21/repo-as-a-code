@@ -44,10 +44,11 @@ locals {
       repository_files = {
         # Keep only the GitHub Pages deploy workflow. index.html and README.md are
         # intentionally NOT managed here — the personal-wealth-tracker repo owns them.
-        ".github/workflows/main.yaml" = {
-          content             = templatefile("templates/gha/pages.yaml.tpl", {})
-          overwrite_on_create = true
-        }
+        # ".github/workflows/main.yaml" = {
+        #   content             = templatefile("templates/gha/pages.yaml.tpl", {})
+        #   overwrite_on_create = true
+        #   ignore_changes      = true
+        # }
       }
       has_issues      = false
       has_projects    = false
