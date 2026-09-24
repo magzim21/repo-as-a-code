@@ -38,3 +38,9 @@ provider "vercel" {
   # Optional default team for all resources
   team = "codelaw"
 }
+
+
+provider "aws" {
+  region = "ca-central-1"
+
+}
