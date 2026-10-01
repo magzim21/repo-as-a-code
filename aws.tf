@@ -164,3 +164,19 @@ resource "aws_route53_record" "booking_resend_inbound_mx" {
 # }
 
 ### Vercel ### END
+
+### Google Workspace ### START
+
+# DKIM key of maxim.run, generated in admin.google.com → Apps → Google Workspace → Gmail → Authenticate email.
+# Route 53 limits one TXT string to 255 characters, so the value is split into quoted chunks.
+resource "aws_route53_record" "google_dkim" {
+  zone_id = data.aws_route53_zone.this.zone_id
+  name    = "google._domainkey.${data.aws_route53_zone.this.name}"
+  type    = "TXT"
+  ttl     = "300"
+  records = [
+    join("\"\"", regexall(".{1,255}", "v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAt5SIue+x4ImBPwj48ItlJCpdkE/9lMkOKVLgR3/Cy7vemvQ8MsDU2BJVXb4FKZuwBGl2PmrMrzg/31PC11Cro1+PLvg+lpKHeuXc5heV2Ohm9eizQ9zQinN9sJvNwKg+X8aWOAwboyijzqvyIrr897i1NF5pxX9RD4pS1insrYCAsiddluz4K4820dHC59KXmoofpiGKfMPECNSLBmek58/LeC+nHk4Y5FGjGFM6JNGgcW6akbYBgr6b5SsjTnfdOllTCbSNPyif5+yI29TPPMNML7MR8NDJb/w103Vl72Lgt6dcIAnYFGOYczSPG/bVxNpdxs5A+/3paWejAG+QAwIDAQAB"))
+  ]
+}
+
+### Google Workspace ### END
