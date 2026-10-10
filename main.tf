@@ -42,6 +42,21 @@ locals {
       archive_on_destroy = true
     },
     {
+      name            = "visualize-llm-chat"
+      description     = "Own LLM chat: any model via one API router, my context rules, usage stats, conversation shown as a map"
+      visibility      = "private"
+      archived        = false
+      default_branch  = "main" # imported as it is; the switch to prod is a separate task
+      has_issues      = true
+      has_projects    = true
+      has_wiki        = false
+      has_discussions = false
+      # Live state at import (2026-10-09): Dependabot alerts and security updates off.
+      enable_dependabot_security_updates = false
+
+      archive_on_destroy = true
+    },
+    {
       name            = "human-mcp"
       description     = "Human MCP server"
       visibility      = "private"
