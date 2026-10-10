@@ -27,6 +27,21 @@ locals {
       archive_on_destroy = true
     },
     {
+      name            = "utilities"
+      description     = "Personal command-line utilities"
+      visibility      = "private"
+      archived        = false
+      default_branch  = "main" # imported as it is; the switch to prod is a separate task
+      has_issues      = true
+      has_projects    = true
+      has_wiki        = false
+      has_discussions = false
+      # Live state at import (2026-10-09): Dependabot alerts and security updates off.
+      enable_dependabot_security_updates = false
+
+      archive_on_destroy = true
+    },
+    {
       name            = "human-mcp"
       description     = "Human MCP server"
       visibility      = "private"
@@ -296,7 +311,7 @@ locals {
       pages = {
         build_type = "workflow"
       }
-      has_issues      = true
+      has_issues      = false # live value; until 2026-10-09 the module ignored has_issues, so "true" here never applied
       has_projects    = true
       has_wiki        = false
       has_discussions = true
@@ -1358,6 +1373,7 @@ module "repos" {
   # topics       = try(each.value.topics, [])
   topics = try(each.value.topics, [])
 
+  has_issues      = try(each.value.has_issues, null)
   has_projects    = try(each.value.has_projects, null)
   has_wiki        = try(each.value.has_wiki, null)
   has_downloads   = try(each.value.has_downloads, null)
@@ -1409,7 +1425,8 @@ module "repos" {
 
   # This also automatically enables vulnerability_alerts
   # vulnerability_alerts               = true
-  # enable_dependabot_security_updates = try(each.value.enable_dependabot_security_updates, true, null)
+  # Default true (the module default); an imported repository may keep its live "off" until it is switched on on purpose.
+  enable_dependabot_security_updates = try(each.value.enable_dependabot_security_updates, true)
 
 
   # Configure webhooks for the repository

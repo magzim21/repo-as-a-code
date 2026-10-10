@@ -114,3 +114,7 @@ import {
   to = module.repos["Registration-form"].github_repository.this
   id = "Registration-form"
 }
+import {
+  to = module.repos["utilities"].github_repository.this
+  id = "utilities"
+}
