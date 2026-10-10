@@ -1375,6 +1375,39 @@ locals {
       # default_branch = "main"
       is_template = false
     },
+    {
+      # Archived; the live code moved to codelawcorp/booking-orchestrator (2026-10-02).
+      name           = "booking-orchestrator"
+      description    = "One 'Book Now' click → dynamic price, payment, CRM, calendar, ad-conversion. A config-driven booking orchestrator for any service business."
+      visibility     = "private"
+      archived       = true
+      default_branch = "main" # GitHub cannot rename a branch of an archived repository
+      has_issues     = true
+      has_projects   = true
+      is_template    = false
+    },
+    {
+      name           = "Decorator-logger"
+      description    = ""
+      visibility     = "public"
+      archived       = true
+      default_branch = "master" # GitHub cannot rename a branch of an archived repository
+      has_issues     = true
+      has_projects   = true
+      has_wiki       = true
+      is_template    = false
+    },
+    {
+      name           = "RPG_game"
+      description    = "Practicing OOP"
+      visibility     = "public"
+      archived       = true
+      default_branch = "master" # GitHub cannot rename a branch of an archived repository
+      has_issues     = true
+      has_projects   = true
+      has_wiki       = true
+      is_template    = false
+    },
 
   ]
 

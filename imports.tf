@@ -126,3 +126,15 @@ import {
   to = module.repos["day-room"].github_repository.this
   id = "day-room"
 }
+import {
+  to = module.repos["booking-orchestrator"].github_repository.this
+  id = "booking-orchestrator"
+}
+import {
+  to = module.repos["Decorator-logger"].github_repository.this
+  id = "Decorator-logger"
+}
+import {
+  to = module.repos["RPG_game"].github_repository.this
+  id = "RPG_game"
+}
