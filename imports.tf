@@ -122,3 +122,7 @@ import {
   to = module.repos["visualize-llm-chat"].github_repository.this
   id = "visualize-llm-chat"
 }
+import {
+  to = module.repos["day-room"].github_repository.this
+  id = "day-room"
+}
