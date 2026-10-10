@@ -11,3 +11,8 @@ output "rum_application_client_token" {
 output "rum_application_id" {
   value = datadog_rum_application.this.id
 }
+
+output "repository_name" {
+  description = "GitHub repository name (used by the unmanaged-repository guard in guard.tf)."
+  value       = var.name
+}

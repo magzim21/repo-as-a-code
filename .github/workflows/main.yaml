@@ -31,6 +31,10 @@ jobs:
           terraform_version: ${{ vars.TERRAFORM_VERSION }}
       - name: Check if terraform is well formatted
         run: terraform fmt -recursive  -check
+      - name: Run terraform test (mocked providers, no credentials)
+        run: |
+          terraform init -backend=false -input=false
+          terraform test
 
   next-version:
     name: Determine the next version
