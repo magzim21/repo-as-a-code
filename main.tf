@@ -14,6 +14,19 @@ locals {
       archive_on_destroy = false
     },
     {
+      name            = "ntask"
+      description     = "Notion task bookkeeping in one command for Max's Tasks database (agents use it instead of MCP calls)"
+      visibility      = "private"
+      topics          = ["notion", "cli", "automation", "agents"]
+      archived        = false
+      has_issues      = false
+      has_projects    = false
+      has_wiki        = false
+      has_discussions = false
+
+      archive_on_destroy = true
+    },
+    {
       name            = "human-mcp"
       description     = "Human MCP server"
       visibility      = "private"
