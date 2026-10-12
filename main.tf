@@ -46,7 +46,6 @@ locals {
       description     = "Own LLM chat: any model via one API router, my context rules, usage stats, conversation shown as a map"
       visibility      = "private"
       archived        = false
-      default_branch  = "main" # imported as it is; the switch to prod is a separate task
       has_issues      = true
       has_projects    = true
       has_wiki        = false
