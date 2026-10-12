@@ -62,7 +62,6 @@ locals {
       visibility      = "private"
       topics          = ["claude-artifact", "day-planner", "google-calendar", "mcp", "notion", "productivity"]
       archived        = false
-      default_branch  = "main" # imported as it is; the switch to prod is a separate task
       has_issues      = true
       has_projects    = true
       has_wiki        = false
