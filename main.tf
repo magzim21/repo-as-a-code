@@ -27,6 +27,19 @@ locals {
       archive_on_destroy = true
     },
     {
+      name            = "claude-config"
+      description     = "Max's Claude Code config (CLAUDE.md, settings, skills, memories), synced from ~/.claude by a Stop hook"
+      visibility      = "private"
+      topics          = ["claude-code", "dotfiles", "agents"]
+      archived        = false
+      has_issues      = false
+      has_projects    = false
+      has_wiki        = false
+      has_discussions = false
+
+      archive_on_destroy = true
+    },
+    {
       name            = "utilities"
       description     = "Personal command-line utilities"
       visibility      = "private"
