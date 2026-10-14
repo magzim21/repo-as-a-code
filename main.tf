@@ -40,6 +40,21 @@ locals {
       archive_on_destroy = true
     },
     {
+      # Max Onyx's personal site on https://maxim.run, served by Vercel (maxim-run.tf).
+      name            = "maxim-run"
+      description     = "Max Onyx's personal site on maxim.run: DevOps, automation, travel; 6 languages, 3 themes"
+      visibility      = "public"
+      homepage_url    = "https://maxim.run"
+      topics          = ["personal-website", "portfolio", "devops", "i18n", "vercel"]
+      archived        = false
+      has_issues      = false
+      has_projects    = false
+      has_wiki        = false
+      has_discussions = false
+
+      archive_on_destroy = true
+    },
+    {
       name            = "utilities"
       description     = "Personal command-line utilities"
       visibility      = "private"
