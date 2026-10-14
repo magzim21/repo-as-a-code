@@ -32,3 +32,40 @@ resource "vercel_project_domain" "maxim_run_www" {
   redirect             = vercel_project_domain.maxim_run_apex.domain
   redirect_status_code = 301
 }
+
+# DNS: the apex goes to Vercel (it served the GitHub Pages placeholder of magzim21.github.io until 2026-10-13).
+moved {
+  from = aws_route53_record.this_a
+  to   = aws_route53_record.maxim_run_apex
+}
+
+resource "aws_route53_record" "maxim_run_apex" {
+  zone_id = data.aws_route53_zone.this.zone_id
+  name    = data.aws_route53_zone.this.name
+  type    = "A"
+  ttl     = "300"
+  records = ["76.76.21.21"] # Vercel's apex address
+}
+
+# The GitHub Pages IPv6 addresses of the old site go away with it (Vercel serves the apex over IPv4).
+removed {
+  from = aws_route53_record.this_aaaa
+  lifecycle {
+    destroy = true
+  }
+}
+
+# www was a hand-made CNAME to cname.super.so (an old Notion-site host); adopted here and pointed at Vercel,
+# which answers it with a 301 to the apex (vercel_project_domain.maxim_run_www).
+import {
+  to = aws_route53_record.maxim_run_www
+  id = "${data.aws_route53_zone.this.zone_id}_www.${data.aws_route53_zone.this.name}_CNAME"
+}
+
+resource "aws_route53_record" "maxim_run_www" {
+  zone_id = data.aws_route53_zone.this.zone_id
+  name    = "www.${data.aws_route53_zone.this.name}"
+  type    = "CNAME"
+  ttl     = "300"
+  records = ["cname.vercel-dns.com"]
+}

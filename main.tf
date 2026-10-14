@@ -1296,7 +1296,7 @@ locals {
     },
     {
       name        = "magzim21.github.io"
-      description = "Personal website"
+      description = "Legacy: the old GitHub Pages placeholder. maxim.run is served by magzim21/maxim-run on Vercel since 2026-10-13."
       visibility  = "public"
       archived    = false
       is_template = false
@@ -1306,15 +1306,7 @@ locals {
           name = "gh-pages"
         }
       ]
-      pages = { // GitHub provider issue: pages branch must exist at applytime / bootstrap problem
-        build_type = "legacy"
-        source = {
-          branch = "gh-pages"
-          path   = "/"
-        }
-        cname = "${data.aws_route53_zone.this.name}"
-        # cname = "wtf"
-      }
+      # Pages off: maxim.run moved to Vercel (maxim-run.tf). The gh-pages branch stays as history.
     },
     {
       name           = "aws_terraform"

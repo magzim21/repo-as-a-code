@@ -56,31 +56,7 @@ resource "aws_route53_record" "this_cname" {
   ]
 }
 
-resource "aws_route53_record" "this_a" {
-  zone_id = data.aws_route53_zone.this.zone_id
-  name    = data.aws_route53_zone.this.name
-  type    = "A"
-  ttl     = "300"
-  records = [
-    "185.199.108.153",
-    "185.199.109.153",
-    "185.199.110.153",
-    "185.199.111.153"
-  ]
-}
-
-resource "aws_route53_record" "this_aaaa" {
-  name    = data.aws_route53_zone.this.name
-  zone_id = data.aws_route53_zone.this.zone_id
-  type    = "AAAA"
-  ttl     = "300"
-  records = [
-    "2606:50c0:8000::153",
-    "2606:50c0:8001::153",
-    "2606:50c0:8002::153",
-    "2606:50c0:8003::153"
-  ]
-}
+# The apex A record moved to maxim-run.tf (aws_route53_record.maxim_run_apex): maxim.run is served by Vercel.
 
 
 # https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/verifying-your-custom-domain-for-github-pages#verifying-a-domain-for-your-user-site
