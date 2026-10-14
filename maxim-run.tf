@@ -15,6 +15,9 @@ resource "vercel_project" "maxim_run" {
     repo              = "magzim21/${module.repos["maxim-run"].repository.name}"
     production_branch = "prod"
   }
+
+  # Vercel refuses a production branch that does not exist yet: wait until the module has renamed main to prod.
+  depends_on = [module.repos["maxim-run"]]
 }
 
 resource "vercel_project_domain" "maxim_run_apex" {
