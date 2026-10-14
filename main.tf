@@ -1306,7 +1306,17 @@ locals {
           name = "gh-pages"
         }
       ]
-      # Pages off: maxim.run moved to Vercel (maxim-run.tf). The gh-pages branch stays as history.
+      # GitHub refuses to switch Pages off for a user site (422), so Pages stays on without a custom domain:
+      # maxim.run moved to Vercel (maxim-run.tf). cname = null also keeps aws.tf from making a DNS record.
+      pages = {
+        build_type               = "legacy"
+        do_not_create_index_html = true
+        source = {
+          branch = "gh-pages"
+          path   = "/"
+        }
+        cname = null
+      }
     },
     {
       name           = "aws_terraform"

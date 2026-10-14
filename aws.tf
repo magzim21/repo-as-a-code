@@ -45,7 +45,7 @@ data "aws_route53_zone" "this" {
 
 resource "aws_route53_record" "this_cname" {
   for_each = {
-    for repo in local.repos : repo.name => repo if try(repo.pages, null) != null && try(repo.pages.cname, null) != data.aws_route53_zone.this.name
+    for repo in local.repos : repo.name => repo if try(repo.pages, null) != null && try(repo.pages.cname, "") != null && try(repo.pages.cname, null) != data.aws_route53_zone.this.name
   }
   zone_id = data.aws_route53_zone.this.zone_id
   name    = try(each.value.pages.cname, null) != null ? each.value.pages.cname : "${each.key}.${data.aws_route53_zone.this.name}"
