@@ -251,7 +251,7 @@ locals {
       description = "AWS Lakehouse Lab"
       visibility  = "private"
       topics      = ["aws", "lakehouse", "lab"]
-      archived    = false
+      archived    = true # Max, 2026-10-16: «Архивировать». Its AWS resources (S3, Glue, IAM role) stay.
       template = {
         owner                = "codelawcorp"
         repository           = "template"
