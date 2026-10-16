@@ -275,12 +275,9 @@ locals {
           value = "github-actions-role"
         },
       ]
-      repository_files = {
-        ".github/workflows/terraform.yaml" = {
-          content             = templatefile("templates/gha/terraform.yaml.tpl", {})
-          overwrite_on_create = true
-        }
-      }
+      # Archived next (Max, 2026-10-16: «Архивировать»): an archived repository is read-only, so its managed workflow
+      # file and Dependabot security updates go first, while they can still be removed.
+      enable_dependabot_security_updates = false
       # pages = {
       #   build_type = "workflow"
       # }
