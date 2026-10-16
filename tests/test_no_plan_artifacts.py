@@ -6,7 +6,8 @@ read the repo's Actions can download an artifact while it is kept (security inci
 - a job that saves a plan (terraform plan -out) uploads no artifact at all;
 - no upload-artifact step anywhere names a plan file (tfplan, *.tfplan, a FILE that some job saves with -out);
 - no download-artifact step fetches a plan: tf-apply plans again in its own job and applies that file there.
-Run: python3 tests/test_no_plan_artifacts.py (also in the CI tests job)."""
+The workflow templates other repos get from this one (templates/gha/*.tpl, written by repository_files in main.tf)
+are checked as well. Run: python3 tests/test_no_plan_artifacts.py (also in the CI tests job)."""
 import glob, os, re, sys, tempfile
 
 ARTIFACT = re.compile(r"\buses:\s*actions/(upload|download)-artifact@")
@@ -180,6 +181,7 @@ if __name__ == "__main__":
     self_test()
     here = os.path.dirname(os.path.abspath(__file__))
     files = sorted(glob.glob(os.path.join(here, "..", ".github", "workflows", "*.y*ml")))
+    files += sorted(glob.glob(os.path.join(here, "..", "templates", "gha", "*.tpl")))
     if not files or not check(files):
         sys.exit(1)
     print(f"NP1 no plan file leaves the runner in {len(files)} workflow file(s) ok")

@@ -87,16 +87,13 @@ jobs:
         run: terraform init -input=false
       - name: Check if terraform configuration is valid
         run: terraform validate
+      # For review only: the plan is shown in the log, never saved or uploaded. A saved plan holds
+      # every secret Terraform reads in plain text (incident 2026-10-15; magzim21/repo-as-a-code
+      # tests/test_no_plan_artifacts.py). tf-apply plans again in its own job.
       - name: Run Terraform plan
         env:
           GITHUB_TOKEN: $${{ secrets.pat_token }} # override the default GITHUB_TOKEN
-        run: terraform plan -out=tfplan -parallelism=20
-      - name: Upload Terraform plan
-        uses: actions/upload-artifact@v4
-        with:
-          name: tfplan
-          path: tfplan
-          retention-days: 1
+        run: terraform plan -input=false -parallelism=20
 
 
 
@@ -131,15 +128,13 @@ jobs:
           terraform_version: $${{ vars.TERRAFORM_VERSION }}
       - name: Run Terraform init
         run: terraform init -input=false
-      - name: Download Terraform plan
-        uses: actions/download-artifact@v4
-        with:
-          name: tfplan
-      - name: Run Terraform apply
+      # Plans again and applies that plan in this same job: the plan file never leaves the runner.
+      - name: Run Terraform plan and apply
         env:
           GITHUB_TOKEN: $${{ secrets.pat_token }} # override the default GITHUB_TOKEN
         run: |
-          terraform apply -parallelism=20 -auto-approve tfplan
+          terraform plan -input=false -out=tfplan -parallelism=20
+          terraform apply -input=false -parallelism=20 -auto-approve tfplan
           echo "#### Successfully applied terraform configuration" >> $GITHUB_STEP_SUMMARY
 
 
