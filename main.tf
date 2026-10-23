@@ -128,17 +128,15 @@ locals {
     {
       name        = "personal-wealth-tracker"
       description = "Personal Wealth Tracker"
-      visibility  = "public"
-      topics      = ["personal", "wealth", "tracker", "self-hosted"]
-      archived    = false
+      # Private since 2026-10-22; the site moved to Vercel (pages-to-vercel.tf).
+      visibility   = "private"
+      homepage_url = "https://personal-wealth-tracker.maxim.run"
+      topics       = ["personal", "wealth", "tracker", "self-hosted"]
+      archived     = false
       template = {
         owner                = "codelawcorp"
         repository           = "template"
         include_all_branches = false
-      }
-      pages = {
-        build_type               = "workflow"
-        do_not_create_index_html = true # the app owns index.html — Terraform must not overwrite it
       }
       repository_files = {
         # Keep only the GitHub Pages deploy workflow. index.html and README.md are
@@ -159,18 +157,24 @@ locals {
     {
       name        = "ims-lp"
       description = "IMS Landing Page"
-      visibility  = "public"
-      topics      = ["html", "css", "javascript", ]
-      archived    = false
+      # Private since 2026-10-22; the site moved to Vercel (pages-to-vercel.tf).
+      visibility   = "private"
+      homepage_url = "https://ims-lp.maxim.run"
+      topics       = ["html", "css", "javascript", ]
+      archived     = false
       template = {
         owner                = "codelawcorp"
         repository           = "template"
         include_all_branches = false
       }
-      pages = {
-        build_type = "workflow"
-      }
       repository_files = {
+        # The landing that ims-lp.maxim.run serves (ims-lp c7a41d3). With pages on, Terraform wrote a placeholder
+        # index.html here and twice replaced the landing with it (0c9c4ad, 518582c); the key stays, so the file is
+        # updated, never deleted.
+        "index.html" = {
+          content             = file("templates/ims-lp/index.html")
+          overwrite_on_create = true
+        }
         # ims-lp's own workflow since 2026-10-22 (pages-to-vercel.tf); it was templates/gha/pages.yaml.tpl.
         ".github/workflows/main.yaml" = {
           content             = file("templates/gha/ims-lp.yaml")

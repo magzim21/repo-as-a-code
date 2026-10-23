@@ -10,12 +10,14 @@ resource "aws_route53_record" "this_txt_vercel_verification" {
   type    = "TXT"
   ttl     = "300"
   records = [
-    "vc-domain-verify=island-drift-detailing.maxim.run,62f61f2c6b39fe5863e1", # island drift detailng
-    "vc-domain-verify=island-mist-detailing.maxim.run,0f8cbee639d604a32a75",  # island mist detailng
-    "vc-domain-verify=driftwood-events.maxim.run,04fe2873c57504cb78fd",       # driftwood events
-    "vc-domain-verify=maxim.run,ce67b6879fd895323106",                        # maxim-run.tf, apex
-    "vc-domain-verify=www.maxim.run,645f8504d8ccef17e7a1",                    # maxim-run.tf, www
-  ]                                                                           # Vercel does not expose this in provider yet. // this value  came from Island Drift detailng vercel project verification UI.
+    "vc-domain-verify=island-drift-detailing.maxim.run,62f61f2c6b39fe5863e1",  # island drift detailng
+    "vc-domain-verify=island-mist-detailing.maxim.run,0f8cbee639d604a32a75",   # island mist detailng
+    "vc-domain-verify=driftwood-events.maxim.run,04fe2873c57504cb78fd",        # driftwood events
+    "vc-domain-verify=maxim.run,ce67b6879fd895323106",                         # maxim-run.tf, apex
+    "vc-domain-verify=www.maxim.run,645f8504d8ccef17e7a1",                     # maxim-run.tf, www
+    "vc-domain-verify=personal-wealth-tracker.maxim.run,69530cf313d2e99791c6", # pages-to-vercel.tf
+    "vc-domain-verify=ims-lp.maxim.run,bd604e3ab86624961b47",                  # pages-to-vercel.tf
+  ]                                                                            # Vercel does not expose this in provider yet. // this value  came from Island Drift detailng vercel project verification UI.
 }
 
 

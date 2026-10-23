@@ -28,3 +28,24 @@ resource "vercel_project_domain" "pages_to_vercel" {
   project_id = vercel_project.pages_to_vercel[each.key].id
   domain     = "${each.key}.maxim.run"
 }
+
+# The CNAME records were made for GitHub Pages by aws_route53_record.this_cname (aws.tf, for repos with pages); they
+# move here and point at Vercel instead of magzim21.github.io.
+resource "aws_route53_record" "pages_to_vercel" {
+  for_each = local.pages_to_vercel
+  zone_id  = data.aws_route53_zone.this.zone_id
+  name     = "${each.key}.${data.aws_route53_zone.this.name}"
+  type     = "CNAME"
+  ttl      = "300"
+  records  = ["cname.vercel-dns.com"]
+}
+
+moved {
+  from = aws_route53_record.this_cname["personal-wealth-tracker"]
+  to   = aws_route53_record.pages_to_vercel["personal-wealth-tracker"]
+}
+
+moved {
+  from = aws_route53_record.this_cname["ims-lp"]
+  to   = aws_route53_record.pages_to_vercel["ims-lp"]
+}
