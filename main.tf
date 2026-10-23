@@ -54,9 +54,10 @@ locals {
     },
     {
       # Max Onyx's personal site on https://maxim.run, served by Vercel (maxim-run.tf).
+      # Private since 2026-10-22: docs/ (internal docs, links.json) never sits in a public repository (Max).
       name            = "maxim-run"
       description     = "Max Onyx's personal site on maxim.run: DevOps, automation, travel; 6 languages, 3 themes"
-      visibility      = "public"
+      visibility      = "private"
       homepage_url    = "https://maxim.run"
       topics          = ["personal-website", "portfolio", "devops", "i18n", "vercel"]
       archived        = false
