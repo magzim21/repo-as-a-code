@@ -171,8 +171,9 @@ locals {
         build_type = "workflow"
       }
       repository_files = {
+        # ims-lp's own workflow since 2026-10-22 (pages-to-vercel.tf); it was templates/gha/pages.yaml.tpl.
         ".github/workflows/main.yaml" = {
-          content             = templatefile("templates/gha/pages.yaml.tpl", {})
+          content             = file("templates/gha/ims-lp.yaml")
           overwrite_on_create = true
         }
         "README.md" = {
