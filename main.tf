@@ -27,6 +27,19 @@ locals {
       archive_on_destroy = true
     },
     {
+      name            = "claude-telegram-bot"
+      description     = "Telegram bot for a Claude Code session on the Mac (@leadpancakes_bot): lpbot launcher and runbook"
+      visibility      = "private"
+      topics          = ["claude-code", "telegram", "runbook"]
+      archived        = false
+      has_issues      = false
+      has_projects    = false
+      has_wiki        = false
+      has_discussions = false
+
+      archive_on_destroy = true
+    },
+    {
       name            = "claude-config"
       description     = "Max's Claude Code config (CLAUDE.md, settings, skills, memories), synced from ~/.claude by a Stop hook"
       visibility      = "private"
