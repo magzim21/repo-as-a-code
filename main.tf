@@ -73,6 +73,26 @@ locals {
       archive_on_destroy = true
     },
     {
+      # Project Brain Growth 0–3: interactive 3D atlas of brain development from birth to age 3
+      # (claude.ai artifact UiD3TpEey3R9y7VJ9t8qac). Private: docs/ never sits in a public repository (Max).
+      name        = "brain-growth"
+      description = "Interactive 3D atlas of brain development from birth to age 3: fsaverage and BigBrain models, cuts, exercises"
+      visibility  = "private"
+      topics      = ["neuroscience", "three-js", "brain-atlas", "child-development", "claude-artifact"]
+      archived    = false
+      template = {
+        owner                = "codelawcorp"
+        repository           = "template"
+        include_all_branches = false
+      }
+      has_issues      = false
+      has_projects    = false
+      has_wiki        = false
+      has_discussions = false
+
+      archive_on_destroy = true
+    },
+    {
       # Max Onyx's personal site on https://maxim.run, served by Vercel (maxim-run.tf).
       # Private since 2026-10-22: docs/ (internal docs, links.json) never sits in a public repository (Max).
       name            = "maxim-run"
