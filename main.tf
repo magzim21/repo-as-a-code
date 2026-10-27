@@ -93,6 +93,22 @@ locals {
       archive_on_destroy = true
     },
     {
+      # Private Digital Twin, data side: a person's own Google and Meta exports as one timeline on their computer.
+      # Its 9 commits of 2026-10-26..27 lived only on the Mac (its AGENTS.md said declared here; it was not). No
+      # template: the local history is merged in. Private: docs/ and no real export data (its AGENTS.md).
+      name            = "private-digital-twin"
+      description     = "Private Digital Twin, data side: own Google and Meta exports as one local timeline"
+      visibility      = "private"
+      topics          = ["personal-data", "privacy", "local-first", "data-export"]
+      archived        = false
+      has_issues      = false
+      has_projects    = false
+      has_wiki        = false
+      has_discussions = false
+
+      archive_on_destroy = true
+    },
+    {
       # Max Onyx's personal site on https://maxim.run, served by Vercel (maxim-run.tf).
       # Private since 2026-10-22: docs/ (internal docs, links.json) never sits in a public repository (Max).
       name            = "maxim-run"
