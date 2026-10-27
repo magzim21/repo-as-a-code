@@ -53,6 +53,26 @@ locals {
       archive_on_destroy = true
     },
     {
+      # Project 👄 Language learning (Notion My Apps): dictionary words woven into Claude's replies.
+      # Private: docs/ (internal docs, links.json) never sits in a public repository (Max).
+      name        = "language-learning"
+      description = "Words from your own dictionary woven into Claude's replies at a density you choose: a skill plus Claude Code hooks"
+      visibility  = "private"
+      topics      = ["claude-code", "claude-skills", "language-learning", "notion"]
+      archived    = false
+      template = {
+        owner                = "codelawcorp"
+        repository           = "template"
+        include_all_branches = false
+      }
+      has_issues      = false
+      has_projects    = false
+      has_wiki        = false
+      has_discussions = false
+
+      archive_on_destroy = true
+    },
+    {
       # Max Onyx's personal site on https://maxim.run, served by Vercel (maxim-run.tf).
       # Private since 2026-10-22: docs/ (internal docs, links.json) never sits in a public repository (Max).
       name            = "maxim-run"
