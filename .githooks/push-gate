@@ -1,0 +1,244 @@
+#!/usr/bin/env bash
+# push-gate: a push is refused unless the repository's full test suite passed on exactly the commit pushed
+# (Max, 2026-10-26, Notion task «Every repo with tests refuses a push without a full test pass on the exact commit»:
+# 215 of 311 fix commits since 2026-10-08 fixed lines younger than 24 h; 28 of 61 CI turns to red came from the pushed
+# commit itself). README "push-gate". Each repository keeps a copy of this file as .githooks/push-gate (a versioned
+# copy: push-gate-install writes it and --status compares it with this one) and a .githooks/pre-push of two lines that
+# names its suite:
+#   exec "$(dirname "$0")/push-gate" "$@" -- npm test
+#
+#   push-gate REMOTE URL -- CMD...       git's pre-push: stdin <local ref> <local sha> <remote ref> <remote sha>; every
+#                                        branch pushed gets CMD run in a temporary worktree of its exact commit
+#   push-gate --test [REV] -- CMD...     the same run without a push (default REV: HEAD); a pass makes the next push of
+#                                        that commit instant
+#   push-gate --version                  prints GATE_VERSION
+#
+# A pass is recorded by tree (<git common dir>/push-gate/passed/<tree hash>): a commit whose files equal a passed
+# commit's (a reworded message) is not tested again; a rebase onto another agent's commit makes a new tree and runs the
+# suite again. The worktree borrows the dependency folders of the checkout that pushes (node_modules beside each
+# package.json whose package-lock.json is equal, .terraform, .venv); a changed lock file gets `npm ci` there instead.
+# Never `git push --no-verify` (~/.claude/CLAUDE.md "Commits").
+# Tests: tests/test_push_gate.py (PG1-PG17).
+GATE_VERSION=4
+set -u
+# The whole script is one { } block: bash parses all of it before the first line runs, so a git pull or an edit that
+# rewrites this file during a push never mixes two versions (~/.claude/CLAUDE.md "Long-running scripts"; on 2026-10-26
+# an edit during a run made a passing suite end in "elapsed: unbound variable"). Test PG17.
+{
+
+ZERO=0000000000000000000000000000000000000000
+DEP_DIRS=".terraform .venv venv"
+
+die() { echo "push-gate: $*" >&2; exit 2; }
+
+mode=hook rev=HEAD
+case "${1:-}" in
+  --version) echo "$GATE_VERSION"; exit 0 ;;
+  --test) mode="test"; shift; [ "${1:-}" != "--" ] && [ $# -gt 0 ] && { rev=$1; shift; } ;;
+  --) ;;
+  -*) die "usage: push-gate REMOTE URL -- CMD... | push-gate --test [REV] -- CMD... | push-gate --version" ;;
+  *) shift; [ "${1:-}" != "--" ] && [ $# -gt 0 ] && shift ;;      # git passes the remote's name and its URL
+esac
+[ "${1:-}" = "--" ] || die "no test command: .githooks/pre-push must end with -- <the full test suite>"
+shift
+[ $# -gt 0 ] || die "no test command after --"
+cmd=("$@")
+
+common=$(git rev-parse --path-format=absolute --git-common-dir) || exit 2
+top=$(git rev-parse --show-toplevel) || exit 2
+state="$common/push-gate"
+mkdir -p "$state/passed" "$state/logs" || exit 2
+repo=$(basename "$(dirname "$common")")
+[ "$(basename "$common")" = ".git" ] || repo=$(basename "$common" .git)
+unset GIT_DIR GIT_WORK_TREE GIT_INDEX_FILE GIT_PREFIX GIT_QUARANTINE_PATH GIT_OBJECT_DIRECTORY \
+      GIT_ALTERNATE_OBJECT_DIRECTORIES
+
+tty=0; [ -t 2 ] && tty=1
+cols=100; (( tty )) && cols=$(tput cols 2>/dev/null || echo 100)
+
+hms() { local s=$1; printf '%dh%02dm%02ds' $((s / 3600)) $((s % 3600 / 60)) $((s % 60)); }
+title() { (( tty )) && printf '\033]0;push-gate · %s\007' "$1" >&2; return 0; }
+step() {   # step N M TEXT
+  echo "==> Step $1 of $2 · $3" >&2
+  title "Step $1 of $2 · $3"
+}
+
+drawn=0
+live_show() {   # redraw the live block in place (terminal only)
+  local out="" n=$# i
+  (( drawn > 0 )) && out=$'\033['"$drawn"'A'
+  for l in "$@"; do out="$out"$'\r\033[K'"${l:0:$((cols - 1))}"$'\n'; done
+  if (( drawn > n )); then
+    for ((i = n; i < drawn; i++)); do out="$out"$'\r\033[K\n'; done
+    out="$out"$'\033['"$((drawn - n))"'A'
+  fi
+  printf '%s' "$out" >&2
+  drawn=$n
+}
+live_end() { if (( tty )); then live_show "$1"; drawn=0; else echo "$1" >&2; fi; }
+
+bar() {   # bar PERCENT -> ████░░░░
+  local p=$1 w=24 f b="" i
+  f=$((p * w / 100))
+  for ((i = 0; i < w; i++)); do if (( i < f )); then b="${b}█"; else b="${b}░"; fi; done
+  printf '%s' "$b"
+}
+
+last_line() {   # the newest non-empty line of the log, without escapes
+  [ -s "$1" ] || return 0
+  # bytes, not characters (LC_ALL=C): the 600-byte tail may cut a multibyte character, which tr and sed refuse in a
+  # UTF-8 locale ("Illegal byte sequence", 2026-10-26); the cut character's bytes are dropped (iconv -c)
+  tail -c 600 "$1" | LC_ALL=C tr '\r' '\n' | LC_ALL=C sed -e $'s/\033\\[[0-9;?]*[A-Za-z]//g' \
+    | LC_ALL=C grep -v '^[[:space:]]*$' | tail -n 1 | iconv -c -f UTF-8 -t UTF-8 2>/dev/null
+}
+
+# --- what to test --------------------------------------------------------------------------------------------------
+shas=()
+add_sha() { local s; for s in ${shas[@]+"${shas[@]}"}; do [ "$s" = "$1" ] && return; done; shas+=("$1"); }
+if [ "$mode" = test ]; then
+  sha=$(git rev-parse --verify -q "$rev^{commit}") || die "$rev is no commit"
+  add_sha "$sha"
+else
+  while read -r _lref lsha rref _rsha; do
+    [ "$lsha" = "$ZERO" ] && continue                 # a deleted branch has no commit to test
+    case "$rref" in refs/heads/*) add_sha "$lsha" ;; esac
+  done
+fi
+[ ${#shas[@]} -gt 0 ] || exit 0
+
+# --- one run -------------------------------------------------------------------------------------------------------
+wt="" child="" tmp="" log="" cur_step="" cur_sha=""
+borrowed=()
+cleanup() {
+  [ -n "$child" ] && kill -0 "$child" 2>/dev/null && { kill -TERM -- "-$child" 2>/dev/null || kill -TERM "$child"; } \
+    2>/dev/null
+  [ -n "$child" ] && wait "$child" 2>/dev/null
+  child=""
+  if [ -n "$wt" ]; then git -C "$top" worktree remove --force "$wt" >/dev/null 2>&1; fi
+  [ -n "$tmp" ] && rm -rf "$tmp"
+  git -C "$top" worktree prune >/dev/null 2>&1
+  wt="" tmp=""
+}
+on_signal() {
+  (( tty && drawn > 0 )) && { live_show ""; drawn=0; }
+  cleanup
+  {
+    echo "STOPPED in $cur_step (${cur_sha:0:7} of $repo)."
+    echo "  Nothing was pushed. The test run was stopped and its temporary worktree removed; no pass was recorded,"
+    echo "  so the next push of ${cur_sha:0:7} runs the suite again. Its output so far: $log"
+  } >&2
+  title stopped
+  exit 130
+}
+trap on_signal INT TERM HUP
+
+link_deps() {   # borrow the pushing checkout's dependency folders; npm ci where the lock file differs
+  local pj d n=0 out=""
+  borrowed=()
+  while IFS= read -r pj; do
+    d=$(dirname "$pj"); [ "$d" = . ] && d=""
+    local src="$top/${d:+$d/}node_modules" dst="$wt/${d:+$d/}node_modules"
+    [ -e "$dst" ] && continue
+    [ -d "$wt/${d:-.}" ] || continue
+    if [ -d "$src" ] && cmp -s "$top/${d:+$d/}package-lock.json" "$wt/${d:+$d/}package-lock.json" 2>/dev/null; then
+      ln -s "$src" "$dst" && n=$((n + 1)) && out="$out ${d:+$d/}node_modules" && borrowed+=("${d:+$d/}node_modules")
+    elif [ -f "$wt/${d:+$d/}package-lock.json" ] && grep -q '"dependencies"\|"devDependencies"' "$wt/$pj"; then
+      echo "  ${d:+$d/}package-lock.json differs from $top: npm ci in the worktree" >&2
+      (cd "$wt/${d:-.}" && npm ci --no-audit --no-fund --loglevel=error </dev/null >&2) || return 1
+      n=$((n + 1)) && out="$out ${d:+$d/}node_modules(npm ci)"
+    fi
+  done < <(git -C "$wt" ls-files -- 'package.json' '*/package.json')
+  local dd
+  for dd in $DEP_DIRS; do
+    while IFS= read -r src; do
+      local rel=${src#"$top"/}
+      [ -d "$wt/$(dirname "$rel")" ] && [ ! -e "$wt/$rel" ] && ln -s "$src" "$wt/$rel" && n=$((n + 1)) && out="$out $rel" && borrowed+=("$rel")
+    done < <(find "$top" -maxdepth 4 -name node_modules -prune -o -type d -name "$dd" -print -prune 2>/dev/null)
+  done
+  # A borrowed folder is a symlink, which an ignore line such as node_modules/ (folders only) does not match: git would
+  # list it as untracked inside the suite (olha-biz tests/vercel.test.mjs read it as a file, 2026-10-26). The suite's git
+  # gets an excludes file naming each one, after the user's own (core.excludesFile).
+  local own; own=$(git config --path core.excludesFile 2>/dev/null || echo "${XDG_CONFIG_HOME:-$HOME/.config}/git/ignore")
+  { [ -f "$own" ] && cat "$own" && echo; for b in ${borrowed[@]+"${borrowed[@]}"}; do echo "/$b"; done; } > "$tmp/exclude"
+  if (( n )); then echo "  borrowed from $top:$out" >&2; else echo "  nothing to borrow: no dependency folder here" >&2; fi
+}
+
+run_suite() {   # run_suite SHA -> 0 passed, 1 failed
+  local sha=$1 tree start elapsed last pct rem frame sub
+  tree=$(git rev-parse "$sha^{tree}")
+  cur_sha=$sha
+  if [ -f "$state/passed/$tree" ]; then
+    echo "push-gate: ${sha:0:7} ($repo): its files passed \`${cmd[*]}\` before ($(head -n 1 "$state/passed/$tree")): no run needed" >&2
+    return 0
+  fi
+  tmp=$(mktemp -d "${TMPDIR:-/tmp}/push-gate.$repo.XXXXXX") || return 1
+  wt="$tmp/$repo"
+  log="$state/logs/$sha.log"
+  : > "$log"
+
+  cur_step="step 1 of 3 (checking out)"
+  step 1 3 "CHECKING OUT ${sha:0:7} of $repo into $wt"
+  git -C "$top" worktree add --detach --quiet "$wt" "$sha" >&2 || { cleanup; return 1; }
+
+  cur_step="step 2 of 3 (dependencies)"
+  step 2 3 "LINKING the dependency folders of $top"
+  link_deps || { echo "push-gate: REFUSED: the dependencies of ${sha:0:7} did not install (npm ci above)" >&2; cleanup; return 1; }
+
+  cur_step="step 3 of 3 (testing)"
+  step 3 3 "TESTING \`${cmd[*]}\` on ${sha:0:7} in $wt"
+  last=$(cat "$state/last-seconds" 2>/dev/null || echo "")
+  case "$last" in ''|*[!0-9]*) last="" ;; esac
+  set -m                                             # the suite gets its own process group: Ctrl+C stops all of it
+  local i=${GIT_CONFIG_COUNT:-0}
+  (cd "$wt" && export GIT_CONFIG_COUNT=$((i + 1)) "GIT_CONFIG_KEY_$i=core.excludesFile" "GIT_CONFIG_VALUE_$i=$tmp/exclude" \
+     && exec "${cmd[@]}") </dev/null >"$log" 2>&1 &
+  child=$!
+  set +m
+  start=$SECONDS
+  local beat=$SECONDS
+  while kill -0 "$child" 2>/dev/null; do
+    elapsed=$((SECONDS - start))
+    if [ -n "$last" ] && (( last > 0 )); then
+      pct=$((elapsed * 100 / last)); (( pct > 99 )) && pct=99
+      rem=$((last - elapsed))
+      if (( rem > 0 )); then rem="~$(hms $rem) remaining"; else rem="~?h??m??s remaining (longer than the last pass, $(hms "$last"))"; fi
+      frame="TESTING $(bar $pct) $pct% · $(hms $elapsed) elapsed · $rem"
+    else
+      frame="TESTING $repo · $(hms $elapsed) elapsed · ~?h??m??s remaining (no pass measured yet)"
+    fi
+    sub=$(last_line "$log")
+    if (( tty )); then
+      if [ -n "$sub" ]; then live_show "$frame" "  └ RUNNING: $sub"; else live_show "$frame"; fi
+      sleep 0.3
+    else
+      if (( SECONDS - beat >= 10 )); then echo "push-gate: $frame${sub:+ · last line: ${sub:0:120}}" >&2; beat=$SECONDS; fi
+      sleep 0.3
+    fi
+  done
+  wait "$child"; local rc=$?
+  child=""
+  elapsed=$((SECONDS - start))
+  if (( rc == 0 )); then
+    live_end "TESTING $(bar 100) 100% · ${cmd[*]} passed on ${sha:0:7} · $(hms $elapsed)"
+    printf 'pass of `%s` on %s at %s in %ss\n' "${cmd[*]}" "$sha" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" "$elapsed" \
+      > "$state/passed/$tree"
+    echo "$elapsed" > "$state/last-seconds"
+  else
+    live_end "TESTING failed on ${sha:0:7} after $(hms $elapsed) (exit $rc)"
+    {
+      echo "---- the last 40 lines of its output ($log) ----"
+      tail -n 40 "$log"
+      echo "----"
+      echo "push-gate: REFUSED: \`${cmd[*]}\` failed (exit $rc) on ${sha:0:7}, the exact commit pushed, in a clean worktree"
+      echo "  of $repo. Fix it in a new commit and push again; never git push --no-verify."
+    } >&2
+  fi
+  cleanup
+  return $(( rc == 0 ? 0 : 1 ))
+}
+
+refused=0
+for s in "${shas[@]}"; do run_suite "$s" || refused=1; done
+if (( refused )); then title refused; else title "done"; fi
+exit $refused
+}

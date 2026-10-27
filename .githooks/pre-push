@@ -1,0 +1,4 @@
+#!/bin/sh
+# push-gate hook (magzim21/utilities push-gate-install): a push is refused unless this repository's full test suite passed
+# on exactly the commit pushed, in a temporary worktree of it. Never git push --no-verify.
+exec "$(dirname "$0")/push-gate" "$@" -- sh -c 'python3 tests/test_no_plan_artifacts.py && terraform fmt -recursive -check && mkdir -p "$HOME/.cache/push-gate/terraform-plugins" && export TF_PLUGIN_CACHE_DIR="$HOME/.cache/push-gate/terraform-plugins" TF_DATA_DIR=.terraform-push-gate && terraform init -backend=false -input=false >/dev/null && terraform test'
