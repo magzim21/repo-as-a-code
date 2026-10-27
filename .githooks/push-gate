@@ -17,9 +17,13 @@
 # commit's (a reworded message) is not tested again; a rebase onto another agent's commit makes a new tree and runs the
 # suite again. The worktree borrows the dependency folders of the checkout that pushes (node_modules beside each
 # package.json whose package-lock.json is equal, .terraform, .venv); a changed lock file gets `npm ci` there instead.
+# A push to backup/<topic> runs no suite: it is a copy of commits not yet on the default branch, never merged
+# (~/.claude/CLAUDE.md "Repos and branches"; Max, 2026-10-27: «всегда делай бэкапы в ремот, используя бранчи»), and
+# unfinished work must back up even while its tests fail. gitleaks scans its commits that no remote branch holds yet;
+# a secret found, or gitleaks missing ($PUSH_GATE_GITLEAKS, default gitleaks), refuses it.
 # Never `git push --no-verify` (~/.claude/CLAUDE.md "Commits").
-# Tests: tests/test_push_gate.py (PG1-PG17).
-GATE_VERSION=4
+# Tests: tests/test_push_gate.py (PG1-PG18).
+GATE_VERSION=5
 set -u
 # The whole script is one { } block: bash parses all of it before the first line runs, so a git pull or an edit that
 # rewrites this file during a push never mixes two versions (~/.claude/CLAUDE.md "Long-running scripts"; on 2026-10-26
@@ -93,7 +97,7 @@ last_line() {   # the newest non-empty line of the log, without escapes
 }
 
 # --- what to test --------------------------------------------------------------------------------------------------
-shas=()
+shas=() backups=()
 add_sha() { local s; for s in ${shas[@]+"${shas[@]}"}; do [ "$s" = "$1" ] && return; done; shas+=("$1"); }
 if [ "$mode" = test ]; then
   sha=$(git rev-parse --verify -q "$rev^{commit}") || die "$rev is no commit"
@@ -101,9 +105,23 @@ if [ "$mode" = test ]; then
 else
   while read -r _lref lsha rref _rsha; do
     [ "$lsha" = "$ZERO" ] && continue                 # a deleted branch has no commit to test
-    case "$rref" in refs/heads/*) add_sha "$lsha" ;; esac
+    case "$rref" in
+      refs/heads/backup/*) backups+=("$lsha") ;;      # a copy, never merged: gitleaks only, no suite
+      refs/heads/*) add_sha "$lsha" ;;
+    esac
   done
 fi
+gitleaks=${PUSH_GATE_GITLEAKS:-gitleaks}
+for b in ${backups[@]+"${backups[@]}"}; do
+  command -v "$gitleaks" >/dev/null 2>&1 \
+    || { echo "push-gate: REFUSED: backup ${b:0:7}: $gitleaks not found, so its commits cannot be scanned for secrets. brew install gitleaks." >&2; exit 1; }
+  if ! out=$("$gitleaks" git --redact --no-banner --log-opts="$b --not --remotes" "$top" 2>&1); then
+    printf '%s\n' "$out" | tail -20 >&2
+    echo "push-gate: REFUSED: gitleaks found a secret in the commits of backup ${b:0:7} not yet on any remote. Remove it from the commits, then push again." >&2
+    exit 1
+  fi
+  echo "push-gate: backup ${b:0:7}: no suite (a copy, never merged); gitleaks found no secret" >&2
+done
 [ ${#shas[@]} -gt 0 ] || exit 0
 
 # --- one run -------------------------------------------------------------------------------------------------------
