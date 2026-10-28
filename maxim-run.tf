@@ -69,3 +69,33 @@ resource "aws_route53_record" "maxim_run_www" {
   ttl     = "300"
   records = ["cname.vercel-dns.com"]
 }
+
+# Datadog RUM of https://maxim.run (task https://app.notion.com/p/407b399fe9c281e38c30dba4cb517c6d; "every site of
+# Max has Datadog RUM", Max, 2026-10-27). The site loads it only after the visitor's analytics consent
+# (magzim21/maxim-run src/rum.js) and its privacy page names Datadog. RUM data only, 30 days: the privacy page says so.
+resource "datadog_rum_application" "maxim_run" {
+  name                              = "maxim.run"
+  type                              = "browser"
+  rum_event_processing_state        = "ALL"
+  product_analytics_retention_state = "NONE"
+}
+
+# Read by magzim21/maxim-run scripts/build.mjs at build time and written into its rum.js; without both no page
+# loads RUM. Not sensitive: every visitor's browser gets them. Production only, so preview builds send nothing.
+resource "vercel_project_environment_variables" "maxim_run" {
+  project_id = vercel_project.maxim_run.id
+  variables = [
+    {
+      key       = "DD_RUM_APPLICATION_ID"
+      value     = datadog_rum_application.maxim_run.id
+      target    = ["production"]
+      sensitive = false
+    },
+    {
+      key       = "DD_RUM_CLIENT_TOKEN"
+      value     = datadog_rum_application.maxim_run.client_token
+      target    = ["production"]
+      sensitive = false
+    },
+  ]
+}
