@@ -20,7 +20,9 @@ module "terraform_state_bucket" {
 
   # The name follows the folder name: plan only from a folder named repo-as-a-code (a worktree goes to
   # .claude/worktrees/<topic>/repo-as-a-code). From any other folder the plan replaces this state bucket (2026-10-27).
-  bucket        = "terraform-state-${data.aws_caller_identity.current.account_id}-${basename(abspath(path.root))}"
+  # The repository's name, never the checkout folder's: a worktree in .claude/worktrees/<topic> would plan to
+  # replace this bucket, which holds every state of this repository.
+  bucket        = "terraform-state-${data.aws_caller_identity.current.account_id}-repo-as-a-code"
   force_destroy = false
 
   versioning = {
