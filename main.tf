@@ -1475,7 +1475,7 @@ locals {
       is_template = false
     },
     {
-      # Archived; the live code moved to codelawcorp/booking-orchestrator (2026-10-02).
+      # Archived; the live code moved to codelawcorp/booking-orchestrator (2026-10-02), renamed codelawcorp/lead-ledger on 2026-10-14.
       name           = "booking-orchestrator"
       description    = "One 'Book Now' click → dynamic price, payment, CRM, calendar, ad-conversion. A config-driven booking orchestrator for any service business."
       visibility     = "private"
