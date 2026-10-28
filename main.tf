@@ -225,7 +225,8 @@ locals {
       repository_files = {
         # The landing that ims-lp.maxim.run serves (ims-lp c7a41d3). With pages on, Terraform wrote a placeholder
         # index.html here and twice replaced the landing with it (0c9c4ad, 518582c); the key stays, so the file is
-        # updated, never deleted.
+        # updated, never deleted. Every apply writes this template over ims-lp's index.html: change both together
+        # (on 2026-10-27 an apply reverted ims-lp 82707a3, the consent and Datadog RUM scripts, with f9a2951).
         "index.html" = {
           content             = file("templates/ims-lp/index.html")
           overwrite_on_create = true
