@@ -77,7 +77,7 @@ module "boat_detailing_landing_page" {
   visibility         = "private"
   topics             = ["yacht", "boat", "detailing", "business", "cleaning", "landing-page", "html", "css", "javascript", ]
   has_issues         = true
-  archived           = false
+  archived           = true # Max, 2026-10-27: archive it; island-mist-detailing.maxim.run was down (expired certificate)
   archive_on_destroy = false
   template = {
     owner                = "codelawcorp"

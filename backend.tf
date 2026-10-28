@@ -18,6 +18,8 @@ module "terraform_state_bucket" {
   source  = "terraform-aws-modules/s3-bucket/aws"
   version = "5.9.1"
 
+  # The name follows the folder name: plan only from a folder named repo-as-a-code (a worktree goes to
+  # .claude/worktrees/<topic>/repo-as-a-code). From any other folder the plan replaces this state bucket (2026-10-27).
   bucket        = "terraform-state-${data.aws_caller_identity.current.account_id}-${basename(abspath(path.root))}"
   force_destroy = false
 
