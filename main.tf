@@ -169,9 +169,10 @@ locals {
     },
     {
       name            = "human-mcp"
-      description     = "Human MCP server"
+      description     = "Humanport: a person exposed as a task queue over MCP; site humanport.dev (humanport.tf)"
       visibility      = "private"
-      topics          = ["mcp"]
+      homepage_url    = "https://humanport.dev"
+      topics          = ["mcp", "human-in-the-loop", "landing-page"]
       archived        = false
       has_issues      = false
       has_projects    = false
