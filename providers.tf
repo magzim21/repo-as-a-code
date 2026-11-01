@@ -44,3 +44,9 @@ provider "aws" {
   region = "ca-central-1"
 
 }
+
+# Route 53 DNSSEC keys live in us-east-1 (humanport.tf; the pattern of codelawcorp/detailing terraform/providers.tf).
+provider "aws" {
+  alias  = "us_east_1"
+  region = "us-east-1"
+}
